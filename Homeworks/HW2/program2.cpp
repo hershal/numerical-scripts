@@ -37,23 +37,35 @@ using namespace std;
 
 /*** Declare user-defined functions to be used ***/
 int conjgrad(matrix&, matrix&, vector&, vector&, int, double);
-
+int sor(matrix&, double, vector&, vector&, int, double);
 
 /*** Main program ***/
 int main() {
 
   /*** Define and input problem data ***/
-  int n=3, maxIter=500, iter;
-  double tol=1e-5, w=1.2;
+  int n=100, maxIter=5000, iter, iterSor;
+  double tol=1e-5, w=1.6;
   matrix Cinv(n,n), A(n,n);
-  vector x(n), b(n);
+  vector xCG(n), xSor(n), b(n);
 
-  A(0,0)= 3; A(0,1)=-1; A(0,2)= 1; b(0)=1;
-  A(1,0)=-1; A(1,1)= 6; A(1,2)= 2; b(1)=0;
-  A(2,0)= 1; A(2,1)= 2; A(2,2)= 7; b(2)=4;
+  // A(0,0)= 3; A(0,1)=-1; A(0,2)= 1; b(0)=1;
+  // A(1,0)=-1; A(1,1)= 6; A(1,2)= 2; b(1)=0;
+  // A(2,0)= 1; A(2,1)= 2; A(2,2)= 7; b(2)=4;
 
-
-  x=0; //initialize  x
+  // A matrix loop-builder
+  for(int i=0; i<n; i++) {
+    for(int j=0; j<n; j++) {
+      if (j==i-1 || j==i+1) {
+  	A(i,j) = -1;
+      } else if(j==i) {
+  	A(i,j) = 2+i/10.0;
+      } 
+    }
+    b(i) = 1+i/20.0;
+  }
+  
+  
+  xSor=xCG=0; //initialize  x
 
   /*** Construct pre-conditioning matrix ***/
   Cinv=0;
@@ -63,19 +75,29 @@ int main() {
       exit(EXIT_FAILURE);
     } 
     else { 
-      Cinv(i,i) = 1/sqrt(A(i,i)); 
-      // Cinv(i,i) = 1; //Use this for no pre-cond
+      // Cinv(i,i) = 1/sqrt(A(i,i)); 
+      Cinv(i,i) = 1; //Use this for no pre-cond
     }
   }
 
   /*** Call conjugate gradient function ***/
-  iter=conjgrad(Cinv,A,b,x,maxIter,tol);
+  iter=conjgrad(Cinv,A,b,xCG,maxIter,tol);
   
   /*** Print results to screen ***/
   cout << endl; 
   cout << "Iteration index: k = " << iter << endl;
-  cout << "Approximate solution: x^(k) = " << endl;
-  cout << x << endl;
+  //  cout << "Approximate solution: x^(k) = " << endl;
+  //  cout << xCG << endl;
+
+  /*** Call conjugate gradient function ***/
+  iterSor=sor(A,w,b,xSor,maxIter,tol);
+  
+  /*** Print results to screen ***/
+  cout << endl; 
+  cout << "w values: w = " << w << endl;
+  cout << "Iteration index: k = " << iterSor << endl;
+  //  cout << "Approximate solution: x^(k) = " << endl;
+  //  cout << xSor << endl;
 
   return 0;
 }

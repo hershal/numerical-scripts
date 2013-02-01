@@ -22,7 +22,7 @@ int conjgrad(matrix& Cinv, matrix& A, vector& b, vector& x,
 
   if(dim(A,1)!=n || dim(Cinv,0)!=n || dim(Cinv,1)!=n || 
                                      dim(b)!=n || dim(x)!=n) {
-    cerr << "CG: bad data -- exiting" << endl; 
+    cerr << "CG: bad data 1 -- exiting" << endl; 
     exit(EXIT_FAILURE); 
   }
   if(tol <= 0) {
