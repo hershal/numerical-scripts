@@ -41,11 +41,14 @@ int main() {
 
   xGauss = xJacobi = 0;
 
+  for(int i=0; i<dim(xGauss); i++) {
+    xGauss = xJacobi = 88;
+  }
+
   A(0,0)= 4; A(0,1)= 1; A(0,2)=-1; A(0,3)= 1; b(0)=-2;
   A(1,0)= 1; A(1,1)= 4; A(1,2)=-1; A(1,3)=-1; b(1)=-1;
   A(2,0)=-1; A(2,1)=-1; A(2,2)= 5; A(2,3)= 1; b(2)= 0;
   A(3,0)= 1; A(3,1)=-1; A(3,2)= 1; A(3,3)= 3; b(3)= 1;
-  x=0 ; //initial x
 
 
   /*** Print data to screen ***/
@@ -55,7 +58,7 @@ int main() {
   cout << "Given: b = " << endl;
   cout << b << endl;
   cout << "Given: x^(0) = " << endl;
-  cout << x << endl;
+  cout << xGauss << endl;
 
 
   /*** Call Jacobi function ***/
