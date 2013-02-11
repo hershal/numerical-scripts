@@ -1,0 +1,123 @@
+
+Given: A = 
+4  1  -1  1  
+1  4  -1  -1  
+-1  -1  5  1  
+1  -1  1  3  
+
+Given: b = 
+-2
+-1
+0
+1
+
+Given: x^(0) = 
+0
+0
+0
+0
+
+Jacobi: solution converged, |r|_inf = 0.000853992
+
+Iteration index: k = 14
+
+Approximate solution: x^(k) = 
+-0.752927
+0.0407854
+-0.280609
+0.691166
+
+Gauss-Seidel: solution converged, |r|_inf = 0.000640597
+
+Iteration index: k = 8
+
+Approximate solution: x^(k) = 
+-0.753176
+0.0410105
+-0.280705
+0.69163
+
+Approximate solution: x^(k) = 
+-0.753176
+0.0410105
+-0.280705
+0.69163
+
+
+Given: A = 
+4  1  -1  1  
+1  4  -1  -1  
+-1  -1  5  1  
+1  -1  1  3  
+
+Given: b = 
+-2
+-1
+0
+1
+
+Given: x^(0) = 
+1
+1
+1
+1
+
+Jacobi: solution converged, |r|_inf = 0.000803917
+
+Iteration index: k = 14
+
+Approximate solution: x^(k) = 
+-0.752934
+0.0407672
+-0.280594
+0.691181
+
+Gauss-Seidel: solution converged, |r|_inf = 0.000737975
+
+Iteration index: k = 8
+
+Approximate solution: x^(k) = 
+-0.753711
+0.0411945
+-0.280957
+0.691954
+
+
+Given: A = 
+4  1  -1  1  
+1  4  -1  -1  
+-1  -1  5  1  
+1  -1  1  3  
+
+Given: b = 
+-2
+-1
+0
+1
+
+Given: x^(0) = 
+88
+88
+88
+88
+
+Jacobi: solution converged, |r|_inf = 0.000949831
+
+Iteration index: k = 18
+
+Approximate solution: x^(k) = 
+-0.753417
+0.0409127
+-0.280673
+0.691811
+
+Gauss-Seidel: solution converged, |r|_inf = 0.000683147
+
+Iteration index: k = 13
+
+Approximate solution: x^(k) = 
+-0.75369
+0.041187
+-0.280947
+0.691941
+

@@ -38,15 +38,17 @@ using namespace std;
 /*** Declare user-defined functions to be used ***/
 int conjgrad(matrix&, matrix&, vector&, vector&, int, double);
 int sor(matrix&, double, vector&, vector&, int, double);
+int jacobi(matrix&, vector&, vector&, int, double);
+int gauss_seidel(matrix&, vector&, vector&, int, double);
 
 /*** Main program ***/
 int main() {
 
   /*** Define and input problem data ***/
-  int n=100, maxIter=5000, iter, iterSor;
-  double tol=1e-5, w=1.6;
+  int n=100, maxIter=5000, iter, iterSor, iterJacobi, iterGauss;
+  double tol=1e-5, w=1.2;
   matrix Cinv(n,n), A(n,n);
-  vector xCG(n), xSor(n), b(n);
+  vector xCG(n), xSor(n), xGauss(n), xJacobi(n), b(n);
 
   // A(0,0)= 3; A(0,1)=-1; A(0,2)= 1; b(0)=1;
   // A(1,0)=-1; A(1,1)= 6; A(1,2)= 2; b(1)=0;
@@ -58,10 +60,10 @@ int main() {
       if (j==i-1 || j==i+1) {
   	A(i,j) = -1;
       } else if(j==i) {
-  	A(i,j) = 2+i/10.0;
+  	A(i,j) = 2+(i+1)/10.0;
       } 
     }
-    b(i) = 1+i/20.0;
+    b(i) = 1+(i+1)/20.0;
   }
   
   
@@ -75,29 +77,35 @@ int main() {
       exit(EXIT_FAILURE);
     } 
     else { 
-      // Cinv(i,i) = 1/sqrt(A(i,i)); 
-      Cinv(i,i) = 1; //Use this for no pre-cond
+      Cinv(i,i) = 1/sqrt(A(i,i)); 
+      // Cinv(i,i) = 1; //Use this for no pre-cond
     }
   }
 
-  /*** Call conjugate gradient function ***/
   iter=conjgrad(Cinv,A,b,xCG,maxIter,tol);
-  
-  /*** Print results to screen ***/
-  cout << endl; 
   cout << "Iteration index: k = " << iter << endl;
-  //  cout << "Approximate solution: x^(k) = " << endl;
-  //  cout << xCG << endl;
-
-  /*** Call conjugate gradient function ***/
-  iterSor=sor(A,w,b,xSor,maxIter,tol);
-  
-  /*** Print results to screen ***/
+  // cout << "Approximate solution: x^(k) = " << endl;
+  // cout << xCG << endl;
   cout << endl; 
+
+  iterSor=sor(A,w,b,xSor,maxIter,tol);
   cout << "w values: w = " << w << endl;
   cout << "Iteration index: k = " << iterSor << endl;
-  //  cout << "Approximate solution: x^(k) = " << endl;
-  //  cout << xSor << endl;
+  // cout << "Approximate solution: x^(k) = " << endl;
+  // cout << xSor << endl;
+  cout << endl; 
+
+  iterJacobi=jacobi(A,b,xJacobi,maxIter,tol);
+  cout << "Iteration index: k = " << iterJacobi << endl;
+  // cout << "Approximate solution: x^(k) = " << endl;
+  // cout << xJacobi << endl;
+  cout << endl; 
+
+  iterGauss=gauss_seidel(A,b,xGauss,maxIter,tol);
+  cout << "Iteration index: k = " << iterGauss << endl;
+  // cout << "Approximate solution: x^(k) = " << endl;
+  // cout << xGauss << endl;
+  cout << endl; 
 
   return 0;
 }

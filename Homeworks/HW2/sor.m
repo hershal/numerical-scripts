@@ -3,7 +3,7 @@
 # For M368K HW2, § 7.4 Number 2
 # Written in GNU Octave
 
-function x = sor(A, w, b, x)
+function x = sor(A, b, w, x)
 
   i = 0;
   tol = 10^-6;

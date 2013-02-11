@@ -11,3 +11,4 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
 clean: all
 	rm $(EXECUTABLE)
+	rm $(OBJECTS)

@@ -4,11 +4,10 @@
 # This is an incomplete implementation used only to answer the question
 # Written in GNU Octave
 
-function [x, r] = congrad(A, C_inv, b, x)
+function [x, r] = congrad(A, b, C_inv, x)
 
   i = 0;
-#  tol = 10^-6;
-  tol = 0.001;
+  tol = 10^-6;
   maxIter = 100;
 
   r = b - A*x(:,1);

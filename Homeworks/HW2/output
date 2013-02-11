@@ -1,0 +1,33 @@
+Situation: Conjugate-Gradient With Preconditioning
+CG: solution converged, |r|_inf = 8.79093e-06
+Iteration index: k = 15
+
+Situation: Conjugate-Gradient No Preconditioning
+CG: solution converged, |r|_inf = 7.5284e-06
+Iteration index: k = 28
+
+Situtation: SOR with w=1.2
+SOR: solution converged, |r|_inf = 4.07132e-06
+w values: w = 1.2
+Iteration index: k = 17
+
+Situtation: SOR with w=1.6
+SOR: solution converged, |r|_inf = 9.75269e-06
+w values: w = 1.6
+Iteration index: k = 29
+
+Situtation: SOR with w=2.3
+SOR: solution converged, |r|_inf = 0
+w values: w = 2.3
+Iteration index: k = 2664
+
+Situationn: Jacobi Method
+Jacobi: solution converged, |r|_inf = 7.84231e-06
+Iteration index: k = 51
+
+Situation: Gauss-Seidel Method
+Gauss-Seidel: solution converged, |r|_inf = 6.40178e-06
+Iteration index: k = 28
+
+
+The w value does have a significant impact on convergence depending on the value used for w. There does seem to be a "sweet spot" in which SOR can lead to quite fast convergence. Also a properly preconditioned Conjugate-Gradient can converge even faster than SOR. Gauss-Seidel seems to be a good middle ground between simplicity and ease of use (i.e. no need to find good 'w' or 'C_inv' values) for the solution to converge in a timely manner.
