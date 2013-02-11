@@ -30,4 +30,10 @@ Gauss-Seidel: solution converged, |r|_inf = 6.40178e-06
 Iteration index: k = 28
 
 
-The w value does have a significant impact on convergence depending on the value used for w. There does seem to be a "sweet spot" in which SOR can lead to quite fast convergence. Also a properly preconditioned Conjugate-Gradient can converge even faster than SOR. Gauss-Seidel seems to be a good middle ground between simplicity and ease of use (i.e. no need to find good 'w' or 'C_inv' values) for the solution to converge in a timely manner.
+The w value does have a significant impact on convergence depending on
+the value used for w. There does seem to be a "sweet spot" in which
+SOR can lead to quite fast convergence. Also a properly preconditioned
+Conjugate-Gradient can converge even faster than SOR. Gauss-Seidel
+seems to be a good middle ground between simplicity and ease of use
+(i.e. no need to find good 'w' or 'C_inv' values) for the solution to
+converge in a timely manner.
