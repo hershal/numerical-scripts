@@ -9,7 +9,7 @@
 # and lower and upper bounds a and b. These are nominallly -pi to pi,
 # so don't count on this algorithm working for any other bounds. After
 # you get the coefficients, its up to you to figure out what to do
-# with them.
+# with them (Fourier Series is a good buzz-word suggestion).
 
 function [A,B] = triglsq(f, n, a, b)
 
@@ -27,7 +27,7 @@ function [A,B] = triglsq(f, n, a, b)
     ## loop if possible. Its not good to have difficult instructions
     ## inside of a deep for-loop, especially in interpreted scripts.
     g=@(x) (1/pi).*(f(x).*cos(i.*x));
-    h=@(x) (1/pi).*(f(x).*sin((i+1).*x));
+    h=@(x) (1/pi).*(f(x).*sin(i.*x));
 	    
     A(i+1) = quadcc(g,a,b,tol);
     B(i+1) = quadcc(h,a,b,tol);

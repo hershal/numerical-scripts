@@ -3,21 +3,18 @@
 # For M368K HW3, § 8.5 Number 2
 # Written in GNU Octave
 
-f=@(x) abs(x);
-
-
+f=@(x) x;
 # Plot Domain
 x=-pi:.01:pi;
 
 # Degree of the polynomial
-n=3;
+n=2;
 
 [a,b] = triglsq(f,n,-pi,pi)
 
-s=a(1)./2 + a(length(a)).*cos((length(a)-1).*x);
-
-for i=2:length(a)-1
-  s+= a(i).*cos((i-1).*x) + b(i).*sin((i-1).*x);
+s=a(1)./2;
+for i=1:n
+  s+= a(i+1).*cos(i.*x) + b(i+1).*sin(i.*x);
 endfor
 
 figure;
