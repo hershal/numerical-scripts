@@ -15,6 +15,7 @@ function c = contlsq(f, n, a, b)
   i=0; j=0;
 
   A = zeros(n,n);
+  B = zeros(n,1);
 
   for i=0:n
     for j=0:n
@@ -22,9 +23,9 @@ function c = contlsq(f, n, a, b)
       ## !! WARNING: !!
       ## This is nasty. Consider moving this segment outside of the
       ## loop if possible. Its not good to have difficult instructions
-      ## inside of a deep for-loop, especially in octave scripts.
-      h=@(x) (x.^i).*f(x);
+      ## inside of a deep for-loop, especially in interpreted scripts.
       g=@(x) (x).^(i+j);
+      h=@(x) (x.^i).*f(x);
 
       A(i+1,j+1) = quadcc(g,a,b,tol);
 
@@ -32,8 +33,7 @@ function c = contlsq(f, n, a, b)
     B(i+1) = quadcc(h,a,b,tol);
 
   endfor
-A
-B
+
 c=A\B'
   
 endfunction
