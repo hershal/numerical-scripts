@@ -4,6 +4,7 @@
 # Written in GNU Octave
 
 f=@(x) x;
+
 # Plot Domain
 x=-pi:.01:pi;
 
