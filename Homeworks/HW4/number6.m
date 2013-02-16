@@ -1,15 +1,15 @@
 #!/usr/bin/octave
-# Created by Hershal Bhave on 2/14/13
-# For M368K HW3, § 8.5 Number 2
+# Created by Hershal Bhave on 2/15/13
+# For M368K HW3, § 8.5 Number 6
 # Written in GNU Octave
 
-f=@(x) x;
+f=@(x) number6func(x);
 
 # Plot Domain
 x=-pi:.01:pi;
 
 # Degree of the polynomial
-n=2;
+n=100;
 
 [a,b] = triglsq(f,n,-pi,pi);
 
@@ -25,6 +25,6 @@ plot(x,s, 'k');
 hold off;
 
 legend("Original Function","Trig Poly Approx","location","northwest");
-title("§ 8.5 Number 2: y vs x of f(x) and its Least-Squares Trig Poly Approximation");
+title("§ 8.5 Number 6: y vs x of f(x) and its Least-Squares Trig Approximation")
 xlabel("x");
 ylabel("y");
