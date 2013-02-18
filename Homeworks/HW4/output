@@ -116,7 +116,6 @@ Fitting error: E =
 2.18796
 
 
-
 Difference in Fitting Errors between n=2 and n=3:
 (abs (/ (- 2.18792 16.1058) 16.1058)) = 0.8641532863937215
 
@@ -125,6 +124,8 @@ Difference in Fitting Errors between n=3 and n=4:
 
 Difference in Fitting Errors between n=4 and n=5:
 (abs (/ (- 2.18796 2.1933) 2.1933)) = 0.002434687457256144
+
+Yes, looks like S_n(x) is a filtered version of the original function.
 
 Compression Ratio for n=5:
 (- 1 (/ 5.0 50)) = 0.9

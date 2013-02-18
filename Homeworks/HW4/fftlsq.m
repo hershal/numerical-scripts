@@ -1,6 +1,6 @@
 #!/usr/bin/octave
 # Created by Hershal Bhave on 2/16/13
-# For M368K HW3, § 8.6 Number 1,2
+# For M368K HW3, § 8.6 Number 2b
 # Written in GNU Octave
 #
 # Description:
@@ -14,14 +14,13 @@
 # automatically determine an appropriate m value to use in the
 # compuatation.
 
-function [A,B] = fftlsq(f, n, m, a, b)
+function [a,b] = fftlsq(f, n, a, b)
 
-  # Number of levels to use depends on the number of points we have to
-  # represent.
-  L = floor(log2(m));
 
+  A = zeros(2*n, 2*n);
+  
   # Populate the points in between the two bounds.
-  x = (a:(b-a)/(2*m):b)';
+  x = (a:(b-a)/(2*n):b)';
 
   # We don't consider the last point since we want an even number of
   # data points for our algorithm.
@@ -29,18 +28,19 @@ function [A,B] = fftlsq(f, n, m, a, b)
 
   y = (f(x));
 
-  # Initial setup
-  c=y;
-  mu=exp((pi*sqrt(-1))/m);
-
-  # From now on, C will be the new partitioned matrix and c will be
-  # the old one.
-  for k=0:L
-
-      C=[
-      D=eye(2^L).*mu.^(0:2^L-1);
-
-
-
+  for i=0:2*n-1
+    for j=0:2*n-1
+	A(i+1,j+1) = exp(pi*1.0i/n)^(i*j);
+    endfor
   endfor
+
+  c=A*y;
+
+  g=((exp(sqrt(-1).*(0:2*n-1).*pi)')./n);
+  a=real(g.*c);
+  b=imag(g.*c);
+
+  b(1)=0;
+  b(length(b))=0;
+
 endfunction
