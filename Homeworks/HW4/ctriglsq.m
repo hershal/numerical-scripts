@@ -11,7 +11,7 @@
 # you get the coefficients, its up to you to figure out what to do
 # with them (Fourier Series is a good buzz-word suggestion).
 
-function [A,B] = triglsq(f, n, a, b)
+function [A,B] = ctriglsq(f, n, a, b)
 
   tol=10^-6;
 

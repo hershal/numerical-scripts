@@ -11,7 +11,7 @@ x=-pi:.01:pi;
 # Degree of the polynomial
 n=100;
 
-[a,b] = triglsq(f,n,-pi,pi);
+[a,b] = ctriglsq(f,n,-pi,pi);
 
 s=a(1)./2;
 for i=1:n

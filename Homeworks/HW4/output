@@ -1,0 +1,130 @@
+Case: n=2:
+
+Fitting error: E = 
+2.19457
+[hershal@cortex HW4]$ ./program4
+
+xy-data read from file: program4.dat
+
+Number of data points 2m: 100
+
+Enter trig poly degree n: 2
+
+Trig LS results for n = 2, m = 50
+
+Cosine coeffs: a_0 ... a_n = 
+-0.445702
+0.369639
+0.0319616
+
+Sine coeffs: b_1 ... b_{n-1} = 
+0
+-0.135124
+0
+
+Fitting error: E = 
+16.1058
+
+
+Case: n=3:
+
+[hershal@cortex HW4]$ ./program4
+
+xy-data read from file: program4.dat
+
+Number of data points 2m: 100
+
+Enter trig poly degree n: 3
+
+Trig LS results for n = 3, m = 50
+
+Cosine coeffs: a_0 ... a_n = 
+-0.445702
+0.369639
+0.0319616
+-0.528206
+
+Sine coeffs: b_1 ... b_{n-1} = 
+0
+-0.135124
+0.0254391
+0
+
+Fitting error: E = 
+2.18792
+
+
+Case: n=4:
+
+[hershal@cortex HW4]$ ./program4
+
+xy-data read from file: program4.dat
+
+Number of data points 2m: 100
+
+Enter trig poly degree n: 4
+
+Trig LS results for n = 4, m = 50
+
+Cosine coeffs: a_0 ... a_n = 
+-0.445702
+0.369639
+0.0319616
+-0.528206
+0.0111725
+
+Sine coeffs: b_1 ... b_{n-1} = 
+0
+-0.135124
+0.0254391
+-0.0152702
+0
+
+Fitting error: E = 
+2.1933
+
+
+Case: n=5:
+
+[hershal@cortex HW4]$ ./program4
+
+xy-data read from file: program4.dat
+
+Number of data points 2m: 100
+
+Enter trig poly degree n: 5
+
+Trig LS results for n = 5, m = 50
+
+Cosine coeffs: a_0 ... a_n = 
+-0.445702
+0.369639
+0.0319616
+-0.528206
+0.0111725
+0.0104573
+
+Sine coeffs: b_1 ... b_{n-1} = 
+0
+-0.135124
+0.0254391
+-0.0152702
+0.0016279
+0
+
+Fitting error: E = 
+2.18796
+
+
+
+Difference in Fitting Errors between n=2 and n=3:
+(abs (/ (- 2.18792 16.1058) 16.1058)) = 0.8641532863937215
+
+Difference in Fitting Errors between n=3 and n=4:
+(abs (/ (- 2.1933 2.18792) 2.18792)) = 0.002458956451789699
+
+Difference in Fitting Errors between n=4 and n=5:
+(abs (/ (- 2.18796 2.1933) 2.1933)) = 0.002434687457256144
+
+Compression Ratio for n=5:
+(- 1 (/ 5.0 50)) = 0.9

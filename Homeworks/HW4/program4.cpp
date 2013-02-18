@@ -59,14 +59,22 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
-  vector a(n+1), b(n-1);
+  vector a(n+1), b(n+1);
   a = 0 ; b = 0 ; // initialize for sum
 
+  /*(Need to compute a,b coeffs here)*/
 
+  for(int i=0; i<n+1; i++) {
+    for(int j=0; j<2*m; j++) {
+      a(i)+=y(j)*cos(i*x(j));
+      b(i)+=y(j)*sin(i*x(j));
+    }
+      a(i)*=1.0/m;
+      b(i)*=1.0/m;
+  }
 
-           /*(Need to compute a,b coeffs here)*/
-
-
+  // I really just want to avoid a conditional in a deep for-loop
+  b(0)=b(n)=0;
 
   /*** Print least-squares coeffs to screen ***/
   cout << endl;
@@ -78,11 +86,17 @@ int main() {
   cout << b << endl;
 
   /*** Compute least-squares fitting error ***/
-  double E = 0;
-
-
            /*(Need to compute error E here)*/
+  double E = 0;
+  double s;
 
+  for(int i=0; i<2*m; i++) {
+    s = a(0)/2 + a(n)*cos(n*x(i));
+    for(int j=1; j<n; j++) {
+      s += a(j)*cos(j*x(i)) + b(j)*cos(j*x(i));
+    }
+    E+=pow((y(i)-s),2);
+  }
 
   cout << endl;
   cout << "Fitting error: E = " << endl;
