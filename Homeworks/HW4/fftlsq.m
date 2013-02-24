@@ -36,7 +36,7 @@ function [a,b] = fftlsq(f, n, a, b)
 
   c=A*y;
 
-  g=((exp(sqrt(-1).*(0:2*n-1).*pi)')./n);
+  g=((exp(1.0i.*(0:2*n-1).*pi)')./n);
   a=real(g.*c);
   b=imag(g.*c);
 
