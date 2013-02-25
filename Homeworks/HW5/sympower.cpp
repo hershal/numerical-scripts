@@ -1,6 +1,6 @@
 /*******************************************************************
 Function to find dominant eigenvalue and eigenvector of a square 
-matrix A using the general power method.  The eigenvalue and 
+matrix A using the symmetric power method.  The eigenvalue and 
 eigenvector are assumed to be real, and the matrix A is assumed 
 to be diagonalizable.
 
@@ -16,7 +16,7 @@ Outputs: vector x(n), double lambda, integer iter (returned)
 using namespace std;
 
 
-int genpower(matrix& A, vector& x, double& lambda, 
+int sympower(matrix& A, vector& x, double& lambda, 
                           int n, int maxIter, double tol) {
   
   int iter=0, pindex ;
@@ -25,24 +25,22 @@ int genpower(matrix& A, vector& x, double& lambda,
 
   y = x ;
   while(iter<maxIter && error>=tol) {
-    ynorm = vecMaxNorm(y) ;
+
+    ynorm = vecL2Norm(y) ;
     x = scaleVec(1/ynorm,y) ;
-    pindex=0 ;
-    for(int j=0; j<n; j++) {
-      if(fabs(x(j))>fabs(x(pindex))) pindex=j;
-    }
+
     y = matVecMult(A,x) ;
-    lambda = y(pindex)/x(pindex) ;
+    lambda = vecDot(x,y);
     r = scaleVec(1/lambda,y) - x ;
-    error = vecMaxNorm(r) ;
+    error = vecL2Norm(r) ;
     iter++ ;
   }
 
   if(error < tol) {
-    cout << "GenPwr: soln converged, |r|_inf = " << error << endl;
+    cout << "SymPwr: soln converged, |r|_inf = " << error << endl;
   }
   else {
-    cout << "GenPwr: max iterations exceeded" << endl;
+    cout << "SymPwr: max iterations exceeded" << endl;
   }
   return iter;
 }

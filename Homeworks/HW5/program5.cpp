@@ -29,15 +29,13 @@ maxIter,tol}.
 #include "matrix.h"
 using namespace std;
 
-
 /*** Specify name of input data file ***/
 const int maxChar = 20;
 const char myfile[maxChar]="program5.dat" ;
 
-
 /*** Declare user-defined functions to be used ***/
 int genpower(matrix&, vector&, double&, int, int, double) ;
-
+int sympower(matrix&, vector&, double&, int, int, double) ;
 
 int main() {
  /*** Read data points from file ***/
@@ -59,16 +57,28 @@ int main() {
   cout << "Number of data points: m = " << m << endl;
   cout << endl;
 
-
   /*** Build mean mu and covariance A ***/
   vector mu(n) ;
   matrix A(n,n) ;
   mu = 0 ; A = 0 ; // initialize for sum
 
-
-           /*(Need to compute mu and A here)*/
-
-
+  /*(Need to compute mu and A here)*/
+  for(int i=0; i<n; i++) {
+    double sum = 0;
+    for(int k=0; k<m; k++) {
+      sum+=datapt(i,k);
+    }
+    mu(i) = 1.0/m*sum;
+  }
+  for(int i=0; i<n; i++) {
+    for(int j=0; j<n; j++) {
+      double sum = 0;
+      for(int k=0; k<m; k++) {
+	sum+=(datapt(i,k) - mu(i))*(datapt(j,k) - mu(j));
+      }
+      A(i,j) = 1.0/m*sum;
+    }
+  }  
 
   /*** Print mu and A to screen ***/
   cout << "***Results for mu and A***" << endl;
@@ -79,29 +89,54 @@ int main() {
   cout << A << endl;
 
   /*** Parameters for power method ***/
-  int maxIter=35, iter;  
-  double tol=1e-4, lambda; 
-  vector x(n);
+  int maxIterGenPwrGenPwr=35, iterGenPwr;  
+  double tolGenPwr=1e-4, lambdaGenPwr; 
+  vector xGenPwr(n);
 
-  x=1; //initial vec
+  xGenPwr=1; //initial vec
   if(matMaxNorm(A)==0) {A=1;} //reset A if zero
 
   /*** Print data to screen ***/
-  cout << "***Results for power method***" << endl;
+  cout << "***Results for general power method***" << endl;
   cout << endl; 
-  cout << "Given: A = " << endl;
+  cout << "GenPwr: Given: A = " << endl;
   cout << A << endl;
-  cout << "Given: x^(0) = " << endl;
-  cout << x << endl;
+  cout << "GenPwr: Given: x^(0) = " << endl;
+  cout << xGenPwr << endl;
 
   /*** Call general power function ***/
-  iter=genpower(A,x,lambda,n,maxIter,tol);
+  iterGenPwr=genpower(A,xGenPwr,lambdaGenPwr,n,maxIterGenPwrGenPwr,tolGenPwr);
   
   /*** Print results to screen ***/
-  cout << "Iteration index: k = " << iter << endl;
-  cout << "Approximate eigval: lambda^(k) = " << lambda << endl;
-  cout << "Approximate eigvec: x^(k) = " << endl;
-  cout << x << endl ;
+  cout << "GenPwr: Iteration index: k = " << iterGenPwr << endl;
+  cout << "GenPwr: Approximate eigval: lambda^(k) = " << lambdaGenPwr << endl;
+  cout << "GenPwr: Approximate eigvec: x^(k) = " << endl;
+  cout << xGenPwr << endl ;
+
+  /*** Parameters for power method ***/
+  int maxIterSymPwr=35, iterSymPwr;  
+  double tolSymPwr=1e-4, lambdaSymPwr; 
+  vector xSymPwr(n);
+  
+  xSymPwr=1; //initial vec
+  if(matMaxNorm(A)==0) {A=1;} //reset A if zero
+
+  /*** Print data to screen ***/
+  cout << "***Results for symmetric power method***" << endl;
+  cout << endl; 
+  cout << "SymPwr: Given: A = " << endl;
+  cout << A << endl;
+  cout << "SymPwr: Given: x^(0) = " << endl;
+  cout << xSymPwr << endl;
+
+  /*** Call general power function ***/
+  iterSymPwr=sympower(A,xSymPwr,lambdaSymPwr,n,maxIterSymPwr,tolSymPwr);
+  
+  /*** Print results to screen ***/
+  cout << "SymPwr: Iteration index: k = " << iterSymPwr << endl;
+  cout << "SymPwr: Approximate eigval: lambda^(k) = " << lambdaSymPwr << endl;
+  cout << "SymPwr: Approximate eigvec: x^(k) = " << endl;
+  cout << xSymPwr << endl ;
 
   return 0; //terminate main program
 }

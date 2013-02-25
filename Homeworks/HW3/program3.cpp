@@ -62,11 +62,24 @@ int main() {
   vector b(n+1), alpha(n+1);
   A=0 ; b=0 ; // initialize for sum
 
+  /*(Need to build A,b here)*/
+  for(int i=0; i<n+1; i++) {
+    for(int j=0; j<n+1; j++) {
+      double Asum=0;
+      for(int k=0; k<m; k++) {
+	Asum+=pow(x(k),(j+i));
+      }
+      A(i,j) = Asum;
+    }
+  }
 
-
-           /*(Need to build A,b here)*/
-
-
+  for(int i=0; i<n+1; i++) {
+    double bSum = 0;
+    for(int k=0; k<m; k++) {
+      bSum+=y(k)*pow(x(k),i);
+    }
+    b(i) = bSum;
+  }
 
   /*** Print least-squares arrays to screen ***/
   cout << endl;
