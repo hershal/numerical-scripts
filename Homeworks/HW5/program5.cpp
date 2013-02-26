@@ -93,7 +93,10 @@ int main() {
   double tolGenPwr=1e-4, lambdaGenPwr; 
   vector xGenPwr(n);
 
-  xGenPwr=1; //initial vec
+  xGenPwr(0)=1; //initial vec
+  xGenPwr(1)=-1; //initial vec
+  xGenPwr(2)=-1; //initial vec
+  xGenPwr(3)=1; //initial vec
   if(matMaxNorm(A)==0) {A=1;} //reset A if zero
 
   /*** Print data to screen ***/
@@ -118,7 +121,11 @@ int main() {
   double tolSymPwr=1e-4, lambdaSymPwr; 
   vector xSymPwr(n);
   
-  xSymPwr=1; //initial vec
+  xSymPwr(0)=1; //initial vec
+  xSymPwr(1)=-1; //initial vec
+  xSymPwr(2)=-1; //initial vec
+  xSymPwr(3)=1; //initial vec
+
   if(matMaxNorm(A)==0) {A=1;} //reset A if zero
 
   /*** Print data to screen ***/
