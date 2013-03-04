@@ -26,25 +26,23 @@ the matrix A.
 #include "matrix.h"
 using namespace std;
 
-
 /*** Declare user-defined functions to be used ***/
 int qr(matrix&, matrix&, matrix&, int, int, double) ;
 
-
 int main() {
   /*** Define and input problem data ***/
-  int n=3, maxIter=12, iter ;  
+  int n=4, maxIter=50, iter ;  
   double tol=1e-5 ;
   matrix A(n,n), D(n,n), Q(n,n) ;
 
-  // A(0,0)= 3; A(0,1)=-1; A(0,2)= 0; A(0,3)= 0; 
-  // A(1,0)=-1; A(1,1)= 5; A(1,2)=0.5; A(1,3)= 0;
-  // A(2,0)= 0; A(2,1)=0.5; A(2,2)= 4; A(2,3)=-1; 
-  // A(3,0)= 0; A(3,1)= 0; A(3,2)=-1; A(3,3)= 2; 
+  A(0,0)= 30     ; A(0,1)=-20     ; A(0,2)= 0  ; A(0,3)= 0; 
+  A(1,0)=-20/3.0 ; A(1,1)= 35/3.0 ; A(1,2)=-5  ; A(1,3)= 0;
+  A(2,0)= 0      ; A(2,1)=-15/2.0 ; A(2,2)= 15 ; A(2,3)=-15/2.0; 
+  A(3,0)= 0      ; A(3,1)= 0      ; A(3,2)=-3  ; A(3,3)= 3; 
 
-  A(0,0)= 3; A(0,1)= 1; A(0,2)= 0;
-  A(1,0)= 1; A(1,1)= 3; A(1,2)= 1;
-  A(2,0)= 0; A(2,1)= 1; A(2,2)= 3;
+  // A(0,0)= 3; A(0,1)= 1; A(0,2)= 0;
+  // A(1,0)= 1; A(1,1)= 3; A(1,2)= 1;
+  // A(2,0)= 0; A(2,1)= 1; A(2,2)= 3;
 
 
   /*** Print data to screen ***/
@@ -69,4 +67,3 @@ int main() {
 
   return 0 ; //terminate main program
 }
-
