@@ -55,7 +55,20 @@ int qr(matrix& A, matrix& Q, matrix& D,
       /*** build the cosine and sine entries of P and 
            its transpose Pt to create a zero at entry 
            {i,i-1} in the matrix B here ***/
+      double x = B(i-1,i-1);
+      double b = B(i,i-1);
 
+      double denom = 1/(sqrt(pow(b,2) + pow(x,2)));
+
+      c = x*denom;
+      s = b*denom;
+
+      P(i-1,i-1) = P(i,i) = c;
+      Pt(i-1,i-1) = Pt(i,i) = c;
+
+      P(i-1,i) = Pt(i,i-1) = s;
+      
+      P(i,i-1) = Pt(i-1,i) = -s;
 
       B = matMatMult(P,B) ; //create zero at {i,i-1} 
       G = matMatMult(G,Pt) ; //accumulate Pt 

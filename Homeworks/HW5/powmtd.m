@@ -1,6 +1,6 @@
 #!/usr/bin/octave
 # Created by Hershal Bhave on 2/23/13
-# For M368K HW3, § 9.3 Number 2
+# For M368K HW3, § 9.3 Number 2,14
 # Written in GNU Octave
 #
 # Description: Finds the dominant eigenvalue (h) and associated
