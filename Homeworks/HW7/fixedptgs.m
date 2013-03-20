@@ -20,17 +20,17 @@ function x = fixedptgs(x, x1, x2, x3, n)
   do
       
     # Normal Style
-    ## x(i+1,1) = x1(x(i,2), x(i,3));
-    ## x(i+1,2) = x2(x(i,1), x(i,3));
-    ## x(i+1,3) = x3(x(i,1), x(i,2));
+    ## x(i+1,1) = x1(x(i,1), x(i,2), x(i,3));
+    ## x(i+1,2) = x2(x(i,1), x(i,2), x(i,3));
+    ## x(i+1,3) = x3(x(i,1), x(i,2), x(i,3));
 
-    ## x(i+1,1) = x1(x(i,2));
-    ## x(i+1,2) = x2(x(i,1));
+    ## x(i+1,1) = x1(x(i,1), x(i,2));
+    ## x(i+1,2) = x2(x(i,1), x(i,2));
 
     # G-S style
-    x(i+1,1) = x1(x(i,2), x(i,3));
-    x(i+1,2) = x2(x(i+1,1), x(i,3));
-    x(i+1,3) = x3(x(i+1,1), x(i+1,2));
+    x(i+1,1) = x1(x(i,1), x(i,2), x(i,3));
+    x(i+1,2) = x2(x(i+1,1), x(i,2), x(i,3));
+    x(i+1,3) = x3(x(i+1,1), x(i+1,2), x(i,3));
 
     ## x(i+1,1) = x1(x(i,2));
     ## x(i+1,2) = x2(x(i+1,1));
@@ -39,7 +39,7 @@ function x = fixedptgs(x, x1, x2, x3, n)
     until(norm(x(i,:)-x(i-1,:), inf) < 10^-5 || i>n)
 
     if (i>n)
-       error("Maximum Iterations reached. Breaking...");
+       printf("Maximum Iterations reached. Breaking...\n");
     endif
 
 endfunction
