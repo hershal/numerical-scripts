@@ -1,0 +1,28 @@
+Initial guesses were chosen by observing the figure and estimating
+where each point was located by by observing the circle's radius
+(r=2.5) for scale.
+
+System size: n = 6
+Initial guess: x^(0) = 
+3
+-3
+2
+-1
+1
+-3
+
+Newton: |xnew-xold|_inf = 0.570625
+Newton: |xnew-xold|_inf = 0.07821820455
+Newton: |xnew-xold|_inf = 0.001196725414
+Newton: |xnew-xold|_inf = 3.056476124e-07
+Newton: solution converged
+
+Iteration index: k = 4
+Approx solution: x = 
+3.491209764
+-3.162282117
+2.254214387
+-0.9897622818
+0.9946032888
+-3.292497731
+

@@ -1,0 +1,273 @@
+
+***Input data details***
+
+Data file: program5.dat
+Number of data points: m = 100
+
+***Results for mu and A***
+
+Mean vector mu = 
+1.89664
+1.94386
+1.15752
+3.95281
+
+Covariance matrix A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+***Results for general power method***
+
+GenPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+GenPwr: Given: x^(0) = 
+1
+1
+1
+1
+
+GenPwr: soln converged, |r|_inf = 7.54031e-05
+GenPwr: Iteration index: k = 24
+GenPwr: Approximate eigval: lambda^(k) = 3.90152
+GenPwr: Approximate eigvec: x^(k) = 
+-0.234514
+0.584649
+1
+0.494113
+
+***Results for symmetric power method***
+
+SymPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+SymPwr: Given: x^(0) = 
+1
+1
+1
+1
+
+SymPwr: soln converged, |r|_inf = 7.52838e-05
+SymPwr: Iteration index: k = 24
+SymPwr: Approximate eigval: lambda^(k) = 3.90151
+SymPwr: Approximate eigvec: x^(k) = 
+-0.183071
+0.456401
+0.780641
+0.385724
+
+
+--------------------------------------------------
+
+
+***Input data details***
+
+Data file: program5.dat
+Number of data points: m = 100
+
+***Results for mu and A***
+
+Mean vector mu = 
+1.89664
+1.94386
+1.15752
+3.95281
+
+Covariance matrix A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+***Results for general power method***
+
+GenPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+GenPwr: Given: x^(0) = 
+0
+1
+0
+0
+
+GenPwr: soln converged, |r|_inf = 8.71639e-05
+GenPwr: Iteration index: k = 25
+GenPwr: Approximate eigval: lambda^(k) = 3.90152
+GenPwr: Approximate eigvec: x^(k) = 
+-0.234474
+0.584679
+1
+0.494102
+
+***Results for symmetric power method***
+
+SymPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+SymPwr: Given: x^(0) = 
+0
+1
+0
+0
+
+SymPwr: soln converged, |r|_inf = 8.70259e-05
+SymPwr: Iteration index: k = 25
+SymPwr: Approximate eigval: lambda^(k) = 3.90151
+SymPwr: Approximate eigvec: x^(k) = 
+-0.183039
+0.456423
+0.780639
+0.385715
+
+
+--------------------------------------------------
+
+
+***Input data details***
+
+Data file: program5.dat
+Number of data points: m = 100
+
+***Results for mu and A***
+
+Mean vector mu = 
+1.89664
+1.94386
+1.15752
+3.95281
+
+Covariance matrix A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+***Results for general power method***
+
+GenPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+GenPwr: Given: x^(0) = 
+-0.5
+0.5
+0.5
+0.5
+
+GenPwr: soln converged, |r|_inf = 7.54064e-05
+GenPwr: Iteration index: k = 21
+GenPwr: Approximate eigval: lambda^(k) = 3.90149
+GenPwr: Approximate eigvec: x^(k) = 
+-0.235027
+0.584263
+1
+0.494252
+
+***Results for symmetric power method***
+
+SymPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+SymPwr: Given: x^(0) = 
+-0.5
+0.5
+0.5
+0.5
+
+SymPwr: soln converged, |r|_inf = 7.52897e-05
+SymPwr: Iteration index: k = 21
+SymPwr: Approximate eigval: lambda^(k) = 3.90151
+SymPwr: Approximate eigvec: x^(k) = 
+-0.183476
+0.456109
+0.780658
+0.385842
+
+
+--------------------------------------------------
+
+
+***Input data details***
+
+Data file: program5.dat
+Number of data points: m = 100
+
+***Results for mu and A***
+
+Mean vector mu = 
+1.89664
+1.94386
+1.15752
+3.95281
+
+Covariance matrix A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+***Results for general power method***
+
+GenPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+GenPwr: Given: x^(0) = 
+1
+-1
+-1
+1
+
+GenPwr: soln converged, |r|_inf = 8.10495e-05
+GenPwr: Iteration index: k = 14
+GenPwr: Approximate eigval: lambda^(k) = 3.90149
+GenPwr: Approximate eigvec: x^(k) = 
+0.235043
+-0.584258
+-1
+-0.494253
+
+***Results for symmetric power method***
+
+SymPwr: Given: A = 
+2.33291  0.436089  -0.47099  -0.307872  
+0.436089  2.19321  1.1283  -0.0556413  
+-0.47099  1.1283  2.53626  1.20447  
+-0.307872  -0.0556413  1.20447  1.38376  
+
+SymPwr: Given: x^(0) = 
+1
+-1
+-1
+1
+
+SymPwr: soln converged, |r|_inf = 7.88267e-05
+SymPwr: Iteration index: k = 14
+SymPwr: Approximate eigval: lambda^(k) = 3.90151
+SymPwr: Approximate eigvec: x^(k) = 
+0.183488
+-0.456105
+-0.780658
+-0.385842
+
