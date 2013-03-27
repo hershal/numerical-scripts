@@ -18,31 +18,33 @@ function x = steepest(x,f,n)
     g(2)=gg(x);
     z=2*jacob(x,f)'*f(x);
     z0=norm(z);
-
     z=z/z0;
+
     alpha(2)=0;
     alpha(4)=1;
-    g(4)=gg(x-alpha(4)*z);
+
+    g(4)=gg(x-alpha(4).*z);
 
     while g(4)>g(2)
-      alpha(4)=alpha(4)/2
-      g(4)=gg(x-alpha(4)*z);
+      alpha(4)=alpha(4)/2;
+      g(4)=gg(x-alpha(4).*z);
       if alpha(4)<tol/2
 	fprintf("No likely improvement\n");
 	k=n;
       endif
     endwhile
 
-    alpha(3)=alpha(4)/2;
-    g(3)=gg(x-alpha(3)*z);
-    h1=(g(3)-g(2))/alpha(3);
-    h2=(g(4)-g(3))/(alpha(4)-alpha(3));
-    h3=(h2-h1)/(alpha(4));
+    alpha(3)=alpha(4)/2
+    g(3)=gg(x-alpha(3).*z)
+    
+    h1=(g(3)-g(2))/alpha(3)
+    h2=(g(4)-g(3))/(alpha(4)-alpha(3))
+    h3=(h2-h1)/(alpha(4))
 
     alpha(1)=0.5*(alpha(3)-h1/h3);
-    g(1)=gg(x-alpha(1)*z);
+    g(1)=gg(x-alpha(1).*z);
 
-    [gmin,minidx] = min(g([1:4]))
+    [gmin,minidx] = min(g);
 
     x=x-alpha(minidx)*z;
 

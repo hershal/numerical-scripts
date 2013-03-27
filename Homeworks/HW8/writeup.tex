@@ -13,7 +13,7 @@
 \usepackage{cleveref}
 \usepackage{nameref}
 \usepackage{titlesec}
-\usepackage{multicol}
+\usepackage{framed}
 
 % \relpenalty=9999
 % \binoppenalty=9999
@@ -98,20 +98,126 @@ following:\\
 \subsection{10b}
 By multiplying on the right by $A + \mathbf{x y^{t}}$, show that when
 $\mathbf{y^{t}} A^{-1} \mathbf{x} \ne -1$ we have
-\begin{equation}
+\begin{equation*}
   \label{eq:10b}
   (A+\mathbf{x y^{t}})^{-1} = A^{-1} - \frac{A^{-1} \mathbf{x y^{t}} A^{-1}}{1+\mathbf{y^{t}}A^{-1}\mathbf{x}}
-\end{equation}
+\end{equation*}
 
 \section{\S~10.4}
 \subsection{1b$^2$}
 Use the method of Steepest Descent to approximate $\mathbf{x}^{(1)}$
-given $\mathbf{x}^{(0)}=(1,1.5)$ and $g(x)=\|F(x)\|_2^2$ and
-$\alpha_0=1$ for the following nonlinear system:
-\begin{align*}
-  3x_1^2-x_2^2&=0, \\
-  3x_1x_2^2-x_1^2-1&=0. \\
-\end{align*}
+given $\mathbf{x}^{(0)}=(1,1.5)$, $g(x)=\|F(x)\|_2^2$ and $\alpha_0=1$
+for the following nonlinear system:
+\begin{equation*}
+  \label{eq:stp_F}
+  F(\mathbf{x}) = \left\{
+    \begin{aligned}
+      3x_1^2-x_2^2&=0, \\
+      3x_1x_2^2-x_1^2-1&=0. \\
+    \end{aligned}
+  \right.
+\end{equation*}
+$g(\mathbf{x})$ is given as follows:
+\begin{equation}
+  \label{eq:stp_g}
+  g(\mathbf{x}) = f_1(x_1,x_2)^2+f_2(x_1,x_2)^2
+\end{equation}
+
+Which implies its gradient is:
+\begin{equation}
+  \label{eq:stp_nabg}
+  \nabla g(x_1,x_2) \equiv \nabla g(\mathbf{x}) = 
+  \begin{pmatrix}
+    2f_1(\mathbf{x})\frac{\partial f_1}{\partial x_1}(\mathbf{x}) + 2f_2(\mathbf{x})\frac{\partial f_2}{\partial x_1}(\mathbf{x}) \\
+    2f_1(\mathbf{x})\frac{\partial f_1}{\partial x_2}(\mathbf{x}) + 2f_2(\mathbf{x})\frac{\partial f_2}{\partial x_2}(\mathbf{x}) \\
+  \end{pmatrix}
+\end{equation}
+
+For $\mathbf{x}^{(0)}=(1,1.5)$, we have 
+\begin{equation*}
+  g(\mathbf{x}^{(0)}) = 14.625 \text{, } \quad
+  \nabla g(\mathbf{x^{(0)}}) =
+  \begin{pmatrix}
+    44.625 \\
+    63.000 \\
+  \end{pmatrix} \text{, and } \quad
+  z_0=\|\nabla g(\mathbf{x^{(0)}})\|_2 = 77.204
+.
+\end{equation*}
+
+Now we will find a normalized $\mathbf{z}$. Let
+\begin{equation*}
+  \mathbf{z} = \frac{1}{z_0}\nabla g(\textbf{x}^{(0)}) = 
+  \begin{pmatrix}
+    0.57802 \\
+    0.81602 \\
+  \end{pmatrix}
+\end{equation*}
+
+% With $\alpha_1=0$, we have 
+% $$g_1=g(\mathbf{x}^{(0)}-\alpha_1\mathbf{z}) = g(\mathbf{x}^{(0)}) = 14.625$$.
+% We can arbitrarily let $\alpha_3=1$ so that
+% $$g_3=g(\mathbf{x}^{(0)}-\alpha_3\mathbf{z}) = 1.57123$$.
+% Because $g_3<g_1$ , we accept $\alpha_3$ and set $\alpha_2$ = $\alpha_3/2 = 0.5$. Thus
+% $$g_2=g(\mathbf{x}^{(0)}-\alpha_2\mathbf{z}) = 0.11978$$.
+% 
+% We now find the quadratic polynomial that interpolates the data $(0, 14.625)$,
+% $(1, 1.57123)$, and $(0.5, 0.11978)$. It is most convenient to use Newton’s
+% foward divided-difference inter polating polynomial for this purpose, which has
+% the form
+% \begin{equation}
+%   \label{eq:stp_P}
+%   P(\alpha) = g_1+h_1\alpha+h_3\alpha(\alpha-\alpha_2)
+% \end{equation}
+% 
+% Which interpolates
+% $$g(\textbf{x}^{(0)}-\alpha\nabla g(\textbf{x}^{(0)}))=g(\textbf{x}^{(0)}-\alpha\textbf{z})$$
+% 
+% at $\alpha_1=0$, $\alpha_2=0.5$, and $\alpha_3=1$ as follows:
+% 
+% \begin{center}
+% $
+%   \begin{array}{llll}
+%     \alpha_1=0, & g_1=14.625, & \\
+%     \alpha_2=0.5, & g_2=0.11978, & h_1=-29.010 \\
+%     \alpha_3=1, & g_3=1.57123, & h_2=2.9029, & h_3=31.913 \\
+%   \end{array}
+% $
+% \end{center}
+% 
+% Thus 
+% $$P(\alpha)=14.625-(-29.010)\alpha+31.913\alpha(\alpha-\alpha_2)$$
+% is our interpolating polynomial given by the form in Equation~\ref{eq:stp_P}.
+
+We are given that $\alpha_0=0$ so we will skip the generation of an
+interpolating polynomial. All we have to do now is simply
+\begin{equation}
+  \label{eq:stp_x1}
+  \mathbf{x}^{(1)}=\mathbf{x}^{(0)}-\alpha_0\mathbf{z}
+\end{equation}
+
+Using Equation~\ref{eq:stp_x1} we obtain
+\begin{equation*}
+  \label{eq:stp_x1_numeric}
+  \mathbf{x}^{(1)}=
+  \begin{pmatrix}
+    1 \\
+    1.5 \\
+  \end{pmatrix} - 
+  \begin{pmatrix}
+    0.57802 \\
+    0.81602 \\
+  \end{pmatrix}  
+\end{equation*}
+Which gives us our final answer
+\begin{equation*}
+\label{eq:stp_x1_answer}
+\boxed{\mathbf{x}^{(1)}=
+  \begin{pmatrix}
+    0.42198 \\
+    0.68398 \\
+  \end{pmatrix}}
+\end{equation*}
 
 \section{\S~10.5}
 \subsection{1b$^3$}
