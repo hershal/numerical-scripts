@@ -1,48 +1,60 @@
-\documentclass[a4paper,12pt]{article}
-\title{M368K Homework 8}
-\author{Hershal Bhave}
+\documentclass[12pt]{article}
+\title{M368K Homework 8 \\ \normalsize{\S~10.3 \#2b$^1$,10b\quad \S~10.4 \#1b$^2$\quad \S~10.5 \#1b$^3$,2c$^3$}}
+\author{Hershal Bhave (hb6279)}
 \date{\today}
 
 \usepackage{listings}
 \usepackage{mathtools}
-\usepackage{fullpage}
+\usepackage[in]{fullpage}
 \usepackage{color}
+\usepackage{tabularx}
+\usepackage{courier}
+\usepackage{caption}
+\usepackage{cleveref}
+\usepackage{nameref}
+\usepackage{titlesec}
+\usepackage{multicol}
+
+% \relpenalty=9999
+% \binoppenalty=9999
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
+% \definecolor{mygreen}{rgb}{0.13,0.55,0.13}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
-\lstset{ %
-  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
-  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
-  breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{mygreen},    % comment style
-  deletekeywords={...},            % if you want to delete keywords from the given language
-  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
-  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
-  frame=single,                    % adds a frame around the code
-  keywordstyle=\color{blue},       % keyword style
-  % language=Octave,                 % the language of the code
-  % numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  % numbersep=5pt,                   % how far the line-numbers are from the code
-  % numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
-  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
-  showstringspaces=false,          % underline spaces within strings only
-  showtabs=false,                  % show tabs within strings adding particular underscores
-  % stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
-  tabsize=2,                       % sets default tabsize to 2 spaces
-  title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\footnotesize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=single,
+  keywordstyle=\color{blue},
+  % language=Octave,
+  % numbers=left,
+  % numbersep=5pt,
+  % numberstyle=\tiny\color{mygray},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  % stepnumber=2,
+  stringstyle=\color{mymauve},
+  tabsize=2,
+  title=\lstname,
   columns=fullflexible,
 }
 
 \begin{document}
-\maketitle 
+\maketitle
 
-\section{2b$^{1}$}
+\section{\S~10.3}
+\subsection{2b$^{1}$}
 Use Broyden's method with $\mathbf{x^{(0)}}$ = $\mathbf{0}$ to compute
 $\mathbf{x^{(2)}}$ for the following nonlinear system, given
 $\mathbf{x^{(0)}}$=
@@ -52,19 +64,19 @@ $\begin{pmatrix}
   0\\
 \end{pmatrix}$
 
-\begin{align}
+\begin{align*}
   \label{eq:2b}
-  x^2_1+x_2-37&=0\\
-  x_1-x^2_2-5&=0\\
-  x_1+x_2+x_3-3&=0
-\end{align}
+  x^2_1+x_2-37&=0,\\
+  x_1-x^2_2-5&=0,\\
+  x_1+x_2+x_3-3&=0.\\
+\end{align*}
 
-Using the algorithm specified in \texttt{broyden.m}, I achieved the
+Using the algorithm specified
+in~\texttt{\nameref{lst:broyden}}~(\cref{lst:broyden}), I achieved the
 following:\\
 
-\setlength{\tabcolsep}{2em}
-\begin{center}
-  \begin{tabular}[c]{lllll}
+\begin{centering}
+  \begin{tabularx}{\textwidth}{*5{>{\centering\arraybackslash}X}}
     \hline
     $k$ & $x^{(k)}_1$  & $x^{(k)}_2$ & $x^{(k)}_3$ & $\|\mathbf{x}^{(k)}-\mathbf{x}^{(k-1)}\|_2$ \\
     \hline
@@ -73,17 +85,17 @@ following:\\
     2 & 5.9790 & 1.1178 & -4.0967 & 0.30241 \\
     3 & 6.0040 & 1.0413 & -4.0453 & 0.095495 \\
     $\vdots$ &$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\
-    $\infty$ & 6 & 1 & -4 & $\lim_{k \to \infty}\textnormal{Error}=0$ \\
+    $\infty$ & 6 & 1 & -4 & $\lim_{k\rightarrow\infty}=0$ \\
     \hline
-  \end{tabular}
-\end{center}
+  \end{tabularx}
+\end{centering}
 
 \begin{minipage}{1.0\linewidth}
-  \lstinputlisting[language=Octave]{broyden.m}
+  \lstinputlisting[language=Octave,label=lst:broyden,caption=\texttt{broyden.m}]{broyden.m}
 \end{minipage}
 
 \newpage
-\section{10b}
+\subsection{10b}
 By multiplying on the right by $A + \mathbf{x y^{t}}$, show that when
 $\mathbf{y^{t}} A^{-1} \mathbf{x} \ne -1$ we have
 \begin{equation}
@@ -91,6 +103,77 @@ $\mathbf{y^{t}} A^{-1} \mathbf{x} \ne -1$ we have
   (A+\mathbf{x y^{t}})^{-1} = A^{-1} - \frac{A^{-1} \mathbf{x y^{t}} A^{-1}}{1+\mathbf{y^{t}}A^{-1}\mathbf{x}}
 \end{equation}
 
+\section{\S~10.4}
+\subsection{1b$^2$}
+Use the method of Steepest Descent to approximate $\mathbf{x}^{(1)}$
+given $\mathbf{x}^{(0)}=(1,1.5)$ and $g(x)=\|F(x)\|_2^2$ and
+$\alpha_0=1$ for the following nonlinear system:
+\begin{align*}
+  3x_1^2-x_2^2&=0, \\
+  3x_1x_2^2-x_1^2-1&=0. \\
+\end{align*}
+
+\section{\S~10.5}
+\subsection{1b$^3$}
+The nonlinear system
+\begin{align*}
+  f_1(x_1,x_2)&=x_1^2-x_2^2+2x_2 =0 \\
+  f_2(x_1,x_2)&=2x_1+x_2^2-6 =0 \\
+\end{align*}
+has two solutions,
+
+\begin{equation*}
+  \begin{array}{ccc}
+    \mathbf{x}^{(1)}=
+    \begin{bmatrix}
+      0.625204094 \\
+      2.179355825 \\
+    \end{bmatrix}
+    &
+    \mathrm{and}
+    &
+    \mathbf{x}^{(2)}=
+    \begin{bmatrix}
+      2.109511920 \\
+      −1.334532188 \\
+    \end{bmatrix}
+  \end{array}
+\end{equation*}
+
+Use the continuation method and Euler's method with $N=2$ to
+approximate the solutions where $$\mathbf{x}(0)=(1,1)^t$$ and identify
+which of the two known solutions the continuation curve is
+approaching.
+
+\subsection{2c$^3$}
+The nonlinear system
+\begin{align*}
+  f_1(x_1,x_2)&=x_1^2-x_2^2+2x_2 =0 \\
+  f_2(x_1,x_2)&=2x_1+x_2^2-6 =0 \\
+\end{align*}
+has two solutions,
+
+\begin{equation*}
+  \begin{array}{ccc}
+    \mathbf{x}^{(1)}=
+    \begin{bmatrix}
+      0.625204094 \\
+      2.179355825 \\
+    \end{bmatrix}
+    &
+    \mathrm{and}
+    &
+    \mathbf{x}^{(2)}=
+    \begin{bmatrix}
+      2.109511920 \\
+      −1.334532188 \\
+    \end{bmatrix}
+  \end{array}
+\end{equation*}
+Use the Runge-Kutta method of order four with order four with $N=1$ to
+approximate the solutions where $$\mathbf{x}(0)=(1,1)^t$$ and identify
+which of the two known solutions the continuation curve is
+approaching.
 
 
 \end{document}
