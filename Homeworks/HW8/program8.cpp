@@ -41,25 +41,22 @@ on one line)
 #include "matrix.h"
 using namespace std ;
 
+#define a 1.0
+#define b 1.5
+#define L 0.7
 
 /*** Declare function with steepest descent algorithm ***/
 int descent(vector&, int, int, double, int, double) ;
+double y(double rr, double aa);
+double z(double rr, double aa);
+double dzdr(double rr, double aa);
+double dzda(double rr, double aa);
+double dydr(double rr, double aa);
+double dyda(double rr, double aa);
 
 
 /*** Define g function for problem ***/
 void geval(vector& x, double& g){
-  // double a=1, b=-0.1 ; //define any constants
-  // double pi=4.0*atan(1.0) ; //the number pi
-  // g = a + b*x(0)*x(1) + x(0)*x(0) + x(1)*x(1) ;
-
-  double a=1.0, b=1.5, L=0.7;
-  // vector ref(2);
-  // ref(0)=1; ref(0)=0;
-  // double angle = arcos(vecDot(ref,x)/(vecL2Norm(ref)*vecL2Norm(x)));
-
-
-  // double r = sqrt(pow(x(0),2)+pow(x(1),2));
-  // double angle = atan2(x(1),x(0));
 
   double r = x(0);
   double angle = x(1);
@@ -73,57 +70,46 @@ void geval(vector& x, double& g){
 
 /*** Define dg function (gradient) for problem ***/
 void dgeval(vector& x, vector& dg){
-  // double a=1, b=-0.1 ; //define any constants
-  // double pi=4.0*atan(1.0) ; //the number pi
-  // dg(0) = b*x(1) + 2*x(0) ;
-  // dg(1) = b*x(0) + 2*x(1) ;
-
-
-  // double a=1.0, b=1.5, L=0.7;
-  double tol = pow(10,-5);
-
-  vector tmp(2);
-  double left, right;
-
-  // double r = sqrt(pow(x(0),2)+pow(x(1),2));
-  // double angle = atan2(x(1),x(0));
 
   double r = x(0);
   double angle = x(1);
 
-  double rdenom = (49+100*pow(r,2)-140*r*sin(angle));
+  dg(0) = dydr(r,angle)*(-2.0*pow(a,2)/pow(y(r,angle),3) + 2.0*a/pow(y(r,angle),2) + dzdr(r,angle)*(-2.0*pow(b,2)/pow(z(r,angle),3)+2.0*b/pow(z(r,angle),2)));
+  dg(1) = dyda(r,angle)*(-2.0*pow(a,2)/pow(y(r,angle),3) + 2.0*a/pow(y(r,angle),2) + dzda(r,angle)*(-2.0*pow(b,2)/pow(z(r,angle),3)+2.0*b/pow(z(r,angle),2)));
 
-  dg(0) = 2000*((200*(-10*r+7*sin(angle)))/pow(rdenom,3)
-		+(20*(10*r- 7*sin(angle)))/pow(rdenom,3)
-		-(450*(10*r-7*sin(angle)))/pow(rdenom,3)
-		+(3*(10*r+7*sin(angle)))/pow(rdenom,2));
+}
 
-  dg(1) = (7/10)*r*cos(angle)*(-(40000)/(pow(rdenom,2))
-			     +(4/pow(((49/100)+pow(r,2)-7/5*r*sin(angle)),3))
-			     -9000000/(pow(rdenom,3))
-			     +60000/pow(rdenom,2));
-  
+double y(double rr, double aa) {
+  return pow(L*cos(aa),2)+pow(rr-L*sin(aa),2);
+}
 
-  // tmp(0) = tol; tmp(1) = 0;
-  // tmp = tmp+x;
-  // geval(tmp,left);
-  // geval(x,right);
-  // dg(0) = (left-right)/tol;
-  // 
-  // tmp(0) = 0; tmp(1) = tol;
-  // tmp = tmp+x;
-  // geval(tmp,left);
-  // geval(x,right);
-  // dg(1) = (left-right)/tol;
+double z(double rr, double aa) {
+  return pow(L*cos(aa),2)+pow(rr+L*sin(aa),2);
+}
+
+double dzdr(double rr, double aa) {
+  return 2.0*(rr+L*sin(aa));
+}
+
+double dzda(double rr, double aa) {
+  return -2.0*(L*sin(aa)*L*cos(aa)*(rr*L*sin(aa)));
+}
+
+double dydr(double rr, double aa) {
+  return 2.0*(rr-L*sin(aa));
+}
+
+double dyda(double rr, double aa) {
+  return -2.0*(L*sin(aa)*L*cos(aa)+((rr+L*sin(aa)*L*cos(aa))));
 }
 
 
 int main() {
   /*** Define problem parameters ***/
   int n=2, maxIter=100, iter=0, maxSrch=20 ;
-  double tol=1e-6, a0=0.2, g ;
+  double tol=1e-6, a0=0.3, g ;
   vector x(n) ;
-  x(0) = 1.0 ; x(1) = 0.3 ; //initial guess
+  x(0) = 1.0 ; x(1) = 0.0 ; //initial guess
 
   /*** Print problem info ***/
   cout << setprecision(10) ;

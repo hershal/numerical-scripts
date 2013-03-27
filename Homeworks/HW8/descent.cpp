@@ -59,6 +59,9 @@ int descent(vector& xk, int n, int maxIter,
     geval(xh,gh) ;
 
     kSrch = 0 ;
+
+    vector tmp(2);
+
     while( gh>=gk && kSrch<maxSrch ){ 
       ah = ah/2 ;
       xh = xk - scaleVec(ah/dgkNorm,dgk) ;
@@ -74,29 +77,25 @@ int descent(vector& xk, int n, int maxIter,
     a3 = 0 ; y3 = 0 ;
     ahh = ah ; ghh = gh ; xhh = xh ;
 
-    // ahh= alpha(2) = 0.5
-    // ah = alpha(3) = 1
-    ahh=0.5;
-    ah=1.0;
-
-    // gk = g(1)=gg(x)
-    // ghh= g(2)
-    // gh = g(3)=gg(x-alpha(3).*z)
-
     // h1 = y1
     // h2 = y2
     // h3 = y3
-    y1=(ghh-gk)/(ah);
-    y2=(gh-ghh)/(ahh-ah);
-    y3=(y2-y1)/(ahh);
 
-    ahh=0.5*(ah-y1/y3);
+    a1=0;
+    a3=ah;
+    a2=a3/2;
+
+    tmp = xk-scaleVec(a2,dgk);
+    geval(tmp, ghh);
+
+    y1=(ghh-gk)/(a2);
+    y2=(gh-ghh)/(a3-a2);
+    y3=(y2-y1)/(a3);
+
+    ahh=0.5*(a2-y1/y3);
     xhh=xk-scaleVec(ahh/dgkNorm,dgk);
     geval(xhh,ghh);
-    xhh=xh-scaleVec(ah/dgkNorm, dgk);
 
-    // xhh=
-    // ghh=
     /*** compute quadratic interpolation quantities
          (using notation from class notes) a1,y1, 
          a2,y2, a3,y3 and ahh,xhh,ghh here ***/

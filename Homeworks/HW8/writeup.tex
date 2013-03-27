@@ -100,11 +100,21 @@ following:\\
 \subsection{10b}
 By multiplying on the right by $A + \mathbf{x y^{t}}$, show that when
 $\mathbf{y^{t}} A^{-1} \mathbf{x} \ne -1$ we have
-\begin{equation*}
+\begin{equation}
   \label{eq:10b}
   (A+\mathbf{x y^{t}})^{-1} = A^{-1} - \frac{A^{-1} \mathbf{x y^{t}} A^{-1}}{1+\mathbf{y^{t}}A^{-1}\mathbf{x}}
-\end{equation*}
+\end{equation}
 
+By right-multiplying the LHS with $A + \mathbf{x y^{t}}$, we obtain 
+
+\begin{align*}
+I &= (A+\mathbf{x y^t}) A^{-1} - \frac{A^{-1} \mathbf{x} \mathbf{y}^{t} A^{-1}}{1+\mathbf{y}^{t}A^{-1}\mathbf{x}}\\
+&= AA^{-1}+\mathbf{x}\mathbf{y}^t A^{-1}-\frac{A^{-1}A \mathbf{x} \mathbf{y}^{t} A^{-1}+\mathbf{x} \mathbf{y}^{t}A^{-1}\mathbf{x} \mathbf{y}^{t}A^{-1}}{1+\mathbf{y}^{t}A^{-1}\mathbf{x}}\\
+&=I+\mathbf{x y^t} A^{-1}-\frac{\mathbf{x}(1+\mathbf{y^{t}}A^{-1}\mathbf{x})\mathbf{y^{t}}}{1+\mathbf{y^{t}}A^{-1}\mathbf{x}}\\
+&=I+\mathbf{x} \mathbf{y}^{t}A^{-1}-\mathbf{x} \mathbf{y}^{t}A^{-1}\\
+I&= I.\\
+\end{align*}
+The equality seems to hold, so we have shown that when $\mathbf{y^{t}} A^{-1} \mathbf{x} \ne -1$, Equation~\ref{eq:10b} holds true.\\
 \section{\S~10.4}
 \subsection{1b$^2$}
 Use the method of Steepest Descent to approximate $\mathbf{x}^{(1)}$
@@ -247,15 +257,34 @@ has two solutions,
     \mathbf{x}^{(2)}=
     \begin{bmatrix}
       2.109511920 \\
-      −1.334532188 \\
+      -1.334532188 \\
     \end{bmatrix}
   \end{array}
 \end{equation*}
 
-Use the continuation method and Euler's method with $N=2$ to
-approximate the solutions where $\mathbf{x}(0)=(1,1)^t$ and identify
-which of the two known solutions the continuation curve is
-approaching.
+Use the continuation method and Euler's method with $N=2$ to approximate the
+solutions where $\mathbf{x}(0)=(1,1)^t$ and identify which of the two known
+solutions the continuation curve is approaching.
+
+Using the algorithm for Euler's Method of order four and $N=2$ described in
+in~\texttt{\nameref{lst:eulers}} (\cref{lst:eulers}), I was able to obtain the following:
+
+\begin{equation*}
+  \boxed{
+    \begin{array}[h]{cc}
+    \mathbf{x}^*= \left\{
+      \begin{array}{c}
+        0.42105 \\
+        2.61842 \\
+      \end{array}
+    \right.\\
+    \text{The solution appears to be approaching }\mathbf{x}^{(1)}\text{.}
+  \end{array}
+  }
+\end{equation*}
+\begin{minipage}[h]{1.0\linewidth}
+  \lstinputlisting[language=Octave,label=lst:eulers,caption=\texttt{eulers.m}]{eulers.m}
+\end{minipage}
 
 \subsection{2c$^3$}
 The nonlinear system
@@ -278,15 +307,14 @@ has two solutions,
     \mathbf{x}^{(2)}=
     \begin{bmatrix}
       2.109511920 \\
-      −1.334532188 \\
+      -1.334532188 \\
     \end{bmatrix}
   \end{array}
 \end{equation*}
 Use the Runge-Kutta method of order four with order four with $N=1$ to
-approximate the solutions where $\mathbf{x}(0)=(1,1)^t$ and identify
+approximate the solutions where $\mathbf{x}(0)=(3,-2)^t$ and identify
 which of the two known solutions the continuation curve is
 approaching.
-
 
 Using the algorithm for Runge-Kutta of order four and $N=1$ described in
 in~\texttt{\nameref{lst:rungekutta}} (\cref{lst:rungekutta}), I was able to obtain the following:
@@ -296,18 +324,19 @@ in~\texttt{\nameref{lst:rungekutta}} (\cref{lst:rungekutta}), I was able to obta
     \begin{array}[h]{cc}
     \mathbf{x}^*= \left\{
       \begin{array}{c}
-        0.59710 \\
-        2.25797 \\
+        2.1094 \\
+        -1.3346 \\
       \end{array}
     \right.\\
-    \text{The solution appears to be approaching }\mathbf{x}^{(1)}\text{.}
+    \text{The solution appears to be approaching }\mathbf{x}^{(2)}\text{.}
   \end{array}
   }
 \end{equation*}
-
-
 \begin{minipage}[h]{1.0\linewidth}
   \lstinputlisting[language=Octave,label=lst:rungekutta,caption=\texttt{rungekutta.m}]{rungekutta.m}
 \end{minipage}
+
+\section{Programming Minilab}
+The solutions generally converge to the same point.
 
 \end{document}
