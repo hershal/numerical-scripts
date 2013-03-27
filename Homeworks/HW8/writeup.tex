@@ -8,7 +8,7 @@
 \usepackage[in]{fullpage}
 \usepackage{color}
 \usepackage{tabularx}
-\usepackage{courier}
+% \usepackage{courier}
 \usepackage{caption}
 \usepackage{cleveref}
 \usepackage{nameref}
@@ -25,7 +25,7 @@
 
 \lstset{
   backgroundcolor=\color{white},
-  basicstyle=\footnotesize\ttfamily,
+  basicstyle=\scriptsize\ttfamily,
   breakatwhitespace=false,
   breaklines=true,
   captionpos=b,
@@ -72,10 +72,11 @@ $\begin{pmatrix}
 \end{align*}
 
 Using the algorithm specified
-in~\texttt{\nameref{lst:broyden}}~(\cref{lst:broyden}), I achieved the
+in~\texttt{\nameref{lst:broyden}} (\cref{lst:broyden}), I achieved the
 following:\\
 
 \begin{centering}
+\boxed{
   \begin{tabularx}{\textwidth}{*5{>{\centering\arraybackslash}X}}
     \hline
     $k$ & $x^{(k)}_1$  & $x^{(k)}_2$ & $x^{(k)}_3$ & $\|\mathbf{x}^{(k)}-\mathbf{x}^{(k-1)}\|_2$ \\
@@ -88,6 +89,7 @@ following:\\
     $\infty$ & 6 & 1 & -4 & $\lim_{k\rightarrow\infty}=0$ \\
     \hline
   \end{tabularx}
+  }
 \end{centering}
 
 \begin{minipage}{1.0\linewidth}
@@ -219,6 +221,10 @@ Which gives us our final answer
   \end{pmatrix}}
 \end{equation*}
 
+\begin{minipage}[h]{1.0\linewidth}
+  \lstinputlisting[language=Octave,label=lst:steepest,caption=\texttt{steepest.m}]{steepest.m}
+\end{minipage}
+
 \section{\S~10.5}
 \subsection{1b$^3$}
 The nonlinear system
@@ -247,7 +253,7 @@ has two solutions,
 \end{equation*}
 
 Use the continuation method and Euler's method with $N=2$ to
-approximate the solutions where $$\mathbf{x}(0)=(1,1)^t$$ and identify
+approximate the solutions where $\mathbf{x}(0)=(1,1)^t$ and identify
 which of the two known solutions the continuation curve is
 approaching.
 
@@ -277,9 +283,31 @@ has two solutions,
   \end{array}
 \end{equation*}
 Use the Runge-Kutta method of order four with order four with $N=1$ to
-approximate the solutions where $$\mathbf{x}(0)=(1,1)^t$$ and identify
+approximate the solutions where $\mathbf{x}(0)=(1,1)^t$ and identify
 which of the two known solutions the continuation curve is
 approaching.
 
+
+Using the algorithm for Runge-Kutta of order four and $N=1$ described in
+in~\texttt{\nameref{lst:rungekutta}} (\cref{lst:rungekutta}), I was able to obtain the following:
+
+\begin{equation*}
+  \boxed{
+    \begin{array}[h]{cc}
+    \mathbf{x}^*= \left\{
+      \begin{array}{c}
+        0.59710 \\
+        2.25797 \\
+      \end{array}
+    \right.\\
+    \text{The solution appears to be approaching }\mathbf{x}^{(1)}\text{.}
+  \end{array}
+  }
+\end{equation*}
+
+
+\begin{minipage}[h]{1.0\linewidth}
+  \lstinputlisting[language=Octave,label=lst:rungekutta,caption=\texttt{rungekutta.m}]{rungekutta.m}
+\end{minipage}
 
 \end{document}

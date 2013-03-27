@@ -46,11 +46,16 @@ int descent(vector& xk, int n, int maxIter,
 
   geval(xk,gk) ; //evaluate g(xk)
   dgeval(xk,dgk) ;  //evaluate dg(xk)
-  dgkNorm = vecL2Norm(dgk) ; 
+  dgkNorm = vecL2Norm(dgk) ; // z_0
   
   while(dgkNorm>=tol && k<maxIter) {
     ah = a0 ;
+
+    // z=1/z_0 \nabla g(x^{(0)})
+    // x=x-alpha(minidx).*z;
     xh = xk - scaleVec(ah/dgkNorm,dgk) ;
+
+    // g(2) = gg(x)
     geval(xh,gh) ;
 
     kSrch = 0 ;
@@ -69,12 +74,34 @@ int descent(vector& xk, int n, int maxIter,
     a3 = 0 ; y3 = 0 ;
     ahh = ah ; ghh = gh ; xhh = xh ;
 
+    // ahh= alpha(2) = 0.5
+    // ah = alpha(3) = 1
+    ahh=0.5;
+    ah=1.0;
 
+    // gk = g(1)=gg(x)
+    // ghh= g(2)
+    // gh = g(3)=gg(x-alpha(3).*z)
+
+    // h1 = y1
+    // h2 = y2
+    // h3 = y3
+    y1=(ghh-gk)/(ah);
+    y2=(gh-ghh)/(ahh-ah);
+    y3=(y2-y1)/(ahh);
+
+    ahh=0.5*(ah-y1/y3);
+    xhh=xk-scaleVec(ahh/dgkNorm,dgk);
+    geval(xhh,ghh);
+    xhh=xh-scaleVec(ah/dgkNorm, dgk);
+
+    // xhh=
+    // ghh=
     /*** compute quadratic interpolation quantities
          (using notation from class notes) a1,y1, 
          a2,y2, a3,y3 and ahh,xhh,ghh here ***/
 
-
+    // h(alpha_3) < h(alpha_crit)
     if(ahh>=0 && ahh<=ah && ghh<gh){
       xk = xhh ;
       gk = ghh ;

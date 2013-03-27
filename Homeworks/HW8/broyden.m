@@ -1,6 +1,6 @@
 #!/usr/bin/octave
 # Created by Hershal Bhave on 3/25/13
-# For M368K HW8, § 10.2 Number 2
+# For M368K HW8, § 10.3 Number 2b
 # Written in GNU Octave
 #
 # Description: Uses the Broyden Algorithm to approximate the solution
