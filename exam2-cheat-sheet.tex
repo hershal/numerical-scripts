@@ -1,0 +1,67 @@
+\documentclass[8pt]{article}
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{tabularx}
+\usepackage{mathabx}
+\usepackage{enumitem}
+\usepackage{arydshln}
+\usepackage{caption}
+\usepackage{multicol}
+\usepackage{sectsty}
+\usepackage{extsizes}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage[margin=1.5cm]{geometry}
+
+\pagestyle{fancyplain}
+
+% Try very hard not to break relational and binary operators (equations)
+\relpenalty=9999
+\binoppenalty=9999
+
+\begin{document}
+
+\lhead{Hershal Bhave \quad\tiny{hb6279}}
+\rhead{M368K Spring 2013 Midterm 2 Cheat Sheet (Dr. Gonzalez)}
+
+\begin{multicols}{2}
+  \section{\S 9.1, \S 9.2}
+  \begin{description}
+  % \item[Definition of Eigenvalue] $p(\lambda) = \mathrm{det}(A-\lambda I)$
+  \item[Ger\^{s}gorin Circle Theorem]
+    \footnote{$a_{ij}$ is the $i$-th row and $j$-th column of the matrix A.}
+    \footnote{The eigenvalues fall in the union of the circles. Remember $\rho(A)=\text{max}|\lambda_i|$}
+    $$R^i=\left\{z\in\mathbb{C} \;\middle|\; |z-a_{jj}|\leq\sum_{j=1,j\neq i}^{n}|a_{ij}|\right\}$$ 
+  \item[Finding Eigenvalues] Solve $\mathrm{det}(A-\lambda I)=0$
+  \item[Finding Eigenvectors] Solve $(A-\lambda_iI)x=0$. The
+    eigenvectors are linearly independent if $\mathrm{det}(A)\neq 0$
+  \item[Orthogonal Vectors]
+    $(\mathbf{v}^{(i)})^\top\mathbf{v}^{(j)}=0, \;\forall\; i\neq j$
+  \item[Orthonormal Vectors]
+    \footnote{Simply normalize the orthogonal set to become orthonormal}
+    $(\mathbf{v}^{(i)})^\top\mathbf{v}^{(i)}=1, \;\forall\; i=1,\dots,n$ and above
+  \item[Orthogonal Matrices]
+    A matrix whose columns form an orthonormal set in $\mathbb{R}^n$
+  \item[Invertible/Orthogonal Matrix Properties] \hfill
+    \begin{enumerate}[i]
+    \item Orthogonal $Q$ is invertible if $Q^{-1}=Q^\top$
+    \item Invertible $Q$ is orthogonal if $Q^{-1}=Q^\top$
+    \item $\forall\mathbf{x} \in \mathbb{R}^n,\|Q\mathbf{x}\|_2=\|\mathbf{x}\|_2$
+    \item $Q^{-1}Q=Q^\top Q=I$
+    \end{enumerate}
+  \item[Similar Matrices] $A$ and $D$ similar if $\exists\,S\;|\;A=S^{-1}DS$
+    \begin{enumerate}[i]
+    \item $A$ and $D$ are similar with $A = S^{−1}DS$, where the
+      columns of $S$ consist of the eigenvectors, and the $i$th
+      diagonal element of $D$ is the eigenvalue of $A$ that
+      corresponds to the $i$th column of $S$.
+    \item An $n\times n$ matrix $A$ that has $n$ distinct eigenvalues is
+      similar to a diagonal matrix.
+    \item Diagonalizable matrices exist with $A=S^{-1}DS$ or equivalently $D=SAS^{-1}$.
+    \end{enumerate}
+  \item[Positive-Definiteness] A symmetric matrix $A$ is positive-definite $\iff$ all its eigenvalues are positive
+  \end{description}
+\end{multicols}
+
+\end{document}
