@@ -1,0 +1,189 @@
+
+System size: n = 2
+Initial guess: x^(0) = 
+0.1
+0
+
+Descent: |Gradg_k|_2 = 8.101356298
+Descent: |Gradg_k|_2 = 10.19451555
+Descent: |Gradg_k|_2 = 6.962698621
+Descent: |Gradg_k|_2 = 2.572104413
+Descent: |Gradg_k|_2 = 0.7153778937
+Descent: |Gradg_k|_2 = 0.5564442314
+Descent: |Gradg_k|_2 = 0.1684335061
+Descent: |Gradg_k|_2 = 0.0544444561
+Descent: |Gradg_k|_2 = 0.01697314028
+Descent: |Gradg_k|_2 = 0.007514769961
+Descent: |Gradg_k|_2 = 0.0008098146352
+Descent: |Gradg_k|_2 = 0.0005187102819
+Descent: |Gradg_k|_2 = 0.000290613291
+Descent: |Gradg_k|_2 = 0.0001576831817
+Descent: |Gradg_k|_2 = 9.489034612e-05
+Descent: |Gradg_k|_2 = 3.23570413e-05
+Descent: |Gradg_k|_2 = 1.786109039e-05
+Descent: |Gradg_k|_2 = 1.060016381e-05
+Descent: |Gradg_k|_2 = 5.000757235e-06
+Descent: |Gradg_k|_2 = 2.526980494e-06
+Descent: |Gradg_k|_2 = 1.322463827e-06
+Descent: max iter exceeded in alpha search
+Descent: |Gradg_k|_2 = 5.788574101e-07
+Descent: solution converged
+
+Iteration index: k = 22
+
+Approx solution: x = 
+0.8717797525
+0.2062956615
+
+Approx g-value: g = -2
+
+System size: n = 2
+Initial guess: x^(0) = 
+0
+0
+
+Descent: solution converged
+
+Iteration index: k = 0
+
+Approx solution: x = 
+0
+0
+
+Approx g-value: g = 3.331945023
+
+System size: n = 2
+Initial guess: x^(0) = 
+1
+1
+
+Descent: |Gradg_k|_2 = 19.8713046
+Descent: |Gradg_k|_2 = 2.001010609
+Descent: |Gradg_k|_2 = 1.249958707
+Descent: |Gradg_k|_2 = 0.8066952699
+Descent: |Gradg_k|_2 = 0.3218733647
+Descent: |Gradg_k|_2 = 0.3572731044
+Descent: |Gradg_k|_2 = 0.1068423756
+Descent: |Gradg_k|_2 = 0.04505336325
+Descent: |Gradg_k|_2 = 0.04764361383
+Descent: |Gradg_k|_2 = 0.009913419928
+Descent: |Gradg_k|_2 = 0.006327608671
+Descent: |Gradg_k|_2 = 0.002891902319
+Descent: |Gradg_k|_2 = 0.0004582069693
+Descent: |Gradg_k|_2 = 0.0002448721094
+Descent: |Gradg_k|_2 = 3.680840198e-05
+Descent: |Gradg_k|_2 = 2.016760372e-05
+Descent: |Gradg_k|_2 = 1.172401778e-05
+Descent: |Gradg_k|_2 = 7.530529733e-06
+Descent: |Gradg_k|_2 = 3.573095979e-06
+Descent: |Gradg_k|_2 = 2.060446541e-07
+Descent: solution converged
+
+Iteration index: k = 20
+
+Approx solution: x = 
+0.8717797782
+0.2062956383
+
+Approx g-value: g = -2
+
+System size: n = 2
+Initial guess: x^(0) = 
+0.7
+0.5
+
+Descent: |Gradg_k|_2 = 3.000824496
+Descent: |Gradg_k|_2 = 0.2576632011
+Descent: |Gradg_k|_2 = 0.2561922412
+Descent: |Gradg_k|_2 = 0.1516141934
+Descent: |Gradg_k|_2 = 0.07418854551
+Descent: |Gradg_k|_2 = 0.04230400348
+Descent: |Gradg_k|_2 = 0.04360504272
+Descent: |Gradg_k|_2 = 0.01038977698
+Descent: |Gradg_k|_2 = 0.00687403896
+Descent: |Gradg_k|_2 = 0.003205743565
+Descent: |Gradg_k|_2 = 0.002142458628
+Descent: |Gradg_k|_2 = 0.001241345691
+Descent: |Gradg_k|_2 = 0.0005515051173
+Descent: |Gradg_k|_2 = 0.0002994353684
+Descent: |Gradg_k|_2 = 0.0001704602931
+Descent: |Gradg_k|_2 = 0.0001047002977
+Descent: |Gradg_k|_2 = 3.457192298e-05
+Descent: |Gradg_k|_2 = 1.460830469e-05
+Descent: |Gradg_k|_2 = 1.925507449e-06
+Descent: |Gradg_k|_2 = 6.804035346e-07
+Descent: solution converged
+
+Iteration index: k = 20
+
+Approx solution: x = 
+0.8717797417
+0.2062956575
+
+Approx g-value: g = -2
+
+System size: n = 2
+Initial guess: x^(0) = 
+0.9
+0.2
+
+Descent: |Gradg_k|_2 = 0.1060132857
+Descent: |Gradg_k|_2 = 0.0451945926
+Descent: |Gradg_k|_2 = 0.005060625303
+Descent: |Gradg_k|_2 = 0.002270767141
+Descent: |Gradg_k|_2 = 0.0004798096566
+Descent: |Gradg_k|_2 = 0.0002811890731
+Descent: |Gradg_k|_2 = 0.0001455559633
+Descent: |Gradg_k|_2 = 1.91243899e-05
+Descent: |Gradg_k|_2 = 1.270271566e-05
+Descent: |Gradg_k|_2 = 3.702098827e-06
+Descent: |Gradg_k|_2 = 2.12956186e-06
+Descent: max iter exceeded in alpha search
+Descent: |Gradg_k|_2 = 1.341504862e-06
+Descent: max iter exceeded in alpha search
+Descent: |Gradg_k|_2 = 5.736425582e-07
+Descent: solution converged
+
+Iteration index: k = 13
+
+Approx solution: x = 
+0.871779727
+0.2062955555
+
+Approx g-value: g = -2
+
+System size: n = 2
+Initial guess: x^(0) = 
+1
+0
+
+Descent: |Gradg_k|_2 = 0.3364962807
+Descent: |Gradg_k|_2 = 0.1925708025
+Descent: |Gradg_k|_2 = 0.0240186169
+Descent: |Gradg_k|_2 = 0.007283135121
+Descent: |Gradg_k|_2 = 0.003082289921
+Descent: |Gradg_k|_2 = 0.002192886597
+Descent: |Gradg_k|_2 = 0.0004805692047
+Descent: |Gradg_k|_2 = 0.0002555640296
+Descent: |Gradg_k|_2 = 0.0001688795393
+Descent: |Gradg_k|_2 = 0.0001236140378
+Descent: |Gradg_k|_2 = 7.835263334e-05
+Descent: |Gradg_k|_2 = 5.820251694e-05
+Descent: |Gradg_k|_2 = 3.06266123e-05
+Descent: |Gradg_k|_2 = 1.587994517e-05
+Descent: |Gradg_k|_2 = 6.843211265e-06
+Descent: |Gradg_k|_2 = 3.962860945e-06
+Descent: |Gradg_k|_2 = 1.814900965e-06
+Descent: max iter exceeded in alpha search
+Descent: |Gradg_k|_2 = 1.032501265e-06
+Descent: max iter exceeded in alpha search
+Descent: |Gradg_k|_2 = 3.145164375e-07
+Descent: solution converged
+
+Iteration index: k = 19
+
+Approx solution: x = 
+0.8717798085
+0.206295593
+
+Approx g-value: g = -2
