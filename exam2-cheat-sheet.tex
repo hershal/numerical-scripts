@@ -26,13 +26,12 @@
 \rhead{M368K Spring 2013 Midterm 2 Cheat Sheet (Dr. Gonzalez)}
 
 \begin{multicols}{2}
-  \section{\S 9.1, \S 9.2}
   \begin{description}
   % \item[Definition of Eigenvalue] $p(\lambda) = \mathrm{det}(A-\lambda I)$
   \item[Ger\^{s}gorin Circle Theorem]
     \footnote{$a_{ij}$ is the $i$-th row and $j$-th column of the matrix A.}
     \footnote{The eigenvalues fall in the union of the circles. Remember $\rho(A)=\text{max}|\lambda_i|$}
-    $$R^i=\left\{z\in\mathbb{C} \;\middle|\; |z-a_{jj}|\leq\sum_{j=1,j\neq i}^{n}|a_{ij}|\right\}$$ 
+    $$R^i=\left\{z\in\mathbb{C} \;\middle|\; |z-a_{jj}|\leq\sum_{j=1,j\neq i}^{n}|a_{ij}|\right\}$$
   \item[Finding Eigenvalues] Solve $\mathrm{det}(A-\lambda I)=0$
   \item[Finding Eigenvectors] Solve $(A-\lambda_iI)x=0$. The
     eigenvectors are linearly independent if $\mathrm{det}(A)\neq 0$
@@ -43,7 +42,8 @@
     $(\mathbf{v}^{(i)})^\top\mathbf{v}^{(i)}=1, \;\forall\; i=1,\dots,n$ and above
   \item[Orthogonal Matrices]
     A matrix whose columns form an orthonormal set in $\mathbb{R}^n$
-  \item[Positive-Definiteness] A symmetric matrix $A$ is positive-definite $\iff$ all its eigenvalues are positive
+  \item[Positive-Definiteness] A symmetric matrix $A$ is
+    positive-definite $\iff$ all its eigenvalues are positive
   \item[Invertible/Orthogonal Matrix Properties] \hfill
     \begin{enumerate}[i]
     \item Orthogonal $Q$ is invertible if $Q^{-1}=Q^\top$
@@ -61,7 +61,73 @@
       similar to a diagonal matrix.
     \item Diagonalizable matrices exist with $A=S^{-1}DS$ or equivalently $D=SAS^{-1}$.
     \end{enumerate}
+  \item[Power Method]
+    \footnote{\label{ft:powmtd_g}$\mathbf{g}^{(k)} = \mathbf{e}_{p_k}$ where $p_k$ is an array
+      index: $|\mathbf{x}^{(k)}_{p_k}| = \|\mathbf{x}^{(k)}\|_\infty$}
+     Rate of convergence is  $O(|\lambda_2/\lambda_1|^{m})$
+    $$x^{(0)} \neq 0\text{ given, set } \mathbf{y}^{(0)}=\mathbf{x}^{(0)}$$
+    \begin{equation*}
+      \left\{
+    \begin{aligned}
+        \mathbf{x}^{(k)} &= \mathbf{y}^{(k-1)}/\|\mathbf{y}^{(k-1)}\|_\infty \\
+        \mathbf{y}^{(k)} &= A\mathbf{x}^{(k)} \\
+        \boldsymbol{\lambda}^{(k)} &= (\mathbf{g}^{(k)} \cdot \mathbf{y}^{(k)})/(\mathbf{g}^{(k)} \cdot \mathbf{x}^{(k)}) \\
+        &=\mathbf{y}^{(k)}_{p_k}/\mathbf{x}^{(k)}_{p_k} \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+
+  \item[Symmetric Power Method] \footnote{\label{ft:sympowmtd_g}$\mathbf{g}^{(k)} =
+      \mathbf{x}^{(k)}$ where $\mathbf{g}^{(k)}\cdot\mathbf{x}^{(k)}=\|\mathbf{x}^{(k)}\|_2=1$ when $k \geq 1$} 
+    Used when A is symmetric. Rate of convergence is $O(|\lambda_2/\lambda_1|^{2m})$. It is not
+    known whether or not A has a single dominant eigenvalue nor how $\mathbf{x}^{(0)}$ should be chosen. 
+    $$\mathbf{x}^{(0)} \neq 0 \text{ given, set } \mathbf{y}^{(0)}=\mathbf{x}^{(0)}$$
+    \begin{equation*}
+      \left\{
+    \begin{aligned}
+        \mathbf{x}^{(k)} &= \mathbf{y}^{(k-1)}/\|\mathbf{y}^{(k-1)}\|_2 \\
+        \mathbf{y}^{(k)} &= A\mathbf{x}^{(k)} \\
+        \boldsymbol{\lambda}^{(k)} &= (\mathbf{g}^{(k)} \cdot \mathbf{y}^{(k)})/(\mathbf{g}^{(k)} \cdot \mathbf{x}^{(k)}) \\
+        &=\mathbf{y}^{(k)}_{p_k}/\mathbf{x}^{(k)}_{p_k} \\
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \item[Inverse Power Method] Gives faster convergence. Used to determine the eigenvalue that is
+    closest to $q$. A combined method to find all eigenvalues of a matrix is do deflate the original
+    matrix, find the deflated matrix's eigenvalue through General Power Method, then use that eigenvalue
+    as an initial guess to the Inverse Power Method to ensure we have found an eigenvalue of the
+    original matrix, not the deflated matrix.
+    % \footnote{\label{ft:invpowmtd_p}$|\mathbf{y}^{(k)}_{p_k}| = \|\mathbf{y}^{(k)}_{p_k}\|_\infty$}
+    $$\mathbf{x}^{(0)} \neq 0 \text{ given, set } \mathbf{y}^{(0)}=\mathbf{x}^{(0)}$$
+    \begin{equation*}
+      \left\{
+    \begin{aligned}
+        \mathbf{x}^{(k)} &= \mathbf{y}^{(k)}/\|\mathbf{y}^{(k)}\|_\infty \\
+        \mathbf{y}^{(k)} &= (A-qI)^{-1}\mathbf{x}^{(k-1)} \\
+        \boldsymbol{\lambda}^{(k)} &= \frac{(\mathbf{x}^{(k)})^\top A\mathbf{x}^{(k)}}{(\mathbf{x}^{(k)})^\top\mathbf{x}^{(k)}}\\
+        &=\frac{(\mathbf{x}^{(k)})^\top\mathbf{x}^{(k)}}{\|\mathbf{x}^{(k)}\|^2_2}\\
+      \end{aligned}
+      \right.
+    \end{equation*}
+  \item[Wielandt Deflation] Deleting the $i$th row and column of $B$:
+    \begin{equation*}
+        B=A-\lambda_1\mathbf{v}^{(1)}\mathbf{x}^\top 
+        \text{ where } \mathbf{x}=\frac{1}{\lambda_1 v^{(1)}_i}(a_{i1}, a_{i2}, \ldots a_{in}) 
+        \text{ }
+        \footnote{$a_{i1},\ldots,a_{in}$ are entries in the $i$th row of $A$}
+      \end{equation*}
+    \item[Householder Transformation] Reduces a symmetric matrix to a similar tridiagonal matrix. Repeat for $k=1,\ldots,n-2$:
+      \begin{equation*}
+        \begin{aligned}
+          q&=\sum^{n}_{j=k+1}(a_{j,k})^2 \\
+          \alpha&=-\mathrm{sign}(a_{k+1,k})\sqrt{q} \\
+          r&=\sqrt{\frac{1}{2}\alpha^2-\frac{1}{2}\alpha a^{(k)}_{k+1,k}} \\
+          w^{(k)}_j&=\frac{a^{(k)}_{j,k}}{2r} \text{ for each } j=k+2,\ldots,n \\
+          P^{(k)}&=I-2w^{(k)}*(w^{(k)})^\top \\
+          A^{(k+1)}&=P^{(k)}A^{(k)}P^{(k)}
+        \end{aligned}
+      \end{equation*}
+    \item[QR Algorithm] Finds all the eigenvalues of a symmetric, tridiagonal matrix (use Householder's).
   \end{description}
 \end{multicols}
-
 \end{document}
