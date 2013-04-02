@@ -19,18 +19,18 @@ function x = broyden(x, f, n)
   A = inv(A);
   s = -A*v;
   x = x+s;
-  k=1;
+  k = 1;
 
   while(k<n && norm(s)>tol)
-    w=v;
-    v=f(x);
-    y=v-w;
-    z=-A*y;
-    p=-s'*z;
-    u=(s'*A)';
-    A=A+(1/p)*(s+z)*u';
-    s=-A*v;
-    x=x+s;
+    w = v;
+    v = f(x);
+    y = v-w;
+    z = -A*y;
+    p = -s'*z;
+    u = (s'*A)';
+    A+=(1/p)*(s+z)*u';
+    s = -A*v;
+    x = x+s;
     k++;
   endwhile
 
