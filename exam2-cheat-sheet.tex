@@ -13,6 +13,7 @@
 \usepackage{fancyhdr}
 \usepackage{enumerate}
 \usepackage[margin=1.5cm]{geometry}
+\usepackage{multirow}
 
 \pagestyle{fancyplain}
 
@@ -129,7 +130,33 @@
       \end{equation*}
     \item[Rotation Matrices] An identity matrix which differs in four elements, for some $\theta$ and some $i\neq j$
       $$p_{ii}=p_{jj}=\cos\theta \text{ and } p_{ij}=-p_{ji}=\sin\theta$$
-    \item[QR Algorithm] Finds all the eigenvalues of a symmetric, tridiagonal matrix (use Householder's).
+    \item[QR Algorithm] Finds all the eigenvalues of a symmetric, tridiagonal matrix (use Householder's if not tridiagonal). 
+      Do the following where $k=1,\ldots n-1$ for each iteration $i$ needed. The diagonal of $A$ contains the eigenvalues, 
+      which correspond to the eigenvectors in the respective column of $Q$.
+      \begin{equation*}
+        \left\{
+        \begin{aligned}
+          c_{k+1}&=\frac{a_{k,k}}{\sqrt{a^2_{k,k} + a^2_{k+1,k}}} \\
+          s_{k+1}&=\frac{a_{k+1,k}}{\sqrt{a^2_{k,k} + a^2_{k+1,k}}} \\
+          P_{k+1}&= \left(
+          \begin{array}{c|cc|c}
+            I_{k-1} & \multicolumn{2}{c|}{0} & 0 \\
+            \hline
+            \multirow{2}{*}{0} & c_{k+1} & s_{k+1} & \multirow{2}{*}{0} \\
+            & -s_{k+1} & c_{k+1} \\
+            \hline
+            0 & \multicolumn{2}{c|}{0} & I_{n-k-1} \\
+          \end{array}
+            \right)
+          \end{aligned}
+        \right.
+      \end{equation*}
+      \begin{equation*}
+        \begin{aligned}
+          Q^{(i)}&=P_2^\top \cdot \ldots \cdot P_{n-1}^\top \\
+          A^{(i+1)}&=A^{(i)}_{n-1} \cdot Q^{(i)} \\
+        \end{aligned}
+      \end{equation*}
   \end{description}
 \end{multicols}
 \end{document}

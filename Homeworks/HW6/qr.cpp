@@ -67,7 +67,6 @@ int qr(matrix& A, matrix& Q, matrix& D,
       Pt(i-1,i-1) = Pt(i,i) = c;
 
       P(i-1,i) = Pt(i,i-1) = s;
-      
       P(i,i-1) = Pt(i-1,i) = -s;
 
       B = matMatMult(P,B) ; //create zero at {i,i-1} 
