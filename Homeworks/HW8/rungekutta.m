@@ -29,7 +29,7 @@ function x = rungekutta(x, f, N)
       A = jacob(x+k(:,3),f);
       k(:,4) = A\b;
 
-      x = x + (k(:,1)+2*k(:,2)+2*k(:,3)+k(:,4))/6;
+      x += (k(:,1)+2*k(:,2)+2*k(:,3)+k(:,4))/6;
   endfor
 
 endfunction

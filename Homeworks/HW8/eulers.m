@@ -9,9 +9,9 @@
 
 function x = eulers(x, f, N)
 
-  b = -(1/n)*f(x);
+  b = -(1/N)*f(x);
   for i=1:N
     A = jacob(x,f);
-    x = x+A\b;
+    x += A\b;
   endfor
 endfunction
