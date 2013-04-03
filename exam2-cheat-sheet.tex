@@ -217,12 +217,12 @@
         \right.
       \end{equation*}
     \item[Sherman-Morrison Formula] Broyden's formula still requires a matrix inversion to be
-      calculated, so this formula permits $A_i^{-1}$ to be computed from $A_{i-1}^{-1}$. This
-      computation requires only $O(n^2)$ calculation. Using the property
+      calculated, so this formula permits $A_i^{-1}$ to be computed from $A_{i-1}^{-1}$, as long as
+      $A$ is nonsingular. This computation of $A$ requires only $O(n^2)$ calculations, as we bypass
+      calculating $A_i$ and the necessity of solving the linear system. Using the property
       $$\left(A+\mathbf{x}\mathbf{y}^\top\right)^{-1} = A^{-1} - \frac{A^{-1}\mathbf{x}\mathbf{y}^\top A^{-1}}{1+\mathbf{y}^\top A^{-1}\mathbf{x}}$$
-      then
+      We obtain
       $$A_i^{-1}= A_{i-1}^{-1}+\frac{(\mathbf{s}_i - A_{i-1}^{-1}\mathbf{y}_i)\mathbf{s}_i^\top A_{i-1}^{-1}}{\mathbf{s}_i^\top A_{i-1}^{-1} \mathbf{y}_i}$$
-      Now you don't have to solve the linear system.
     \item[Steepest Descent] Given a system of nonlinear equations
       $f_1(x_1,\ldots,x_n)=\ldots=f_1(x_n,\ldots,x_n)=0$, we have a solution when $g(x_1,\ldots,x_n)
       = \sum_{i=1}^n[f_i(x_1,\ldots,x_n)]^2=0$. Steepest Descent linearly converges to a local
