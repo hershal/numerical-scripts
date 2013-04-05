@@ -1,0 +1,100 @@
+\documentclass[12pt]{article}
+\title{M368K Homework 9 \\
+  \normalsize{\S~11.1 \#2a$^1$, 9\quad \S~11.2 \#4a$^2$}}
+\author{Hershal Bhave (hb6279)}
+\date{April 5, 2013}
+
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{listings}
+\usepackage[in]{fullpage}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{cleveref}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+% \definecolor{mygreen}{rgb}{0.13,0.55,0.13}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\scriptsize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=single,
+  keywordstyle=\color{blue},
+  % language=Octave,
+  % numbers=left,
+  % numbersep=5pt,
+  % numberstyle=\tiny\color{mygray},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  % stepnumber=2,
+  stringstyle=\color{mymauve},
+  tabsize=2,
+  title=\lstname,
+  columns=fullflexible,
+}
+
+\begin{document}
+\maketitle
+
+\section{\S~11.1}
+\subsection{2a$^1$}
+The boundary value problem 
+\begin{equation}
+  \label{eq:11.1_2a}
+  y''=y'+2y+\cos x,\quad 0\leq x \leq 1,\quad y(0)=-0.3,\quad y(1)=-0.1
+\end{equation}
+has the solution $y(x)=e^2(e^4-1)^{-1}(e^{2x}-e^{-2x})+x$. Use the
+Linear Shooting method to approximate the solution to
+\cref{eq:11.1_2a} and compare the results to the actual results. 
+Use $h=\frac{1}{2}$ for the Shooting method.
+
+\subsection{9}
+Consider the boundary value problem 
+\begin{equation}
+  \label{eq:11.1_9}
+  y''+y=0\quad, 0\leq x\leq b,\quad, y(0)=0,\quad y(b)=B.
+\end{equation}
+Find choices for $b$ and $B$ so the boundary value problem has
+\begin{enumerate}
+\item No Solution
+\item Exactly One Solution
+\item Infinitely Many Solutions
+\end{enumerate}
+\subsubsection{One Solution}
+
+\subsubsection{Exactly One Solution}
+
+\subsubsection{Infinitely Many Solutions}
+
+\section{\S~11.2}
+\subsection{4a$^2$}
+Use the Nonlinear Shooting method with $TOL=10^{-4}$ and $h=0.1$ to
+approximate the solution to the boundary value problem in
+\cref{eq:11.2_4a}.  The actual solution is given for comparison to
+your results.
+\begin{equation}
+  \label{eq:11.2_4a}
+  y''=y^3-y\,y',\quad 1\leq x\leq 2,\quad y(1)=\frac{1}{2},\quad 
+  y(2)=\frac{1}{3}
+\end{equation}
+
+\section{Programming Minilab}
+
+\end{document}
