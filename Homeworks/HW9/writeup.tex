@@ -60,16 +60,20 @@ The boundary value problem
   \label{eq:11.1_2a}
   y''=y'+2y+\cos x,\quad 0\leq x \leq 1,\quad y(0)=-0.3,\quad y(1)=-0.1
 \end{equation}
-has the solution $y(x)=e^2(e^4-1)^{-1}(e^{2x}-e^{-2x})+x$. Use the
-Linear Shooting method to approximate the solution to
-\cref{eq:11.1_2a} and compare the results to the actual results. 
-Use $h=\frac{1}{2}$ for the Shooting method.
+has the solution $y(x)=-\frac{1}{10}(\sin x + 3\cos x)$. Use the
+Linear Shooting method with $h=\frac{\pi}{4}$ to approximate the
+solution to \cref{eq:11.1_2a} and compare the results to the actual
+results. Also find an approximate solution using one step of
+Secant-Euler with
+$N=2,\,t_0=\frac{\beta-\alpha}{b-a},\,t_1=1.1t_0$. Compare the
+approximate solution associated with $t_2$ to the exact solution at
+each node.
 
 \subsection{9}
 Consider the boundary value problem 
 \begin{equation}
   \label{eq:11.1_9}
-  y''+y=0\quad, 0\leq x\leq b,\quad, y(0)=0,\quad y(b)=B.
+  y''+y=0\quad, 0\leq x\leq b,\quad y(0)=0,\quad y(b)=B.
 \end{equation}
 Find choices for $b$ and $B$ so the boundary value problem has
 \begin{enumerate}
@@ -77,18 +81,120 @@ Find choices for $b$ and $B$ so the boundary value problem has
 \item Exactly One Solution
 \item Infinitely Many Solutions
 \end{enumerate}
-\subsubsection{One Solution}
 
-\subsubsection{Exactly One Solution}
+\Cref{eq:11.1_2a} is a second-order linear differential equation,
+and can be solved as such. Assume $y=e^{rx}$, then we can see that
 
-\subsubsection{Infinitely Many Solutions}
+\begin{equation*}
+  \begin{aligned}
+    y''+y&=0 \\
+    r^2e^{rx}+e^{rx}&=0 \\
+    r^2+1&=0 \\
+  \end{aligned}
+\end{equation*}
+Which implies that
+\begin{equation}
+  \label{eq:11.1_9_y}
+  y(x)=c_1\cos x + c_2\sin x
+\end{equation}
+From \cref{eq:11.1_9_y} we can evaluate the first boundary condition
+$y(0)=0$.
+\begin{equation}
+  \label{eq:11.1_9_c1}
+  \begin{aligned}
+    y(x)&=c_1\cos x + c_2\sin x \\
+    y(0)&=c_1\cos 0 + c_2\sin 0 \\
+    \implies c_1&=0 \\
+  \end{aligned}
+\end{equation}
+
+Now we can find values of $b$ and $B$ for the second boundary
+condition for which the boundary value problem has the end results
+specified in \cref{eq:11.1_9_c1}. We will first consider the case when
+there is no solution. Assuming $y(0)=0$, consider the second condition
+to be $y(2\pi)=3$. Then we will obtain the following.
+
+\begin{equation}
+  \label{eq:11.1_9_nosol}
+  \begin{aligned}
+    y(2\pi)&=c_1\cos 2\pi + c_2\sin 2\pi \\
+    3&=c_1\cos 2\pi + c_2\sin 2\pi \\
+    \implies c_1 &= 3 \\
+  \end{aligned}
+\end{equation}
+We have already mentioned from \cref{eq:11.1_9_c1} that $c_1=0$, but
+we have obtained that $c_1=3$ from \cref{eq:11.1_9_nosol}.  This
+discrepancy means that for the boundary condition $y(2\pi)=3$ there is
+no solution for the system.
+\begin{equation*}
+\boxed{
+  \begin{array}[c]{c}
+    \text{No Solution:} \\
+    b=2\pi,\,B=3 \\
+  \end{array}
+}
+\end{equation*}
+
+
+Now examine the case where there are infintely many solutions.
+Assuming $y(0)=0$, consider the second condition to be
+$y(2\pi)=0$. Then we will obtain the following.
+\begin{equation}
+  \label{eq:11.1_9_infsol}
+  \begin{aligned}
+    y(2\pi)&=c_1\cos 2\pi + c_2\sin 2\pi \\
+    0&=c_1\cos 2\pi + c_2\sin 2\pi \\
+    \implies c_1 &= 0 \\
+  \end{aligned}
+\end{equation}
+We have already mentioned form \cref{eq:11.1_9_c1} that $c_1=0$, so
+for the boundary condition $y(2\pi)=0$ there are infinitely many
+solutions since we only get the same information about $c_1$ from
+the computation involved in \cref{eq:11.1_9_infsol}.
+\begin{equation*}
+\boxed{
+  \begin{array}[c]{c}
+    \text{Infinitely Many Solutions:} \\
+    b=2\pi,\,B=0 \\
+  \end{array}
+}
+\end{equation*}
+
+
+Finally, lets consider the case where there is a solution. If we
+consider the second condition to be $y(\pi)=0$, then the following will
+result.
+\begin{equation}
+  \label{eq:11.1_9_onesol}
+  \begin{aligned}
+    y(\pi)&=c_1\cos \pi + c_2\sin \pi \\
+    0&=c_1\cos \pi + c_2\sin \pi \\
+    \implies c_2 &= 0 \\
+  \end{aligned}
+\end{equation}
+Since we have a value for $c_1$ from \cref{eq:11.1_9_c1} and we have
+found a unique $c_2$ from \cref{eq:11.1_9_onesol}, then we are sure
+that there is only one solution to the boundary value problem which
+can satisfy both of these conditions.
+\begin{equation*}
+\boxed{
+  \begin{array}[c]{c}
+    \text{One Solution:} \\
+    b=\pi,\,B=0 \\
+  \end{array}
+}
+\end{equation*}
 
 \section{\S~11.2}
 \subsection{4a$^2$}
 Use the Nonlinear Shooting method with $TOL=10^{-4}$ and $h=0.1$ to
 approximate the solution to the boundary value problem in
 \cref{eq:11.2_4a}.  The actual solution is given for comparison to
-your results.
+your results. Also find an approximate solution using one step of
+Secant-Euler with
+$N=2,\,t_0=\frac{\beta-\alpha}{b-a},\,t_1=1.1t_0$. Compare the
+approximate solution associated with $t_2$ to the exact solution at
+each node.
 \begin{equation}
   \label{eq:11.2_4a}
   y''=y^3-y\,y',\quad 1\leq x\leq 2,\quad y(1)=\frac{1}{2},\quad 
