@@ -67,7 +67,7 @@ approximate solution associated with $t_2$ to the exact solution at
 each node.
 
 Using the code specified in \cref{lst:eulers,lst:shoot}, I obtained the following
-data.
+data in \cref{tab:2a_data}.
 
 \begin{table}[h]
   \centering
@@ -226,9 +226,12 @@ data in \cref{tab:4a_data}.
 
 \pagebreak
 \section{Programming Minilab}
-Consider the case...
+Consider the case when the terrain is planar, described by a graph
+$z=Ax+By+C$.  Show analytically taht the only solution of the BVP is a
+straight line in the map, and hence on the terrain.
 
-Let $z=Ax+By+C$. Then $p=A$, $q=B$, $u=0$, $v=0$, $w=0$. Solving $y''$, we obtain
+Let $z=Ax+By+C$. Then $p=A$, $q=B$, $u=0$, $v=0$, $w=0$. Solving
+$y''$, we obtain
 \begin{equation}
   \label{eq:minilab_b}
   \begin{aligned}
@@ -239,15 +242,17 @@ Let $z=Ax+By+C$. Then $p=A$, $q=B$, $u=0$, $v=0$, $w=0$. Solving $y''$, we obtai
 This implies 
 \begin{equation}
   \label{eq:minilab_b_1}
-  y'=K \implies y=Kx+J 
+  y'=D \implies y=Dx+E
 \end{equation}
 
-So y is straight line since the second derivative of y is zero. Then z
-is a line since the projection of a line onto a plane is a line.
+So we can conclude from \cref{eq:minilab_b_1} that $y$ is, at most, a
+straight line since the second derivative of $y$ is zero indicated by
+\cref{eq:minilab_b}. This implies that $z$ is just a line since the
+projection of a line onto a plane is a line. Hence the only solution
+to the BVP is a straight line on the map, and hence on the terrain.
 
-The output for part (c) is listed below in \cref{tab:minilab_data}
+The output for part (c) is listed in \cref{tab:minilab_data}
 using the code written in \cref{lst:prog9}.
-
 
 \begin{table}[hp]
   \centering
