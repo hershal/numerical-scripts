@@ -47,18 +47,37 @@ int shootRK4(int&, double&, double&, double&, double&,
 /*** Define f(x,y,yp) function ***/
 void feval(const double& x, const double& y, 
                               const double& yp, double& f){
-  double M=0.2, L=1.3, R=-0.6 ; //define any constants
+  // double M=0.2, L=1.3, R=-0.6 ; //define any constants
   double pi=4.0*atan(1.0) ; //the number pi
 
-  f = M*pi + L*y*cos(x) + R*yp*yp ;
-}
+  // For 2a
+  // f = yp*2*y+cos(x);
 
+  // For 4a
+  f=pow(y,3)-y*yp;
+
+  // For Example 2
+  // f = (-2/x)*yp + (2/pow(x,2))*y + sin(log(x))/pow(x,2);
+}
 
 int main() {
   /*** Define problem parameters ***/
   double tol=1e-6 ;
-  int N=20, maxIter=10, iter ;  
-  double a=0, b=1, alpha=0, beta=2, t ; 
+  int N=10, maxIter=10, iter ;  
+
+  
+  // For 2a
+  // double a=0.0, b=1.0, alpha=-0.3, beta=-0.1, t ;
+  // N=2;
+
+  // For 4a
+  double a=1.0, b=2.0, alpha=1.0/2, beta=1.0/3, t ;
+  N=10;
+
+  // For Example 2
+  // double a=1, b=2, alpha=1, beta=2, t ;
+
+  
   vector x(N+1), y(N+1) ; 
   t=2.0 ; // initial guess of slope 
 
