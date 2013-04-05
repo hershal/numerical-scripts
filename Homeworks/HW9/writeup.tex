@@ -55,21 +55,18 @@
 
 \section{\S~11.1}
 \subsection{2a$^1$}
-The boundary value problem 
+For the boundary value problem 
 \begin{equation}
   \label{eq:11.1_2a}
   y''=y'+2y+\cos x,\quad 0\leq x \leq 1,\quad y(0)=-0.3,\quad y(1)=-0.1
 \end{equation}
-has the solution $y(x)=-\frac{1}{10}(\sin x + 3\cos x)$. Use the
-Linear Shooting method with $h=\frac{\pi}{4}$ to approximate the
-solution to \cref{eq:11.1_2a} and compare the results to the actual
-results. Also find an approximate solution using one step of
-Secant-Euler with
-$N=2$, $t_0=\frac{\beta-\alpha}{b-a}$, and $t_1=1.1t_0$. Compare the
-approximate solution associated with $t_2$ to the exact solution at
-each node.
+find an approximate solution using one step of Secant-Euler with
+$N=2$, $t_0=\frac{\beta-\alpha}{b-a}$, and $t_1=1.1t_0$. The actual
+solution is has the solution $y(x)=-\frac{1}{10}(\sin x + 3\cos
+x)$. Compare the approximate solution associated with $t_2$ to the
+exact solution at each node.
 
-Using the code specified in \cref{lst:prog9}, I obtained the following
+Using the code specified in \cref{lst:eulers,lst:shoot}, I obtained the following
 data.
 
 \begin{table}[h]
@@ -78,17 +75,9 @@ data.
     \hline
     $x$ & $y_{approx}$ & $y_{actual}$ \\
     \hline
-    0 &    -0.3 &     -0.2462378 \\
-    0.1 & -0.3187 &   -0.2251996 \\  
-    0.2 & -0.3266 &   -0.2019112 \\  
-    0.3 & -0.3246 &   -0.1766055 \\  
-    0.4 & -0.3134 &   -0.1495351 \\  
-    0.5 &  -0.294 &   -0.1209707 \\  
-    0.6 & -0.2672 &   -0.0911975 \\  
-    0.7 & -0.2337 &   -0.0605131 \\  
-    0.8 & -0.1943 &   -0.0292241 \\  
-    0.9 & -0.1496 &    0.0023569 \\  
-    1 &    -0.1 &      0.0339143 \\
+    0 &    -0.30000 &     -0.30000 \\
+    0 &    -0.25192 &     -0.24624 \\
+    0 &    -0.10000 &     -0.10000 \\
     \hline           
   \end{tabularx}
   \caption{Approximation of $y(x)$ for \cref{eq:11.1_2a}}
@@ -101,12 +90,7 @@ Consider the boundary value problem
   \label{eq:11.1_9}
   y''+y=0\quad, 0\leq x\leq b,\quad y(0)=0,\quad y(b)=B.
 \end{equation}
-Find choices for $b$ and $B$ so the boundary value problem has
-\begin{enumerate}
-\item No Solution
-\item Exactly One Solution
-\item Infinitely Many Solutions
-\end{enumerate}
+Find choices for $b$ and $B$ so the boundary value problem has no solution, exactly one solution, or infinitely many solutions.
 
 \Cref{eq:11.1_2a} is a second-order linear differential equation,
 and can be solved as such. Assume $y=e^{rx}$, then we can see that
@@ -212,58 +196,96 @@ can satisfy both of these conditions.
 
 \section{\S~11.2}
 \subsection{4a$^2$}
-Use the Nonlinear Shooting method with $TOL=10^{-4}$ and $h=0.1$ to
-approximate the solution to the boundary value problem in
-\cref{eq:11.2_4a}. The actual solution is $y(x)=(x+1)^{-1}$; use this
-to compare your approximation to the actual solution. Also find an
-approximate solution using one step of Secant-Euler with
-$N=2,\,t_0=\frac{\beta-\alpha}{b-a},\,t_1=1.1t_0$. Compare the
-approximate solution associated with $t_2$ to the exact solution at
-each node.
+Find an approximate solution using one step of Secant-Euler with
+$N=2,\,t_0=\frac{\beta-\alpha}{b-a},\,t_1=1.1t_0$ for
+\cref{eq:11.2_4a}. The actual solution is $y(x)=(x+1)^{-1}$. Compare
+the approximate solution associated with $t_2$ to the exact solution
+at each node.
 \begin{equation}
   \label{eq:11.2_4a}
   y''=y^3-y\,y',\quad 1\leq x\leq 2,\quad y(1)=\frac{1}{2},\quad 
   y(2)=\frac{1}{3}
 \end{equation}
 
-
-Using the code specified in \cref{lst:prog9}, I obtained the following
-data.
-
-\begin{table}[h]
+Using the code specified in \cref{lst:eulers,lst:shoot}, I obtained the following
+data in \cref{tab:4a_data}.
+\begin{table}[hp]
   \centering
   \begin{tabularx}{.5\textwidth}{XXX}
     \hline
     $x$ & $y_{approx}$ & $y_{actual}$ \\
-    \hline
-    1  &    0.5 & 0.50000 \\ 
-    1.1  & 0.4762 & 0.47619 \\ 
-    1.2  & 0.4545 & 0.45455 \\ 
-    1.3  & 0.4348 & 0.43478 \\ 
-    1.4  & 0.4167 & 0.41667 \\ 
-    1.5  &    0.4 & 0.40000 \\ 
-    1.6  & 0.3846 & 0.38462 \\ 
-    1.7  & 0.3704 & 0.37037 \\ 
-    1.8  & 0.3571 & 0.35714 \\ 
-    1.9  & 0.3448 & 0.34483 \\ 
-    2  & 0.3333 & 0.33333 \\
+     \hline
+     1.0000 &    0.50000 & 0.5 \\
+     1.5000 &    0.38690 & 0.4 \\
+     2.0000 &    0.33333 & 0.3 \\
     \hline           
   \end{tabularx}
   \caption{Approximation of $y(x)$ for \cref{eq:11.2_4a}}
   \label{tab:4a_data}
 \end{table}
 
-
-
+\pagebreak
 \section{Programming Minilab}
+Consider the case...
 
-% \begin{minipage}{\linewidth}
+Let $z=Ax+By+C$. Then $p=A$, $q=B$, $u=0$, $v=0$, $w=0$. Solving $y''$, we obtain
+\begin{equation}
+  \label{eq:minilab_b}
+  \begin{aligned}
+    y''&=\frac{(Ay'-B)*0}{1+A^2+B^2}
+    &=0
+  \end{aligned}
+\end{equation}
+This implies 
+\begin{equation}
+  \label{eq:minilab_b_1}
+  y'=K \implies y=Kx+J 
+\end{equation}
+
+So y is straight line since the second derivative of y is zero. Then z
+is a line since the projection of a line onto a plane is a line.
+
+The output for part (c) is listed below in \cref{tab:minilab_data}
+using the code written in \cref{lst:prog9}.
+
+
+\begin{table}[hp]
+  \centering
+  \begin{tabularx}{.5\textwidth}{XXX}
+    \hline
+    $x$ & $y_{approx}$ \\
+    \hline
+    -3   &        -2    \\
+    -2.7   &    -1.661  \\
+    -2.4   &    -1.315  \\
+    -2.1   &   -0.9471  \\
+    -1.8   &   -0.5977  \\
+    -1.5   &   -0.3355  \\
+    -1.2   &   -0.1551  \\
+    -0.9   &  -0.02526  \\
+    -0.6   &   0.08581  \\
+    -0.3   &    0.2049  \\
+    0.0   &    0.3401   \\
+    0.3   &    0.4813   \\
+    0.6   &    0.6215  \\
+    0.9   &    0.7653  \\
+    1.2   &    0.9237  \\
+    1.5   &     1.099  \\
+    1.8   &     1.282  \\
+    2.1   &     1.464  \\
+    2.4   &     1.643  \\
+    2.7   &     1.822  \\
+    3   &         2  \\
+    \hline           
+  \end{tabularx}
+  \caption{Approximation of $y(x)$ for the programming minilab}
+  \label{tab:minilab_data}
+\end{table}
+
+\pagebreak
+\section{Code}
+  \lstinputlisting[language=Octave,label=lst:eulers,caption=\texttt{eulersivp.m}]{eulersivp.m}
+  \lstinputlisting[language=Octave,label=lst:shoot,caption=\texttt{shootsecular.m}]{shootseceuler.m}
   \lstinputlisting[language=C++,label=lst:prog9,caption=\texttt{program9.cpp}]{program9.cpp}
-% \end{minipage}
-
-% \begin{minipage}{linewidth}
-%   \lstinputlisting[language=C++,label=lst:prog9,caption=\texttt{program9.cpp}]{program9.cpp}
-% \end{minipage}
-
 
 \end{document}
