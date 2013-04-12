@@ -166,7 +166,7 @@ more mesh points. Doing this with $n=3$ I obtained the data in
 \cref{tab:2b} on \cpageref{tab:2b}, confirming that our solution is
 close to the actual solution, even with only one step.
 
-\begin{table}[hp]
+\begin{table}[htp]
   \centering
   \begin{tabularx}{\textwidth}{*4{>{\centering\arraybackslash}X}}
     \hline
@@ -304,7 +304,7 @@ in \cref{tab:4a}.
   \caption{Approximation of 4a with n=3 using one Newton Iteration}
   \label{tab:4a}
 \end{table}
-
+\pagebreak
 \section{\S~11.5}
 \subsection{2$^4$}
 Use the Piecewise Linear Algorithm to approximate the solution to the
@@ -314,9 +314,99 @@ y(0)=y(1)=0 $$ using $x_0=0$, $x_1=0.4$, $x_2=0.8$, $x_3=1$. Compare
 your results to the actual solution $y(x)=x^2-x$. Explicitly write the
 finite-element equations. Solve and compare at nodes. Note $\int_0^1\phi_1 f
 \dd{x} = -0.5813$ and $\int_0^1\phi_2 f \dd{x} = -0.7960$.
+
+The nonzero entries of the tridiagonal matrix $A$ are defined by 
+\begin{equation}
+  \label{eq:piecewise-general-a}
+  a_{ij} = \int_0^1[p(x)\phi'_i(x)\phi'_j(x)+q(x)\phi'_i(x)\phi'_j(x)]\dd{x}
+\end{equation}
+and
+\begin{equation}
+  \label{eq:piecewise-general-b}
+  b_i = \int_0^1f(x)\phi_i(x)\dd{x}
+\end{equation}
+So then 
+\begin{equation}
+  \begin{aligned}
+   % A(1,1) &=
+   % \int_0^1\left\{p(x)[\phi'_i(x)]^2+q(x)[\phi_i(x)]^2\right\}\dd{x} \\
+   % A(i,2) &=
+   % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
+   % A(2,1) &=
+   % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
+   % A(2,2) &= \int_0^1\left\{p(x)[\phi'_{i+1}(x)\phi'_{i+1}]+q(x)[\phi_{i+1}(x)\phi_{i+1}]\right\}\dd{x} \\
+    Q_{1,i}&=\left(\frac{1}{h_{i}}\right)^2\int_{x_i}^{x_{i+1}}(x_{i+1}-x)(x-x_{i})q(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n-1 \\
+    Q_{2,i}&=\left(\frac{1}{h_{i-1}}\right)^2\int_{x_{i-1}}^{x_{i}}(x-x_{i-1})^2q(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n \\
+    Q_{3,i}&=\left(\frac{1}{h_{i}}\right)^2\int_{x_i}^{x_{i+1}}(x_{i+1}-x)^2q(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n \\
+    Q_{4,i}&=\left(\frac{1}{h_{i-1}}\right)^2\int_{x_{i-1}}^{x_{i}}p(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n+1 \\
+    Q_{5,i}&=\frac{1}{h_{i-1}}\int_{x_{i-1}}^{x_{i}}(x-x_{i-1})f(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n \\
+    Q_{6,i}&=\frac{1}{h_{i}}\int_{x_i}^{x_{i+1}}(x_{i+1}-x)f(x)\dd{x},
+    \qquad \text{for each }i=1,\ldots,n \\
+  \end{aligned}
+\end{equation}
+which expands the entries of the matrix to
+\begin{equation}
+  \begin{aligned}
+   % A(1,1) &=
+   % \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+   % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+   % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+   % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+   % A(1,2) &=
+   % \int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)\phi'_{2}]\dd{x} + 
+   %   \int_{x_1}^{x_2}q(x)[\phi_1(x)\phi_{2}]\right\}\dd{x} \\
+   % A(2,1) &=
+   % \int_{x_1}^{x_2}\left\{p(x)[\phi'_2(x)\phi'_{1}]\dd{x} + 
+   %   \int_{x_1}^{x_2}q(x)[\phi_2(x)\phi_{1}]\right\}\dd{x} \\
+   % A(2,2) &=  \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+   % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+   % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+   % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+    a_{i,i} &= Q_{4,i}+Q_{4,i+1}+Q_{2,i}+Q_{3,i},
+    \qquad \text{for each } i=1,\ldots,n \\
+    a_{i,i+1} &= -Q_{4,i+1}+Q_{1,i},
+    \qquad \text{for each } i=1,\ldots,n-1 \\
+    a_{i,i-1} &= -Q_{4,i}+Q_{1,i-1}
+    \qquad \text{for each } i=2,\ldots,n \\
+    b_{i} &= Q_{5,i}+Q_{6,i} \qquad \text{for each } i=1,\ldots,n \\
+  \end{aligned}
+\end{equation}
+Evaluating each integral for $i=1,2$ gives
+\begin{equation}
+  \label{eq:2a-matrix}
+A=
+  \begin{pmatrix}
+    3.06667 & -1.23333 \\
+    -1.23333 & 6.8 \\
+  \end{pmatrix}
+\end{equation}
+and 
+\begin{equation}
+  \label{eq:2a-matrix-b}
+b=
+  \begin{pmatrix}
+    -0.5813 \\
+    -0.7960\\
+  \end{pmatrix}
+\end{equation}
+Finally, the solution is
+\begin{equation}
+  \label{eq:2a-matrix-c}
+\boxed{c=
+  \begin{pmatrix}
+    -.25553 \\
+    -.16335 \\
+  \end{pmatrix}
+}
+\end{equation}
 \pagebreak
 \section{Minilab}
-\subsection{b}
+\subsection{Part b}
 The maximum temperature occurs at approximately $(-0.12, 243.6)$. Less
 granular data is listed in \cref{tab:mini-b}.
 \begin{table}[H]
@@ -340,7 +430,7 @@ granular data is listed in \cref{tab:mini-b}.
   \label{tab:mini-b}
 \end{table}
 
-\subsection{c}
+\subsection{Part c}
 The optimal laser intensity parameter $\gamma$ I obtained was $475$,
 and the optimal cooling air velocity parameter $\beta$ I obtined was
 $31$. This yielded the data in \cref{tab:mini-c}.
