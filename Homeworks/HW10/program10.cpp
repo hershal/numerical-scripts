@@ -66,18 +66,12 @@ void BVPeval(const double& x, double& p, double& q,
   g = alphaBC + (x-a)*((betaBC-alphaBC)/(b-a)) ;
   dg = (betaBC-alphaBC)/(b-a) ;
 
-  // Book Example
-  // p = 1 ;
-  // q = pi*pi ;
-  // f = 2*pi*pi*(sin(pi*x)) ;
-  double gamma = 475;
-  double beta = 31;
+  double gamma = 486;
+  double beta = 37;
   p = x<0 ? 0.1 : 0.2;
   q = fabs(x)<=0.5 ? 0 : beta;
   f = fabs(x)<=0.4 ? gamma : 0;
-  
 }
-
 
 int main() {
   /*** Define problem parameters ***/
@@ -107,7 +101,6 @@ int main() {
     prt << "   " ;
     prt << endl;
   }
-
   return 0 ; //terminate main program
 }
 
