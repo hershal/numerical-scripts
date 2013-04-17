@@ -26,13 +26,9 @@ do
   mu = y(p);
   [tmp,p] = max(abs(y));
   x(:,k+1)=y/y(p);
-  x(:,k+1)
 
   err(k) = norm(x(:,k)-x(:,k+1),inf);
-  err(k)
-  h = (1/mu)+q
-  k
-printf("\n");
+  h = (1/mu)+q;
   k++;
 
 until k>maxIter || err(k-1)<tol

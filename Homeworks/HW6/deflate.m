@@ -12,7 +12,7 @@ function B = deflate(A, v)
   [tmp,i] = max(abs(v));
   n = length(A);
 
-  if (i!=1) 
+  if (i != 1) 
     for k=1:i-1
       for j=1:i-1
 	B(k,j) = A(k,j) - (v(k)/v(i))*A(i,j);
