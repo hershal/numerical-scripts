@@ -1,0 +1,37 @@
+GNU Octave, version 3.6.3
+Copyright (C) 2012 John W. Eaton and others.
+This is free software; see the source code for copying conditions.
+There is ABSOLUTELY NO WARRANTY; not even for MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  For details, type `warranty'.
+
+Octave was configured for "x86_64-unknown-linux-gnu".
+
+Additional information about Octave is available at http://www.octave.org.
+
+Please contribute if you find this software useful.
+For more information, visit http://www.octave.org/help-wanted.html
+
+Read http://www.octave.org/bugs.html to learn how to submit bug reports.
+
+For information about changes from previous versions, type `news'.
+
+warning: function ./qr.m shadows a core library function
+octave> A=[4 2 1; 0 3 2; 1 1 4];
+octave> x=[1 2 1];
+octave> q=6;
+octave> [x,h]=invpwr(A,x',q)
+x =
+
+   0.50000   1.00000   1.00000   1.00000   1.00000   1.00000
+   1.00000   0.57143   0.55513   0.55484   0.55484   0.55484
+   0.50000   0.80952   0.80989   0.80996   0.80996   0.80996
+
+h =  5.9196
+octave> eig(A)
+ans =
+
+   5.9196 + 0.0000i
+   2.5402 + 0.6882i
+   2.5402 - 0.6882i
+
+octave> 
