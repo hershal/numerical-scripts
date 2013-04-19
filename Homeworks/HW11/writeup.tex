@@ -72,8 +72,18 @@ $v(x)=\sum_{i=1}^Nc_i\phi_i(x)$.
 
 \hfill
 
+\begin{equation}
+  \label{eq:12_1_1}
+  \begin{aligned}
+    c^\intercal Ac &= \sum_{i=1}^N \left(\sum_{j=1}^N c_i A_{i,j}c_j\right) \\
+    &=\sum_{i=1}^N \left(\sum_{j=1}^N c_i \left[\int_a^b p v'_i v'_j
+        \dd{x} + \int_b^a q v_i v_j \dd{x}\right] c_j\right) \\
+    &= \int_b^a p v'^2 + q v^2 \dd{x} \\
+  \end{aligned}
+\end{equation}
+
 Since it was assumed that $p(x)>0$ and $g(x)\geq0$ and it was given
-that $v(x)=\sum_{i=1}^Nc_i\phi_i(x)$, we know that
+that $v(x)=\sum_{i=1}^Nc_iv_i(x)$, we know that
 $v(x)^2\geq0$. Since $v(x)^2$ will always be greater than or equal to
 zero, the integral $\int_a^bp[v']^2+qv^2\dd{x}$ will also be greater
 than or equal to zero based on $v(x)^2\geq0$ and the previous
@@ -96,7 +106,7 @@ $p(x)$ is strictly greater than zero, that must imply that
 $\int_a^bqv^2\dd{x}=0$ is a possibility, leaving
 $\int_a^bp[v']^2\dd{x}=0$. Since $p(x)$ cannot equal zero, we must
 conclude that $v'(x)\equiv0$. If
-$v'(x)=\sum_{i=1}^Nc_i\phi_i(x)\equiv0$, we know that $\phi_i(x)$ is
+$v'(x)=\sum_{i=1}^Nc_iv_i(x)\equiv0$, we know that $v_i(x)$ is
 nonzero on $(x_{i-1},x_{i+1})$, so that must mean that $c_i\equiv0$.
 
 Since $A=\int_a^bp[v']^2+qv^2\dd{x}$ is symmetric and $c^\intercal Ac$
