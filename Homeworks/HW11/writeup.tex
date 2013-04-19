@@ -196,31 +196,28 @@ Writing this in difference-equation form, we get
   2\left[\left(\frac{h}{k}\right)^2+1\right]w_{i,j}-(w_{i+1,j}+w_{i-1,j})
   - \left(\frac{h}{k}\right)^2(w_{i,j+1}+w_{i,j-1})=-h^2f(x_i,y_j)
 \end{equation}
-\hfill
-
-Expressing this in terms of the relabled interior grid points
-$w_i=u(P_i)$, we get the equations at the points $P_i$.
+Which can simplify to 
+\begin{equation}
+  \label{eq:findiffcentdiffsimp}
+    \beta w_{i,j}-(w_{i+1,j}+w_{i-1,j})
+  - \alpha (w_{i,j+1}+w_{i,j-1})=\gamma
+\end{equation}
+Where $\alpha=\left(\frac{h}{k}\right)^2$, $\beta=2(\alpha+1)$, and
+$\gamma=-h^2\frac{q}{K}$. Expressing this in terms of the relabled
+interior grid points $w_i=u(P_i)$, we get the equations at the points
+$P_i$.
 
 \begin{equation}
   \label{eq:8_p}
   \begin{aligned}
-    P_1&: 2\left[\left(\frac{h}{k}\right)^2+1\right]w_1 - w_2 -
-    \left(\frac{h}{k}\right)^2w_3 -
-    h^2f(x_1,y_2)&=w_{0,2}+\cancel{\left(\frac{h}{k}\right)^2w_{1,3}} &=
-    \frac{50}{9} \\
-    P_2&: 2\left[\left(\frac{h}{k}\right)^2+1\right]w_2 - w_1 -
-    \left(\frac{h}{k}\right)^2w_4 -
-    h^2f(x_2,y_2)&=\cancel{w_{3,2}} +
-    \cancel{\left(\frac{h}{k}\right)^2w_{2,3}} &=
-    0\\
-    P_3&: 2\left[\left(\frac{h}{k}\right)^2+1\right]w_3 - w_4 -
-    \left(\frac{h}{k}\right)^2w_1 -
-    h^2f(x_1,y_1)&=w_{0,1}+\left(\frac{h}{k}\right)^2w_{1,0} &= 
-    \frac{50}{9} + \left(\frac{h}{k}\right)^28 \\
-    P_4&: 2\left[\left(\frac{h}{k}\right)^2+1\right]w_4 - w_3 -
-    \left(\frac{h}{k}\right)^2w_2 -
-    h^2f(x_2,y_1)&=\cancel{w_{3,1}}+\left(\frac{h}{k}\right)^2w_{2,0} &=
-    8\\
+    P_1&: \beta w_1 - w_2 - \alpha w_3
+    &=w_{0,2}+\cancel{\alpha w_{1,3}} + \gamma &= \frac{50}{9} + \gamma \\
+    P_2&: \beta w_2 - w_1 - \alpha w_4 
+    &=\cancel{w_{3,2}} + \cancel{\alpha w_{2,3}} + \gamma &= \gamma \\
+    P_3&: \beta w_3 - w_4 - \alpha w_1  &=w_{0,1}+\alpha
+    w_{1,0} + \gamma &= \frac{50}{9} + 8\alpha +  \gamma \\
+    P_4&: \beta w_4 - w_3 - \alpha w_2
+    &=\cancel{w_{3,1}}+\alpha w_{2,0} + \gamma &= 8 +\gamma \\
   \end{aligned}
 \end{equation}
 In matrix form
@@ -249,8 +246,6 @@ In matrix form
   \end{pmatrix}
 \end{array}
 \end{equation}
-Where $\alpha=\left(\frac{h}{k}\right)^2$, 
-$\beta=2(\alpha+1)$, and $\gamma=-h^2\frac{q}{K}$.
 Using the algorithm defined in \cref{lst:poisson} with tolerance
 $10^{-6}$, I obtained the data in \cref{tab:2}.
 \begin{table}[H]
