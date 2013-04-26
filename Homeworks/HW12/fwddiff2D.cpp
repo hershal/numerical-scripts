@@ -90,7 +90,8 @@ int fwddiff2D(int N, int M,
       ahatij = P/(dx*dx) - p/(2.0*dx) ;
       bhatij = r - 2.0*P/(dx*dx) - 2.0*Q/(dy*dy) ;
       chatij = P/(dx*dx) + p/(2.0*dx) ;
-
+      dhatij = Q/(dy*dy) + q/(2.0*dy);
+      ehatij = Q/(dy*dy) - q/(2.0*dy);
 
       if( i>1 ){ 
         uLeft = u(i-1,j) ; //interior value
