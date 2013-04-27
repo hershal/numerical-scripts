@@ -20,6 +20,7 @@
 \usepackage{subcaption}
 \usepackage{wrapfig}
 \usepackage{cancel}
+\usepackage{multirow}
 
 \newcommand{\dd}[1]{\mathrm{d}{#1}}
 \newcommand{\ddt}[1]{\frac{\dd{}}{\dd{#1}}}
@@ -71,20 +72,6 @@ following parabolic partial differential equations. Use $\Delta x =
 discrete equations. Compute up to $t=\frac{2}{10}$; compare
 approximate and exact solutions at each node at the final time.
 
-\subsubsection{a}
-\begin{equation}
-\label{eq:6a_q}
-\begin{aligned}
-  \frac{\partial u}{\partial t} - \frac{4}{\pi^2}
-  \frac{\partial^2u}{\partial x^2} &= 0,\quad 0<x<4,\quad 0<t;\\
-  u(0,t) &= u(4,t)=0, \quad 0<t,\\
-  u(x,0) &=
-  \sin\left[\frac{\pi}{4}x
-    \left(1+2\cos\frac{\pi}{4}x\right)\right], \quad 0\leq x
-    \leq 4.\\
-\end{aligned}
-\end{equation}
-
 \subsubsection{b}
 \begin{equation}
 \label{eq:6b_q}
@@ -97,15 +84,309 @@ approximate and exact solutions at each node at the final time.
 \end{aligned}
 \end{equation}
 
-\subsection{8$^1$}
-Repeat \cref{sec:6} using the Backward-Difference Algorithm.
+From the given equation we have the following constants:
+\begin{equation}
+  \label{eq:6b_const}
+  \begin{aligned}
+    h &= \Delta x = \frac{1}{4} \qquad&  \alpha^2 &= \frac{1}{\pi^2} \\
+    k &= \Delta t = \frac{1}{10} \qquad& \lambda &= \alpha^2(k/h^2) = \frac{8}{5\pi^2} \\
+  \end{aligned}
+\end{equation}
 
-\subsubsection{a}
+Now we can construct the $A$ matrix and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)$.
+\begin{equation}
+  \label{eq:6b_A}
+  \begin{aligned}
+    A &=
+    \begin{pmatrix}
+      % 1-2\lambda & \lambda & 0 & \multicolumn{3}{c}{\cdots} & 0 \\
+      % \lambda & 1-2\lambda & \lambda & \multicolumn{2}{c}{\ddots} &
+      % & \multirow{2}{*}{\vdots} \\
+      % 0 & & \multirow{2}{*}{\ddots} \\
+      % \vdots & & & & & & 0 \\
+      % 0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda & 1-2\lambda \\
+      1-2\lambda & \lambda    & 0       & \multicolumn{2}{c}{\cdots} & 0 \\
+      \lambda    & 1-2\lambda & \lambda & \ddots &  & \multirow{2}{*}{\vdots} \\
+      0 & \ddots & \ddots & \ddots & \ddots & & \\
+      \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
+      & & \ddots & \lambda & 1-2\lambda & \lambda \\
+      0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda & 1-2\lambda \\
+    \end{pmatrix} \\
+    \\
+    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    \left(1+2\cos\frac{\pi}{4}x\right)\\
+  \end{aligned}
+\end{equation}
+
+The discrete equations for the Forward-Difference method is
+\begin{equation}
+  \label{eq:6b_discrete}
+  \mathbf{w}_{i,j+1}=(1-2\lambda)w_{i,j}+\lambda(w_{i+1,j}+w_{i-1,j})
+\end{equation}
+Which turns out to be 
+\begin{equation}
+  \label{eq:6b_discrete_val}
+  \mathbf{w}_{i,j+1}=\left(1-\frac{16}{5\pi^2}\right)w_{i,j}+\frac{8}{5\pi^2}(w_{i+1,j}+w_{i-1,j})
+\end{equation}
+where 
+\begin{equation}
+  \label{eq:6b_w_i_0}
+  \mathbf{w}_{i,0} = \cos\left[\pi\left(x_i-\frac{1}{2}\right)\right]
+\end{equation}
+And now further approximations of $\mathbf{w}$ can be computed by
+\begin{equation}
+  \label{eq:6b_wnext}
+  \mathbf{w}^{(j)} = A\mathbf{w}^{(j-1)}
+\end{equation}
+As you can see, higher orders of $\mathbf{w}$ can be obtained by
+simple multiplication in \cref{eq:6b_wnext}.
+
+Using the algorithm given in \cref{lst:forwarddiff}, I obtained the
+data in \cref{tab:6b_1,tab:6b_2}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,1/10)$ & $w(i,1/10)$ & $|u(x_i,1/10)-w(i,1/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.63982 & 0.63996 & 1.4033 $\times 10^{-4}$ \\
+    0.50 & 0.90484 & 0.90504 & 1.9846 $\times 10^{-4}$ \\
+    0.75 & 0.63982 & 0.63996 & 1.4033 $\times 10^{-4}$ \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 6b for t=1/10}
+  \label{tab:6b_1}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,2/10)$ & $w(i,2/10)$ & $|u(x_i,2/10)-w(i,2/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.57893 & 0.57918 & 2.5399 $\times 10^{-4}$ \\
+    0.50 & 0.81873 & 0.81909 & 3.5919 $\times 10^{-4}$ \\
+    0.75 & 0.57893 & 0.57918 & 2.5399 $\times 10^{-4}$ \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 6b for t=2/10}
+  \label{tab:6b_2}
+\end{table}
+
+\subsection{8$^1$}
+Repeat the question in \cref{sec:6} using the Backward-Difference Algorithm.
+
 \subsubsection{b}
+
+\Cref{eq:6b_const} still applies to this problem. We can construct the
+$A$ matrix and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)$.
+\begin{equation}
+  \label{eq:8b_A}
+  \begin{aligned}
+    A &=
+    \begin{pmatrix}
+      % 1-2\lambda & \lambda & 0 & \multicolumn{3}{c}{\cdots} & 0 \\
+      % \lambda & 1-2\lambda & \lambda & \multicolumn{2}{c}{\ddots} &
+      % & \multirow{2}{*}{\vdots} \\
+      % 0 & & \multirow{2}{*}{\ddots} \\
+      % \vdots & & & & & & 0 \\
+      % 0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda & 1-2\lambda \\
+      1+2\lambda & -\lambda    & 0       & \multicolumn{2}{c}{\cdots} & 0 \\
+      -\lambda    & 1+2\lambda & -\lambda & \ddots &  & \multirow{2}{*}{\vdots} \\
+      0 & \ddots & \ddots & \ddots & \ddots & & \\
+      \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
+      & & \ddots & -\lambda & 1+2\lambda & -\lambda \\
+      0 & \multicolumn{2}{c}{\cdots} & 0 & -\lambda & 1+2\lambda \\
+    \end{pmatrix} \\
+    \\
+    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    \left(1+2\cos\frac{\pi}{4}x\right)\\
+  \end{aligned}
+\end{equation}
+
+The discrete equation for the Backward-Difference Method is
+\begin{equation}
+  \label{eq:8b_discrete}
+  \mathbf{w}_{i,j-1}=(1+2\lambda)w_{i,j}-\lambda(w_{i+1,j}+w_{i-1,j})
+\end{equation}
+Which turns out to be 
+\begin{equation}
+  \label{eq:8b_discrete_val}
+  \mathbf{w}_{i,j-1}=\left(1+\frac{16}{5\pi^2}\right)w_{i,j}-\frac{8}{5\pi^2}(w_{i+1,j}+w_{i-1,j})
+\end{equation}
+where 
+\begin{equation}
+  \label{eq:8b_w_i_0}
+  \mathbf{w}_{i,0} = \cos\left[\pi\left(x_i-\frac{1}{2}\right)\right]
+\end{equation}
+And now further approximations of $\mathbf{w}$ can be computed by
+\begin{equation}
+  \label{eq:8b_wnext}
+  \mathbf{w}^{(j-1)} = A\mathbf{w}^{(j)}
+\end{equation}
+
+In the Backward-Difference method, higher orders of $\mathbf{w}$ can
+only be obtained by solving the linear system for $\mathbf{w}^{(j)}$
+in \cref{eq:8b_wnext}.
+
+Using the algorithm given in \cref{lst:backdiff}, I obtained the data
+in \cref{tab:8b_1,tab:8b_2}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,1/10)$ & $w(i,1/10)$ & $|u(x_i,1/10)-w(i,1/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.63982 & 0.64578 & 0.0059641 \\
+    0.50 & 0.90484 & 0.91327 & 0.0084345 \\
+    0.75 & 0.63982 & 0.64578 & 0.0059641 \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 8b for t=1/10}
+  \label{tab:8b_1}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,2/10)$ & $w(i,2/10)$ & $|u(x_i,2/10)-w(i,2/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.57893 & 0.58977 & 0.010843 \\
+    0.50 & 0.81873 & 0.83407 & 0.015335 \\
+    0.75 & 0.57893 & 0.58977 & 0.010843 \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 8b for t=2/10}
+  \label{tab:8b_2}
+\end{table}
+
+
 \subsection{10$^1$}
-Repeat \cref{sec:6} using the Crank-Nicolson Algorithm.
-\subsubsection{a}
+Repeat the question in \cref{sec:6} using the Crank-Nicolson Algorithm.
 \subsubsection{b}
+
+\Cref{eq:6b_const} still applies to this problem. We can construct the
+$A$ and $B$ matrices and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)$.
+\begin{equation}
+  \label{eq:10b_A}
+  \begin{aligned}
+    A &=
+    \begin{pmatrix}
+      1+\lambda & -\frac{\lambda}{2} & 0 & \multicolumn{2}{c}{\cdots} & 0 \\
+      -\frac{\lambda}{2} & 1+\lambda & -\frac{\lambda}{2} & \ddots &  & \multirow{2}{*}{\vdots} \\
+      0 & \ddots & \ddots & \ddots & \ddots & & \\
+      \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
+      & & \ddots & -\frac{\lambda}{2} & 1+\lambda & -\frac{\lambda}{2} \\
+      0 & \multicolumn{2}{c}{\cdots} & 0 & -\frac{\lambda}{2} & 1+\lambda \\
+    \end{pmatrix} \\
+    B &=
+    \begin{pmatrix}
+      1-\lambda & \frac{\lambda}{2} & 0 & \multicolumn{2}{c}{\cdots} & 0 \\
+      \frac{\lambda}{2} & 1-\lambda & \frac{\lambda}{2} & \ddots &  & \multirow{2}{*}{\vdots} \\
+      0 & \ddots & \ddots & \ddots & \ddots & & \\
+      \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
+      & & \ddots & \frac{\lambda}{2} & 1-\lambda & \frac{\lambda}{2} \\
+      0 & \multicolumn{2}{c}{\cdots} & 0 & \frac{\lambda}{2} & 1-\lambda \\
+    \end{pmatrix} \\
+    \\
+    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    \left(1+2\cos\frac{\pi}{4}x\right)\\
+  \end{aligned}
+\end{equation}
+
+The discrete equation for the Crank-Nicolson method is
+\begin{equation}
+  \label{eq:10b_discrete}
+  \frac{w_{i,j+1}-w_{i,j}}{k}=\frac{\alpha^2}{2}
+  \left[\frac{w_{i+1,j}-2w_{i,j}+w_{i-1,j}}{h^2}
+    + \frac{w_{i+1,j}-2w_{i,j}+w_{i-1,j}}{h^2}\right]
+\end{equation}
+Which simplifies to
+\begin{equation}
+  \label{eq:10b_discrete_simp}
+  w_{i,j+1}-w_{i,j}=\frac{\lambda}{2}
+  [w_{i+1,j}-2w_{i,j}+w_{i-1,j} + w_{i+1,j}-2w_{i,j}+w_{i-1,j}]
+\end{equation}
+And turns out to look like
+\begin{equation}
+  \label{eq:10b_discrete_simp}
+  w_{i,j+1}-w_{i,j}=\frac{4}{5\pi^2}
+  [w_{i+1,j}-2w_{i,j}+w_{i-1,j} + w_{i+1,j}-2w_{i,j}+w_{i-1,j}]
+\end{equation}
+where 
+\begin{equation}
+  \label{eq:10b_w_i_0}
+  \mathbf{w}_{i,0} = \cos\left[\pi\left(x_i-\frac{1}{2}\right)\right]
+\end{equation}
+And now further approximations of $\mathbf{w}$ can be computed by
+\begin{equation}
+  \label{eq:10b_wnext}
+  A\mathbf{w}^{(j+1)} = B\mathbf{w}^{(j)}
+\end{equation}
+
+In the Crank-Nicolson method, higher orders of $\mathbf{w}$ can
+only be obtained by solving the linear system for
+$\mathbf{w}^{(j+1)}$ in \cref{eq:10b_wnext}.
+
+
+Using the algorithm given in \cref{lst:backdiff}, I obtained the data
+in \cref{tab:10b_1,tab:10b_2}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,1/10)$ & $w(i,1/10)$ & $|u(x_i,1/10)-w(i,1/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.63982 & 0.64300 & 0.0031842 \\
+    0.50 & 0.90484 & 0.90934 & 0.0045032 \\
+    0.75 & 0.63982 & 0.64300 & 0.0031842 \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 10b for t=1/10}
+  \label{tab:10b_1}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,2/10)$ & $w(i,2/10)$ & $|u(x_i,2/10)-w(i,2/10)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.25 & 0.57893 & 0.58471 & 0.0057767 \\
+    0.50 & 0.81873 & 0.82690 & 0.0081695 \\
+    0.75 & 0.57893 & 0.58471 & 0.0057767 \\
+    1.00 & 0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 10b for t=2/10}
+  \label{tab:10b_2}
+\end{table}
+
 \section{Programming Minilab}
+
+\section{Code}
+\lstinputlisting
+[language=Octave,label=lst:forwarddiff,caption=\texttt{forwarddiff.m}]
+{forwarddiff.m}
+
+\lstinputlisting
+[language=Octave,label=lst:backdiff,caption=\texttt{backdiff.m}]
+{backdiff.m}
+
 
 \end{document}
