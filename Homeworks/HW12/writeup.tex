@@ -378,15 +378,64 @@ in \cref{tab:10b_1,tab:10b_2}.
 \end{table}
 
 \section{Programming Minilab}
+\subsection{b}
+\begin{table}[H]
+  \centering
+  \begin{tabular}[H]{ccccc}
+    \hline
+    $i$ & $u_i(0.6, 0.6, 5)$ & $\Delta x_i$ & $\Delta y_i$ & $\Delta t_i$ \\
+    \hline
+    1 & 0.95370 & $\frac{1}{10}$ & $\frac{1}{10}$ & $\frac{1}{20}$ \\ 
+    2 & 0.95438 & $\frac{1}{15}$ & $\frac{1}{15}$ & $\frac{1}{25}$ \\
+    3 & -1.76134 $\times 10^{34}$ & $\frac{1}{20}$ & $\frac{1}{20}$ &
+    $\frac{1}{30}$ \\
+    \hline
+  \end{tabular}
+  \caption{Data for Minilab Part c}
+  \label{tab:mini_b}
+\end{table}
 
+It seems that the computation does not approach a definite value
+because it is unstable at higher resolutions of $t$. That is, the
+value of $\Delta t$ at steps 2 and 3 is above what can be considered
+stable for the Forward Difference Method, i.e. $\Delta t = 0.05 \not\leq
+\frac{\Delta x^2\Delta y^2}{2P\Delta x^2 + 2Q\Delta y^2} < 0.083333$
+for step 2 and $\Delta t = 0.04 \not\leq \frac{\Delta x^2\Delta y^2}{2P\Delta
+  x^2 + 2Q\Delta y^2}<0.020833$ at step 3. We are not guaranteed
+stability at steps 2 and 3, so the solution does not converge to a
+definite value.
+\subsection{c}
+\begin{table}[H]
+  \centering
+  \begin{tabular}[H]{ccc}
+    \hline 
+    $i$ & $t_i$ & $u_{avg}(t_i)$ \\
+    \hline
+    1 & 0.5 & 0.9917993860561917 \\
+    2 & 3   & 0.9640316857440158 \\
+    3 & 10  & 0.9357088345473462 \\
+    4 & 20  & 0.9248950884495316 \\
+    5 & 40  & 0.9221110405827277 \\
+    \hline
+  \end{tabular}
+  \caption{Data for Minilab Part c}
+  \label{tab:mini_c}
+\end{table}
 \section{Code}
 \lstinputlisting
 [language=Octave,label=lst:forwarddiff,caption=\texttt{forwarddiff.m}]
 {forwarddiff.m}
-
+\pagebreak
 \lstinputlisting
 [language=Octave,label=lst:backdiff,caption=\texttt{backdiff.m}]
 {backdiff.m}
-
+\pagebreak
+\lstinputlisting
+[language=C++,label=lst:p12,caption=\texttt{program12.cpp}]
+{program12.cpp}
+\pagebreak
+\lstinputlisting
+[language=C++,label=lst:fwddiff2D,caption=\texttt{fwddiff2D.cpp}]
+{fwddiff2D.cpp}
 
 \end{document}

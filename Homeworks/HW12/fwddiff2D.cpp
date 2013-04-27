@@ -45,6 +45,7 @@ xy-grid.
 #include <stdlib.h>
 #include <math.h>
 #include "matrix.h"
+#include <stdio.h>
 using namespace std;
 
 
@@ -93,22 +94,31 @@ int fwddiff2D(int N, int M,
       dhatij = Q/(dy*dy) + q/(2.0*dy);
       ehatij = Q/(dy*dy) - q/(2.0*dy);
 
-      if( i>1 ){ 
+      if(i>1){ 
         uLeft = u(i-1,j) ; //interior value
-      }
-      else {
+      } else {
         uLeft = gLeft ; //boundary value
       }
 
-      uCenter = u(i,j) ;
-
-      if( i<N ){ 
+      if(i<N){ 
         uRight = u(i+1,j) ; //interior value
-      }
-      else {
+      } else {
         uRight = gRight ; //boundary value
       }
 
+      if(j>1) {
+	uBottom = u(i,j-1);	// interior value
+      } else {
+	uBottom = gBottom;	// boundary value
+      }
+
+      if(j<M) {
+	uTop = u(i,j+1);	// interior value
+      } else {
+	uTop = gTop;		// boundary value
+      }
+
+      uCenter = u(i,j);
 
       unew(i,j) = u(i,j) + dt*dhatij*uTop
                          + dt*ahatij*uLeft 

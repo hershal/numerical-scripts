@@ -37,7 +37,7 @@ function [w,u] = crankn2(f,alphasq,h,k,m,n)
   B(m-1,m-1) = 1-lambda;
 
   for i=1:n
-      w=A\B*w;
+    w=A\B*w;
   endfor
 
 endfunction

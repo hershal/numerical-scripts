@@ -70,13 +70,23 @@ void PDEeval(const double& x, const double& y, double& t,
                     double& P, double& Q, double& p, double& q,
                                           double& r, double& eta){
 
+  double galpha = 0.03;
+  
+  double alpha[] = {0.2, 0.6, -0.5};
+  double beta[] = {0.2, 0.2, 0.0};
+  double gamma[] = {0.6, -0.7, -0.6};
 
-  P = 0.01*(1 + exp(-x*y*t/10)) ; 
-  Q = 0.01 ; 
-  p = 0.02*x*y ; 
-  q = 0.04*x ;
-  r = 0 ; 
-  eta = 0.01*t + 0.2*x*sin(y) ; 
+  P = galpha;
+  Q = galpha;
+  p = -y;
+  q = x;
+  r = 0;
+  eta = 0;
+
+  // Unrolled at compile-time
+  for(int i=0; i<3; i++) {
+    eta += gamma[i]*exp(-30*pow(x-alpha[i],2) - 30*pow(y-beta[i],2));
+  }
 
 }
 
@@ -84,29 +94,62 @@ void PDEeval(const double& x, const double& y, double& t,
 void BCeval(const double& x, const double& y, double& t,
             double& ga, double& gb, double& gc, double& gd){
 
-
-  ga = 0 ; 
-  gb = 0 ;
-  gc = 0 ; 
-  gd = 0 ;  
+  ga = 1.0; 
+  gb = 1.0;
+  gc = 1.0; 
+  gd = 1.0;  
 
 }
 
 /*** Define f(x,y) ***/
 void ICeval(const double& x, const double& y, double& f){
 
-  f = 0 ;
+  f = 1.0;
 }
 
 
 int main() {
   /*** Define problem parameters ***/
-  int N=19, M=19, L=50*2, success_flag=0 ;  
+
+  // Part B Parameters
+  // First Grid Parameters (Part b)
+  // int N=19, M=19, L=100, success_flag=0 ;  
+  // double T=5;
+
+  // Second Grid Parameters (Part b)
+  // int N=29, M=29, L=125, success_flag=0 ;  
+  // double T=5;
+
+  // Third Grid Parameters (Part b)
+  // int N=39, M=39, L=150, success_flag=0 ;  
+  // double T=5;
+
+  // Part C Parameters (T<0.5*0.02083)
+  // First Grid Parameters (Part c)
+  int N=29, M=29, L=50, success_flag=0 ;  
+  double T=0.5;
+
+  // Second Grid Parameters (Part c)
+  // int N=29, M=29, L=300, success_flag=0 ;  
+  // double T=3;
+
+  // Third Grid Parameters (Part c)
+  // int N=29, M=29, L=1000, success_flag=0 ;  
+  // double T=10;
+
+  // Fourth Grid Parameters (Part c)
+  // int N=29, M=29, L=2000, success_flag=0 ;  
+  // double T=20;
+
+  // Fifth Grid Parameters (Part c)
+  // int N=29, M=29, L=4000, success_flag=0 ;  
+  // double T=40;
+
   matrix u(N+2,M+2) ;
   vector x(N+2), y(M+2) ; 
-  double a=0, b=1, c=0, d=1 ; 
+  double a=-1, b=1, c=-1, d=1 ; 
   double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
-  double T=2, dt=T/L ; 
+  double dt=T/L ; 
 
   /*** Construct xy-grid ***/
   for(int i=0; i<=N+1; i++){
