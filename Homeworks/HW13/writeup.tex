@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\title{M368K Homework 13 \\
+  \normalsize{\S~12.3 \#2$^1$,\quad \S~12.4 \#1$^2$ }}
+\author{Hershal Bhave (hb6279)}
+\date{Due May 3rd, 2013}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{listings}
+\usepackage[in]{fullpage}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{cleveref}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{cancel}
+\usepackage{multirow}
+
+\newcommand{\dd}[1]{\mathrm{d}{#1}}
+\newcommand{\ddt}[1]{\frac{\dd{}}{\dd{#1}}}
+\newcommand{\dddt}[1]{\frac{\dd{}^2}{\dd{#1}^2}}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\scriptsize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{mygreen},
+  deletekeywords={...},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=single,
+  keywordstyle=\color{blue},
+  % language=Octave,
+  % numbers=left,
+  % numbersep=5pt,
+  % numberstyle=\tiny\color{mygray},
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  % stepnumber=2,
+  stringstyle=\color{mymauve},
+  tabsize=2,
+  title=\lstname,
+  columns=fullflexible,
+}
+
+\relpenalty=10000
+\binoppenalty=10000
+
+\begin{document}
+\maketitle
+
+\section{\S~12.3}
+\subsection{2$^1$}
+Approximate the solution to the given wave equation (hyperbolic
+partial differential equation) by using the Central-Difference Method
+with $\Delta x = \frac{1}{8}$ and $\Delta t= \frac{1}{10}$. Compute up
+to $t=\frac{3}{10}$ and compare approximate and exact solutions at
+each node at the final time.
+
+The actual solution is $u(x,t)=\sin t \sin 4\pi x$.
+\begin{equation}
+  \label{eq:2_q}
+  \begin{aligned}
+  \frac{\delta^2u}{\delta t^2} - \frac{1}{16\pi^2}
+  \frac{\delta^2u}{\delta x^2}  = 0, & \quad 0<x<1,\quad 0<t; \\
+  u(0,t) = u(1,t) = 0, & \quad 0<t \\
+  u(x,0) = \sin \pi x, & \quad 0\leq x \leq 1, \\
+  \frac{\delta u}{\delta t}(x,0) = 0, & \quad 0\leq x \leq 1,
+  \end{aligned}
+\end{equation}
+
+From the given equation we have the following constraints:
+\begin{equation}
+  \label{eq:2_const}
+  \begin{aligned}
+    h &= \Delta x = \frac{1}{8} \qquad&  \alpha^2 &= \frac{1}{16\pi^2} \\
+    k &= \Delta t = \frac{1}{10} \qquad& \lambda &= \alpha(k/h) = \frac{1}{5\pi} \\
+  \end{aligned}
+\end{equation}
+
+Now we can construct the A matrix and initial $\mathbf{w}$ vectors
+using $\lambda$, $u(x,0)$, and $\frac{\delta u}{\delta t}(x,0)$.
+
+\begin{equation}
+  \label{eq:2_A}
+  \begin{aligned}
+    A &=
+    \begin{pmatrix}
+      2(1-\lambda^2) & \lambda^2    & 0       & \multicolumn{2}{c}{\cdots} & 0 \\
+      \lambda^2    & 2(1-\lambda^2) & \lambda^2 & \ddots &  & \multirow{2}{*}{\vdots} \\
+      0 & \ddots & \ddots & \ddots & \ddots & & \\
+      \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
+      & & \ddots & \lambda^2 & 2(1-\lambda^2) & \lambda^2 \\
+      0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda^2 & 2(1-\lambda^2) \\
+    \end{pmatrix} \\
+    \\
+    \mathbf{w}^{(0)} &= f(x_i) \\
+    \mathbf{w}^{(1)} &=
+    (1-\lambda^2)f(x_i)+\frac{\lambda^2}{2}f(x_{i+1}) +
+    \frac{\lambda^2}{2}f(x_{i-1}) + kg(x_i)
+  \end{aligned}
+\end{equation}
+The Discrete Equations for this method are 
+\begin{equation}
+  \label{eq:2_dis}
+  w_{i,j+1} = 2(1-\lambda^2)w{i,j} +
+  \lambda^2(w_{i+1,j}+w_{i-1,j})-w_{i,j}-1 
+\end{equation}
+which turns out to be
+\begin{equation}
+  \label{eq:2_dis_val}
+  w_{i,j+1} = 2(1-\frac{1}{5\pi}^2)w{i,j} +
+  \frac{1}{5\pi}^2(w_{i+1,j}+w_{i-1,j})-w_{i,j}-1 
+\end{equation}
+where the boundary conditions imply that
+\begin{equation}
+  \label{eq:2_bound}
+  w_{0,j} = w_{m,j} = 0.
+\end{equation}
+And now further approximations of $\mathbf{w}$ can be computed by
+\begin{equation}
+  \label{eq:2_wnext}
+  \mathbf{w}^{(j+1P)} = A\mathbf{w}^{(j)} - \mathbf{w}^{(j-1)}
+\end{equation}
+Higher orders of $\mathbf{w}$ can be obtained by simple matrix
+multiplication and then subtraction, displayed in \cref{eq:2_wnext}.
+
+Using the algorithm given in \cref{lst:wavediff}, I obtained the data
+in \cref{tab:2_1,tab:2_2}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,0.3)$ & $w(i,0.3)$ & $|u(x_i,0.3)-w(i,0.3)|$ \\
+    \hline
+    0 & 0 & 0 & \\
+    0.125 &  0.29676 &  0.29676 & 1.2441$\times 10^{-3}$ \\
+    0.250 &  0 & 0 \\
+    0.375 & -0.29676 & -0.29676 & 1.2441$\times 10^{-3}$ \\
+    0.500 &  0 & 0 \\
+    0.625 &  0.29676 &  0.29676 & 1.2441$\times 10^{-3}$ \\
+    0.750 &  0 & 0 \\
+    0.875 & -0.29676 & -0.29676 & 1.2441$\times 10^{-3}$ \\
+    1.000 &  0 & 0 & \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 2 for t=3/10}
+  \label{tab:2_1}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}[p]{cccc}
+    \hline
+    $x_i$ & $u(x_i,0.5)$ & $w(i,0.5)$ & $|u(x_i,0.5)-w(i,0.5)|$ \\
+    \hline
+    0 & 0 & 0 & 0 \\
+    0.125 &  0.48393 &  0.47943 & 4.5006 $\times 10^{-3}$ \\
+    0.250 &  0.00000 &  0.00000 & 0 \\
+    0.375 & -0.48393 & -0.47943 & 4.5006 $\times 10^{-3}$ \\
+    0.500 &  0.00000 & -0.00000 & 0 \\
+    0.625 &  0.48393 &  0.47943 & 4.5006 $\times 10^{-3}$ \\
+    0.750 &  0.00000 &  0.00000 & 0 \\
+    0.875 & -0.48393 & -0.47943 & 4.5006 $\times 10^{-3}$ \\
+    1.000 & 0 & 0 & 0 \\
+    \hline
+  \end{tabular}
+  \caption{Data for Number 2 for t=5/10}
+  \label{tab:2_2}
+\end{table}
+
+\section{\S~12.4}
+\subsection{1$^2$}
+
+\section{Programming Minilab}
+
+\pagebreak
+\section{Code}
+\lstinputlisting
+[language=Octave,label=lst:wavediff,caption=\texttt{wavediff.m}]
+{wavediff.m}
+\pagebreak
+\lstinputlisting
+[language=C++,label=lst:p13,caption=\texttt{program13.cpp}]
+{program13.cpp}
+\pagebreak
+\lstinputlisting
+[language=C++,label=lst:ctrdiff2D,caption=\texttt{ctrdiff2D.cpp}]
+{ctrdiff2D.cpp}
+
+\end{document}
