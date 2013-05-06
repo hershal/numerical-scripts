@@ -186,7 +186,20 @@ in \cref{tab:2_1,tab:2_2}
 
 \section{\S~12.4}
 \subsection{1$^2$}
-
+Use the Finite Element Method to approximate the solution to the
+partial differential equation. Find the finite-element basis
+functions, arrays, and approximate solution; Report the approximate
+solution at each node.
+\begin{equation}
+  \label{eq:1_q}
+  \begin{aligned}
+    u_{xx}+4u_{yy} &= 3 &\quad\text{ in } D, \\
+    u(x,0.5) &= 2x, \\ 
+    u(0,y) &= 0 &\quad\text{ on } S_1, \\
+    u_{x}\cos\theta_1 + 4u_{y}\cos\theta_2 &= (y-x)\frac{\sqrt{2}}{2} &\quad\text{ on
+    } S_2
+  \end{aligned}
+\end{equation}
 \section{Programming Minilab}
 
 \pagebreak
