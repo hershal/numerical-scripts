@@ -8,7 +8,6 @@
 # in du/dt-alpha^2*(d^2u/dt^2), h is deltax, k is deltat, m is the
 # length of x, and n is the length of t
 
-
 function [w] = wavediff(f,g,alpha,h,k,m,n)
 
   i = 1:m-1;
