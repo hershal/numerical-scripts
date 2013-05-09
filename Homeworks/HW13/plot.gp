@@ -33,16 +33,8 @@ set label '$E_4$' center at .55,.55
 set label '$T_1$' center at .0975,.75
 set label '$T_2$' center at .25,.6125
 
-
-# set label '$\mathcal{S}_1$' center at -.05,.75
-# set label '$\mathcal{S}_1$' center at .25,.44
-# set label '$\mathcal{S}_2$' center at .175,.9
 set terminal tikz
 set output 'triangles.tikz'
-set style line 1 lc rgb 'red' pt 7 lt 1 lw 2 ps 0
-set style line 2 lc rgb 'green' pt 7 lt 1 lw 2 ps 0
-# set style line 3 fs transparent solid .75 lc rgb 'blue' pt 9 ps 7
-set style line 3 lc rgb 'blue' pt 9 ps 7 
 set nokey
 
 plot '-' with linespoints lc rgb '#0060ad' pt 7 lt 1 lw 2 ps 1.5, \

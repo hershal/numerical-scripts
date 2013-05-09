@@ -1,6 +1,6 @@
 \begin{tikzpicture}[gnuplot]
 %% generated with GNUPLOT 4.6p2 (Lua 5.2; terminal rev. 99, script rev. 100)
-%% Thu 09 May 2013 12:34:32 AM CDT
+%% Thu May  9 07:18:31 2013
 \path (0.000,0.000) rectangle (12.500,8.750);
 \gpcolor{rgb color={0.000,0.000,0.000}}
 \gpsetlinetype{gp lt plot 0}

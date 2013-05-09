@@ -60,6 +60,8 @@
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
+\lstloadlanguages{Octave,C++,Perl}
+
 \lstset{
   backgroundcolor=\color{white},
   basicstyle=\scriptsize\ttfamily,
@@ -530,23 +532,83 @@ And finally have an approximation to the solution for \cref{eq:1_q}:
   \label{tab:mini_b}
 \end{table}
 The stability threshold was crossed after $\Delta t$ crossed
-$\frac{1}{15}$, as the solution seems to stabilize after that spacing.
+$\frac{1}{15}$, as the solution seems to stabilize after that
+spacing. As can be clearly seen from the plots, there doesn't seem to
+be any usable data until $\Delta T$ hits $\frac{1}{20}$, evidenced by
+\cref{fig:mini_20}. 
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{b-10.tikz}
+    \caption{$\Delta T=\frac{1}{10}$}
+    \label{fig:mini_10}
+  \end{subfigure}~
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{b-15.tikz}
+    \caption{$\Delta T=\frac{1}{15}$}
+    \label{fig:mini_15}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{b-20.tikz}
+    \caption{$\Delta T=\frac{1}{20}$}
+    \label{fig:mini_20}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{b-25.tikz}
+    \caption{$\Delta T=\frac{1}{25}$}
+    \label{fig:mini_25}
+  \end{subfigure}~
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{b-30.tikz}
+    \caption{$\Delta T=\frac{1}{30}$}
+    \label{fig:mini_30}
+  \end{subfigure}~
+  \caption{Minilab Part B results}
+  \label{fig:mini_c}
+\end{figure}
+
 \subsection{Part c}
 \begin{table}[H]
   \centering
-  \begin{tabular}[H]{ccc}
+  \begin{tabular}[H]{cccccccc}
     \hline
-    $i$ & $t_i$ & $u_i(0,2,7)$ \\
+    $i$ & $t_i$ & $u_i(0,2,7)$ & $O_1$ & $O_2$ & $I_{O_1}$ & $I_{O_2}$ & $\frac{I_{O_2}}{I_{O_1}}$ \\
     \hline
-    1 & 3.5 & 0.00004 \\
-    2 & 5   & 0.11079 \\
-    3 & 7   & 0.03557 \\
+    1 & 3.5 & 0.00004 & 0.15017 & 0.00000 & 1.5017 & 0.0     & 0.0 \\
+    2 & 5   & 0.11079 & 0.05088 & 0.00001 & 1.5017 & 0.00001 & 6.65911 $\times 10^{-5}$	\\
+    3 & 7   & 0.03557 & 0.03057 & 0.02755 & 1.5017 & 0.02755 & 0.18345 \\
     \hline
   \end{tabular}
-  \caption{Data for Minilab Part a}
-  \label{tab:mini_b}
+  \caption{Data at $u_i(0,2,7)$ for each $T$}
+  \label{tab:mini_c_u}
 \end{table}
 
+The data is listed in \cref{tab:mini_c_u}. The figures for each time
+step are shown in \cref{fig:mini_c}. The interval $[0,7]$ would
+probably not be appropriate if the objective was to measure the
+outgoing waves at each sensor, since the sensors would start to pick
+up the echoes around $T=7$ (as can be seen in \cref{fig:mini_c_7}).
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{c-3-5.tikz}
+    \caption{T = 3.5}
+    \label{fig:mini_c_3_5}
+  \end{subfigure}~
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{c-5.tikz}
+    \caption{T = 5}
+    \label{fig:mini_c_5}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \includegraphics[width=\textwidth]{c-7.tikz}
+    \caption{T = 7}
+    \label{fig:mini_c_7}
+  \end{subfigure}
+  \caption{Minilab Part C results}
+  \label{fig:mini_c}
+\end{figure}
 \pagebreak
 \section{Code}
 \lstinputlisting
@@ -560,5 +622,13 @@ $\frac{1}{15}$, as the solution seems to stabilize after that spacing.
 \lstinputlisting
 [language=C++,label=lst:ctrdiff2D,caption=\texttt{ctrdiff2D.cpp}]
 {ctrdiff2D.cpp}
+\pagebreak
+\lstinputlisting
+[language=Perl,label=lst:plotpl,caption=\texttt{minilab\_contour.pl}]
+{contour.pl}
+\pagebreak
+\lstinputlisting
+[language=GnuPlot,label=lst:plotgp,caption=\texttt{plot\_1.pl}]
+{plot.gp}
 
 \end{document}
