@@ -71,24 +71,45 @@ void PDEeval(const double& x, const double& y, double& t,
 	     double& P, double& Q, double& p, double& q,
 	     double& r, double& s, double& eta){
 
-  P = 0.1*(1 + exp(-x*y*t/10)) ;
-  Q = 0.1 ;
-  p = 0.02*x*y ;
-  q = 0.04*x ;
-  r = 0.01 ;
-  s = 0.05 ;
-  eta = 0.01*t - 0.02*x*sin(y) ;
+  // P = 0.1*(1 + exp(-x*y*t/10)) ;
+  // Q = 0.1 ;
+  // p = 0.02*x*y ;
+  // q = 0.04*x ;
+  // r = 0.01 ;
+  // s = 0.05 ;
+  // eta = 0.01*t - 0.02*x*sin(y) ;
 
+  // For Programming mini[]lab
+  double pi=4.0*atan(1.0);
+  double xs = 1.5;
+  double ys = 0.0;
+  double xx = -1;
+  double yy = 0;
+  double tt = 0.5;
+  double w = sqrt(pow(x-xs,2) + 0.25*pow(y-ys,2));
+  eta = 10.0*(exp(-30*pow(x-xx,2) 
+			 - 30*pow(y-yy,2) 
+			 - 30*pow(t-tt,2)));
+  if(w>=0 && w<=0.5) {
+    s = 10*pow(cos(pi*w),2);
+  } else {
+    s = 0;
+  }
+  P = Q = 0.3;
+  p = q = r = 0;
+  
 }
 
 /*** Define ga(y,t), gb(y,t), gc(x,t), gd(x,t) ***/
 void BCeval(const double& x, const double& y, double& t,
             double& ga, double& gb, double& gc, double& gd){
 
-  ga = y ; 
-  gb = sqrt(y) ;
-  gc = 0 ; 
-  gd = x ;  
+  // ga = y ; 
+  // gb = sqrt(y) ;
+  // gc = 0 ; 
+  // gd = x ;  
+
+  ga = gb = gc = gd = 0;
 
 }
 
@@ -96,20 +117,60 @@ void BCeval(const double& x, const double& y, double& t,
 void ICeval(const double& x, const double& y, 
 	    double& f, double& gamma) {
 
-  f = 1 ;
-  gamma = x*y*(1-x)*(1-y) ;
-
+  // f = 1 ;
+  // gamma = x*y*(1-x)*(1-y) ;
+  f = gamma = 0;
 }
-
 
 int main() {
   /*** Define problem parameters ***/
-  int N=9, M=9, L=50, success_flag=0 ;  
+  // int N=9, M=9, L=50, success_flag=0 ;  
+  // matrix u(N+2,M+2), uold(N+2,M+2) ;
+  // vector x(N+2), y(M+2) ; 
+  // double a=0, b=1, c=0, d=1 ; 
+  // double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
+  // double T=5, dt=T/L ; 
+
+  //  Minilab Part B
+  // // For \Delta t = \frac{1}{10}
+  // int L = 70;
+  // double T = 7;
+
+  // // For \Delta t = \frac{1}{15}
+  // int L = 105;
+  // double T = 7;
+  
+  // // For \Delta t = \frac{1}{20}
+  // int L = 140;
+  // double T = 7;
+  
+  // // For \Delta t = \frac{1}{25}
+  // int L = 175;
+  // double T = 7;
+  
+  // // For \Delta t = \frac{1}{30}
+  // int L = 210;
+  // double T = 7;
+
+  //  Minilab Part C
+  // // For [0,T] = [0, 3.5]
+  // double T = 3.5;
+  // int L = 105;
+
+  // // For [0,T] = [0, 5]
+  // double T = 5;
+  // int L = 150;
+  
+  // For [0,T] = [0, 7]
+  double T = 7;
+  int L = 210;
+
+  int N=119 , M=119 , success_flag=0;  
   matrix u(N+2,M+2), uold(N+2,M+2) ;
   vector x(N+2), y(M+2) ; 
-  double a=0, b=1, c=0, d=1 ; 
+  double a=-3, b=3, c=-3, d=3; 
   double dx=(b-a)/(N+1), dy=(d-c)/(M+1) ;
-  double T=5, dt=T/L ; 
+  double dt=T/L ; 
 
   /*** Construct xy-grid ***/
   for(int i=0; i<=N+1; i++){

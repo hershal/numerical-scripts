@@ -80,8 +80,8 @@ int ctrdiff2D(int N, int M,
   matrix unew(N+2,M+2) ; //temporary variable
   
   /*** Compute u^{n+1} at interior grid points ***/
-  for(int i=1; i<=N; i++){ //actual i-index on grid
-    for(int j=1; j<=M; j++){ //actual j-index on grid
+  for(int i=1; i<=N; i++) { //actual i-index on grid
+    for(int j=1; j<=M; j++) { //actual j-index on grid
 
       tn = t ;
       PDEeval(x(i),y(j),tn,P,Q,p,q,r,s,eta) ;
@@ -141,9 +141,11 @@ int ctrdiff2D(int N, int M,
         /*** Compute unew = u^{n+1} using central-difference formula
         with u = u^{n} and uold = u^{n-1}. THIS PART NEEDS TO BE
         COMPLETED. ***/
-        unew(i,j) = 0 ;
-
-
+        // unew(i,j) = 0 ;
+	unew(i,j) = (2*u(i,j) - (1-s*dt/2)*uold(i,j) + dt*dt
+		     *(dhatij*uTop + ahatij*uLeft
+		       + bhatij*uCenter + chatij*uRight
+		       + ehatij*uBottom + eta))/(1 + s*dt/2);
       }
 
     }
