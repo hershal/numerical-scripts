@@ -28,6 +28,33 @@
 \newcommand{\dd}[1]{\mathrm{d}{#1}}
 \newcommand{\ddt}[1]{\frac{\dd{}}{\dd{#1}}}
 \newcommand{\dddt}[1]{\frac{\dd{}^2}{\dd{#1}^2}}
+\newcommand{\aoneonematrix}{
+  \begin{bmatrix}
+    1 & 0.25 & 0.75 \\
+    1 & 0    & 0.5 \\
+    1 & 0    & 1 \\
+  \end{bmatrix}
+}
+\newcommand{\aonetwomatrix}{
+  \begin{bmatrix}
+    1 & 0.25 & 0.75 \\
+    1 & 0    & 0.5  \\
+    1 & 0.5  & 0.5  \\
+  \end{bmatrix}
+}
+\newcommand{\bonematrix}[2]{
+  \begin{bmatrix}
+    a_{#1}^{(#2)} \\
+    b_{#1}^{(#2)} \\
+    c_{#1}^{(#2)} \\
+  \end{bmatrix}
+}
+\newcommand{\setupaonematrices}[2]{
+\aoneonematrix \bonematrix{#1}{#2}
+}
+\newcommand{\setupatwomatrices}[2]{
+\aonetwomatrix \bonematrix{#1}{#2}
+}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -103,12 +130,14 @@ using $\lambda$, $u(x,0)$, and $\frac{\delta u}{\delta t}(x,0)$.
   \begin{aligned}
     A &=
     \begin{pmatrix}
+%%% BEGIN NO FILL
       2(1-\lambda^2) & \lambda^2    & 0       & \multicolumn{2}{c}{\cdots} & 0 \\
       \lambda^2    & 2(1-\lambda^2) & \lambda^2 & \ddots &  & \multirow{2}{*}{\vdots} \\
       0 & \ddots & \ddots & \ddots & \ddots & & \\
       \multirow{2}{*}{\vdots} & \ddots & \ddots & \ddots & \ddots & 0 \\
       & & \ddots & \lambda^2 & 2(1-\lambda^2) & \lambda^2 \\
       0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda^2 & 2(1-\lambda^2) \\
+%%% END NO FILL
     \end{pmatrix} \\
     \\
     \mathbf{w}^{(0)} &= f(x_i) \\
@@ -189,85 +218,258 @@ in \cref{tab:2_1,tab:2_2}
 
 \section{\S~12.4}
 \subsection{1$^2$}
-Use the Finite Element Method to approximate the solution to the
-partial differential equation. Find the finite-element basis
-functions, arrays, and approximate solution; Report the approximate
-solution at each node. Let $M=2$; $T_1$ have vertices $(0,0.5),
-(0.25,0.75), (0,1)$; and $T_2$ have vertices $(0,0.5), (0.5,0.5),
-(0.25,0.75)$. 
+Use the Finite Element Method to approximate the solution to the partial
+differential equation. Find the finite-element basisfunctions, arrays,
+and approximate solution; Report the approximate solution at each
+node. Let $M=2$; $T_1$ have vertices $(0,0.5), (0.25,0.75), (0,1)$; and
+$T_2$ have vertices $(0,0.5), (0.5,0.5), (0.25,0.75)$.
 \begin{equation}
   \label{eq:1_q}
   \begin{aligned}
-    u_{xx}+4u_{yy} &= 3 &\quad\text{ in } D, \\
-    u(x,0.5) &= 2x, \\
-    u(0,y) &= 0 &\quad\text{ on } \mathcal{S}_1, \\
+    u_{xx}+4u_{yy} &= 3 &&\quad\text{ in } D, \\
+    u(x,0.5) &= 2x
+    &&\quad\text{ and } \\
+    u(0,y) &= 0
+    &&\quad\text{ on } \mathcal{S}_1, \\
     u_{x}\cos\theta_1 + 4u_{y}\cos\theta_2 &= (y-x)\frac{\sqrt{2}}{2}
-    &\quad\text{ on } \mathcal{S}_2
+    &&\quad\text{ on } \mathcal{S}_2.
   \end{aligned}
 \end{equation}
+
+%
+% Note that for this problem,
+% p = 1
+% q = 4
+% r = 0
+% f = 3
+% g = 2x and 0 (boundary conditions)
+% g_1 = 0
+% g_2 = (y-x)\frac{\sqrt{2}}{2}
+% 
 
 We first divide the region $D$ into triangles $T_1$ and $T_2$
 represented by \cref{fig:tri}.
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=.75\textwidth]{triangles.tikz}
+  % \includegraphics[width=.75\textwidth]{triangles.tikz}
+  \Huge{TODO: PUT THIS BACK IN WHEN DONE}
   \caption{Triangles for Number 1}
   \label{fig:tri}
 \end{figure}
-
-In this problem we have 
+In this problem, we have 
 \begin{equation}
   \label{eq:1_v}
   \begin{aligned}
-    V_1^{(1)} &= (0,0.5)     &\qquad V_1^{(2)} &= (0,0.5) \\
-    V_2^{(1)} &= (0.25,0.75) &\qquad V_2^{(2)} &= (0.5,0.5) \\
-    V_3^{(1)} &= (0,1)       &\qquad V_3^{(2)} &= (0.25,0.75) \\
+    V_1^{(1)} &= (0.25,0.75) &\qquad V_1^{(2)} &= (0.25,0.75) \\
+    V_2^{(1)} &= (0,0.5)     &\qquad V_2^{(2)} &= (0,0.5) \\
+    V_3^{(1)} &= (0,1)       &\qquad V_3^{(2)} &= (0.5,0.5) \\
   \end{aligned}
 \end{equation}
-
-Which we can write for simplicity as
+which we can write for simplicity as
 \begin{equation}
   \label{eq:1_e}
   \begin{aligned}
-    E_1 &= V_1^{(1)} = V_1^{(2)} \\
-    E_2 &= V_2^{(2)} \\
-    E_3 &= V_2^{(1)} = V_3^{(2)} \\
-    E_4 &= V_3^{(1)} \\
+    E_1 &= V_1^{(1)} = V_1^{(2)} &&= (0.25,0.75) \\
+    E_2 &= V_2^{(1)} = V_2^{(2)} &&= (0,0.5) \\
+    E_3 &= V_3^{(1)} &&= (0,1) \\
+    E_4 &= V_3^{(2)} &&= (0.5,0.5). \\
   \end{aligned}
 \end{equation}
 
-We can consider $E_1$ and $E_2$ to be nodes on $\mathbb{S}_1$ where
-the boundary condition $u(x,0.5)=2x$ is imposed. Since we also know
-that $\phi_1$ and $\phi_3$ are nonzero on $T_1$ and $T_2$, we can find
-$\alpha_{1,3}=\alpha_{3,1}$ by
+We must now find the elements of the matrix $A = (\alpha_{i,j})$, for
+$i=1,\ldots,n$ and $j=1,\ldots,m$, is in the form
 \begin{equation}
-  \label{eq:1_alpha_1_3}
-  \int\int_{T_1}\left[
-  p\frac{\partial\phi_1}{\partial x}\frac{\partial\phi_3}{\partial x} + 
-  q\frac{\partial\phi_1}{\partial y}\frac{\partial\phi_3}{\partial y} -
-  r\phi_1\phi_3\right] \dd{x}\,\dd{y} +
-\int\int_{T_2}\left[
-  p\frac{\partial\phi_1}{\partial x}\frac{\partial\phi_3}{\partial x} + 
-  q\frac{\partial\phi_1}{\partial y}\frac{\partial\phi_3}{\partial y} -
-  r\phi_1\phi_3\right] \dd{x}\,\dd{y}
+  \label{eq:1_alpha_phi}
+  \begin{aligned}
+    \alpha_{i,j} &=
+    % region D
+    \int\int_{D}\left[
+      p \,
+      \frac{\partial\phi_i}{\partial x} \,
+      \frac{\partial\phi_j}{\partial x} +
+      q \,
+      \frac{\partial\phi_i}{\partial y} \,
+      \frac{\partial\phi_j}{\partial y} -
+      r
+      \phi_i
+      \phi_i
+    \right]
+    \dd{x}\,\dd{y} +
+    % region S_2 (why S_2?)
+    \int_{\mathcal{S}_2}
+      g_1\phi_i\phi_j \,
+    \dd{\mathcal{S}_2} \\
+  \end{aligned}
 \end{equation}
-
-On triangle $T_1$ we have
+and $\beta_i$, for $i=1,\ldots,n$, in the form
+\begin{equation}
+  \label{eq:1_beta_phi}
+  \beta_i = -\int\int_{\mathcal{D}}f\phi_i\,\dd{x}\,\dd{y} +
+  \int_{\mathcal{S}_2}g_2\phi_i\,\dd{\mathcal{S}} -
+  \sum_{k=n+1}^{m}\alpha_{ik}\gamma_{k}
+\end{equation}
+where $\phi(x,y) = a + bx + cy$ for triangles.
+For triangle $T_1$ we have
 \begin{equation}
   \label{eq:1_t1_phi}
   \begin{aligned}
-    \phi_1(x,y) &= N_1^{(1)}(x,y) = a_1^{(1)} + b_1^{(1)}x + c_1^{(1)}y,\\ 
-    \phi_3(x,y) &= N_2^{(1)}(x,y) = a_2^{(1)} + b_2^{(1)}x + c_2^{(1)}y 
+    % 
+    \phi_1(x,y) &= N_1^{(1)}(x,y) =
+    a_1^{(1)} + b_1^{(1)}x + c_1^{(1)}y,\\ 
+    % 
+    \phi_2(x,y) &= N_2^{(1)}(x,y) =
+    a_2^{(1)} + b_2^{(1)}x + c_2^{(1)}y, \\
+    % 
+    \phi_3(x,y) &= N_3^{(1)}(x,y) =
+    a_3^{(1)} + b_3^{(1)}x + c_3^{(1)}y,\\ 
+    % 
+    \phi_4(x,y) &= 0 \\
   \end{aligned}
 \end{equation}
-and on triangle $T_2$ we have
+which implies that the partials for $\phi$ for $T_1$ are
+\begin{equation}
+  \label{eq:1_t1_dphi}
+  \begin{aligned}
+    \frac{\partial\phi_1}{\partial x} = b_1^{(1)},&\quad
+    \frac{\partial\phi_1}{\partial y} = c_1^{(1)},&\quad
+    \frac{\partial\phi_2}{\partial x} = b_2^{(1)},&\quad
+    \frac{\partial\phi_2}{\partial y} = c_2^{(1)},&\quad \\
+    \frac{\partial\phi_3}{\partial x} = b_3^{(1)},&\quad
+    \frac{\partial\phi_3}{\partial y} = c_3^{(1)},&\quad
+    \frac{\partial\phi_4}{\partial x} = 0,& \quad   
+    \frac{\partial\phi_4}{\partial y} = 0.& \quad
+  \end{aligned}
+\end{equation}
+and for triangle $T_2$ we have
 \begin{equation}
   \label{eq:1_t2_phi}
   \begin{aligned}
-    \phi_1(x,y) &= N_1^{(2)}(x,y) = a_1^{(2)} + b_1^{(2)}x + c_1^{(2)}y,\\ 
-    \phi_3(x,y) &= N_3^{(2)}(x,y) = a_3^{(2)} + b_3^{(2)}x + c_3^{(2)}y 
+    % 
+    \phi_1(x,y) &= N_1^{(2)}(x,y) =
+    a_1^{(2)} + b_1^{(2)}x + c_1^{(2)}y,\\ 
+    % 
+    \phi_2(x,y) &= N_2^{(2)}(x,y) =
+    a_2^{(2)} + b_2^{(2)}x + c_2^{(2)}y,\\ 
+    % 
+    \phi_3(x,y) &= 0 \\
+    % 
+    \phi_4(x,y) &= N_3^{(2)}(x,y) =
+    a_3^{(2)} + b_3^{(2)}x + c_3^{(2)}y,\\
   \end{aligned}
 \end{equation}
+which implies that the partials for $\phi$ for $T_2$ are
+\begin{equation}
+  \label{eq:1_t2_dphi}
+  \begin{aligned}
+    &\frac{\partial\phi_1}{\partial x} = b_1^{(2)},&\quad
+    &\frac{\partial\phi_1}{\partial y} = c_1^{(2)},&\quad
+    &\frac{\partial\phi_2}{\partial x} = b_2^{(2)},&\quad
+    &\frac{\partial\phi_2}{\partial y} = c_2^{(2)},&\quad \\
+    &\frac{\partial\phi_3}{\partial x} = 0,&\quad
+    &\frac{\partial\phi_3}{\partial y} = 0,&\quad
+    &\frac{\partial\phi_4}{\partial x} = b_3^{(2)},&\quad
+    &\frac{\partial\phi_4}{\partial y} = c_3^{(2)}.&\quad
+  \end{aligned}
+\end{equation}
+
+Each $N_j^{(i)}$ equation corresponds to the vertex $V_j^{(i)}$ and
+produces systems in the form
+\begin{equation}
+  \label{eq:1_n_sys}
+  \begin{bmatrix}
+    1 & x_1^{(i)} & y_1^{(i)} \\
+    1 & x_2^{(i)} & y_2^{(i)} \\
+    1 & x_3^{(i)} & y_3^{(i)} \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_j^{(i)} \\ b_j^{(i)} \\ c_j^{(i)} \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    j\stackrel{?}{=}k \\ j\stackrel{?}{=}k \\ j\stackrel{?}{=}k \\
+  \end{bmatrix}
+\end{equation}
+and solving each of the systems gives
+\begin{equation}
+  \label{eq:1_A_array}
+  \begin{aligned}
+    % A_1^(1)
+    \setupaonematrices{1}{1}&
+    = \begin{bmatrix} 1\\0\\0\\\end{bmatrix};
+    &\qquad\bonematrix{1}{1} &= \begin{bmatrix}0\\4\\0\\\end{bmatrix}\\
+    % A_2^(1)
+    \setupaonematrices{2}{1}&
+    = \begin{bmatrix} 0\\1\\0\\\end{bmatrix};
+    &\qquad\bonematrix{2}{1} &= \begin{bmatrix}2\\-2\\-2\\\end{bmatrix}\\
+    % A_3^(1)
+    \setupaonematrices{3}{1}&
+    = \begin{bmatrix} 0\\0\\1\\\end{bmatrix};
+    &\qquad\bonematrix{3}{1} &= \begin{bmatrix}-1\\-2\\2\\\end{bmatrix}\\
+    % A_1^(2)
+    \setupatwomatrices{1}{2}&
+    = \begin{bmatrix} 1\\0\\0\\\end{bmatrix};
+    &\qquad\bonematrix{1}{2} &= \begin{bmatrix}-2\\0\\4\\\end{bmatrix}\\
+    % A_2^(2)
+    \setupatwomatrices{2}{2}&
+    = \begin{bmatrix} 0\\1\\0\\\end{bmatrix};
+    &\qquad\bonematrix{2}{2} &= \begin{bmatrix}2\\-2\\-2\\\end{bmatrix}\\
+    % A_3^(2)
+    \setupatwomatrices{3}{2}&
+    = \begin{bmatrix} 0\\0\\1\\\end{bmatrix}
+    &\qquad\bonematrix{3}{2} &= \begin{bmatrix}1\\2\\-2\\\end{bmatrix}.\\
+  \end{aligned}
+\end{equation}
+
+We can consider $E_1$, $E_2$, and $E_4$ as nodes on $\mathcal{S}_1$
+where the boundary conditions
+\begin{equation*}
+  \begin{aligned}
+    g_1(x,y) = u(x,0.5) &= 2x, \text{ and}\\
+    g_2(x,y) = u(0,y) &= 0 \\
+  \end{aligned}
+\end{equation*}
+are imposed. This implies
+\begin{equation}
+  \label{eq:1_gamma_2_3_4}
+  \begin{aligned}
+    \gamma_2 = 0, \gamma_3 = 0, \text{ and } \gamma_4 = 0.
+  \end{aligned}
+\end{equation}
+
+Since we have already determined $\gamma_2$, $\gamma_3$, and $\gamma_4$,
+we only need to find $\gamma_1$. To do this we only need to consider
+$\alpha_{1,1}$ for both triangles. So now the big integral for $\alpha$
+in \cref{eq:1_alpha_phi} becomes
+\begin{equation}
+  \label{eq:1_alpha_1_1_nophi}
+  \begin{aligned}
+    \alpha_{1,1}&=
+    b_1^{(1)}b_1^{(1)}\int\int_{T_1} p\, \dd{x}\,\dd{y} +
+    c_1^{(1)}c_1^{(1)}\int\int_{T_1} q\, \dd{x}\,\dd{y} \\ &\qquad-
+    \int\int_{T_1} r (a_1^{(1)} + b_1^{(1)}x + c_1^{(1)}y)(a_1^{(1)} +
+    b_2^{(1)}x + c_2^{(1)}y) \dd{x}\,\dd{y} \\ &\quad+ 
+    b_1^{(2)}b_1^{(2)}\int\int_{T_2} p\, \dd{x}\,\dd{y} +
+    c_1^{(2)}c_1^{(2)}\int\int_{T_2} q\, \dd{x}\,\dd{y} \\ &\qquad-
+    \int\int_{T_2} r(a_1^{(2)} + b_1^{(2)}x + c_1^{(2)}y)(a_1^{(2)} +
+    b_1^{(2)}x + c_1^{(2)}y)\dd{x}\,\dd{y} \\
+    &=16\int\int_{T_1} \, \dd{x}\,\dd{y} +
+    64\int\int_{T_2} \, \dd{x}\,\dd{y} \\
+    \alpha_{1,1}&=10
+  \end{aligned}
+\end{equation}
+and now the $\beta$ equation from \cref{eq:1_beta_phi} becomes
+\begin{equation}
+  \label{eq:1_beta_1_values}
+  \begin{aligned}
+    \beta_1 &= -\int\int_{T_1}3\phi_1 \,\dd{x}\,\dd{y} -
+    \int\int_{T_2}3\phi_1 \,\dd{x}\,\dd{y} +
+    \int_{\mathcal{S}_2}
+    (y-x)\frac{\sqrt{2}}{2}\phi_1\,
+    \dd{\mathcal{S}} -
+    \sum_{k=2}^{3}\alpha_{1,k}\gamma_{k}\\
+  \end{aligned}
+\end{equation}
+
 \section{Programming Minilab}
 \pagebreak
 \section{Code}
