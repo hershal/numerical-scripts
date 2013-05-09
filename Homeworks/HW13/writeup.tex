@@ -433,12 +433,12 @@ are imposed. This implies
 \begin{equation}
   \label{eq:1_gamma_2_3_4}
   \begin{aligned}
-    \gamma_2 = 0, \gamma_3 = 0, \text{ and } \gamma_4 = 0.
+    \gamma_2 = 0, \gamma_3 = 0, \text{ and } \gamma_4 = 1.
   \end{aligned}
 \end{equation}
 
 Since we have already determined $\gamma_2$, $\gamma_3$, and $\gamma_4$,
-we only need to find $\gamma_1$. To do this we only need to consider
+we only need to find $\gamma_1$. To do this we need to consider
 $\alpha_{1,1}$ for both triangles. So now the big integral for $\alpha$
 in \cref{eq:1_alpha_phi} becomes
 \begin{equation}
@@ -460,15 +460,55 @@ in \cref{eq:1_alpha_phi} becomes
 \end{equation}
 and now the $\beta$ equation from \cref{eq:1_beta_phi} becomes
 \begin{equation}
-  \label{eq:1_beta_1_values}
+  \label{eq:1_beta_prepara}
   \begin{aligned}
     \beta_1 &= -\int\int_{T_1}3\phi_1 \,\dd{x}\,\dd{y} -
-    \int\int_{T_2}3\phi_1 \,\dd{x}\,\dd{y} +
-    \int_{\mathcal{S}_2}
-    (y-x)\frac{\sqrt{2}}{2}\phi_1\,
-    \dd{\mathcal{S}} -
-    \sum_{k=2}^{3}\alpha_{1,k}\gamma_{k}\\
+    \int\int_{T_2}3\phi_1 \,\dd{x}\,\dd{y} \\ &\quad+
+    \text{ proj}_{T_1}\int_{\mathcal{S}_2} 
+    (y-x)\frac{\sqrt{2}}{2}\phi_1^{(1)}\,\dd{\mathcal{S}} +
+    \text{ proj}_{T_2}\int_{\mathcal{S}_2}
+    (y-x)\frac{\sqrt{2}}{2}\phi_1^{(2)}\,\dd{\mathcal{S}} \\ &\quad-
+    \sum_{k=2}^{4}\alpha_{1,k}\gamma_{k}\\
   \end{aligned}
+\end{equation}
+We must parametrize the $\text{proj}_{T_i}$ entries in order to evaluate
+the line integral. We do this by
+\begin{equation}
+  \label{eq:1_t1_para}
+  \begin{aligned}
+    \text{proj}_{T_1}\mathcal{S}_2 
+    &:= <0.5-0.25t,\,0.5+0.25t>,&t\in(0,1) \\
+    \text{proj}_{T_2}\mathcal{S}_2 
+    &:= <0.25-0.25t,\,0.75+0.25t>,&t\in(0,1) \\
+  \end{aligned}
+\end{equation}
+which makes 
+\begin{equation}
+  \label{eq:1_beta_para}
+  \begin{aligned}
+    \beta_1&= 0.375 +
+    \int_0^1\left[((0.5-0.25t)-(0.5-0.25t))\frac{\sqrt{2}}{2}(4(0.5-0.25t))\right]\dd{t} 
+    \\ &\quad+
+    \int_0^1\left[((0.75-0.25t)-(0.25+0.25t))\frac{\sqrt{2}}{2}(-2+4(0.75+0.25t))\right]\dd{t}
+    \\ &\quad- 2.5\\
+    &= 0.375 + 3.53553 - 2.5 \\
+    \beta_1 &= 1.4105
+  \end{aligned}
+\end{equation}
+Now finally we can obtain $\gamma_4$ 
+\begin{equation}
+  \label{eq:1_gamma_4}
+  (\alpha_{1,1})\gamma_4 = \beta_1 \Rightarrow \gamma_4 = 0.14105
+\end{equation}
+And finally have an approximation to the solution for \cref{eq:1_q}:
+\begin{equation}
+  \label{eq:1_approx_t_phi}
+  \boxed{
+    \begin{aligned}
+      T_1:\phi(x,y)&=0.14105(4x), \\
+      T_2:\phi(x,y)&=0.14105(-2+4y)+(1+2x-2y)
+    \end{aligned}
+  }
 \end{equation}
 
 \section{Programming Minilab}
