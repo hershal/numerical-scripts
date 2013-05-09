@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 if (!defined($ARGV[0]) || !defined($ARGV[1])) {
-  die("usage: <format> <data files...>");
+  die("usage: <output format>  <data files...>");
 } 
 
 my $format = shift(@ARGV);
