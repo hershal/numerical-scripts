@@ -92,6 +92,7 @@ From the given equation we have the following constants:
     k &= \Delta t = \frac{1}{10} \qquad& \lambda &= \alpha^2(k/h^2) = \frac{8}{5\pi^2} \\
   \end{aligned}
 \end{equation}
+\pagebreak[5]
 
 Now we can construct the $A$ matrix and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)$.
 \begin{equation}
@@ -113,8 +114,8 @@ Now we can construct the $A$ matrix and initial $\mathbf{w}$ vector using $\lamb
       0 & \multicolumn{2}{c}{\cdots} & 0 & \lambda & 1-2\lambda \\
     \end{pmatrix} \\
     \\
-    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
-    \left(1+2\cos\frac{\pi}{4}x\right)\\
+    % \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    % \left(1+2\cos\frac{\pi}{4}x\right)\\
   \end{aligned}
 \end{equation}
 
@@ -204,8 +205,8 @@ $A$ matrix and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)$.
       0 & \multicolumn{2}{c}{\cdots} & 0 & -\lambda & 1+2\lambda \\
     \end{pmatrix} \\
     \\
-    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
-    \left(1+2\cos\frac{\pi}{4}x\right)\\
+    % \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    % \left(1+2\cos\frac{\pi}{4}x\right)\\
   \end{aligned}
 \end{equation}
 
@@ -300,8 +301,8 @@ $A$ and $B$ matrices and initial $\mathbf{w}$ vector using $\lambda$ and $u(x,0)
       0 & \multicolumn{2}{c}{\cdots} & 0 & \frac{\lambda}{2} & 1-\lambda \\
     \end{pmatrix} \\
     \\
-    \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
-    \left(1+2\cos\frac{\pi}{4}x\right)\\
+    % \mathbf{w}^{(0)} &= \sin\frac{\pi}{4}x \cdot
+    % \left(1+2\cos\frac{\pi}{4}x\right)\\
   \end{aligned}
 \end{equation}
 
@@ -429,6 +430,10 @@ definite value.
 \lstinputlisting
 [language=Octave,label=lst:backdiff,caption=\texttt{backdiff.m}]
 {backdiff.m}
+\pagebreak
+\lstinputlisting
+[language=Octave,label=lst:crankn,caption=\texttt{crankn.m}]
+{crankn2.m}
 \pagebreak
 \lstinputlisting
 [language=C++,label=lst:p12,caption=\texttt{program12.cpp}]

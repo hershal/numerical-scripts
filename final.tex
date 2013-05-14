@@ -141,6 +141,19 @@
       \right.
     \end{equation*}
 
+  \item[Secant/Forward Euler's Method] Is a first-order version of Runge-Kutta. For a mesh size $n$ and
+    initial guess $\mathbf{x}^{(0)}$
+    \begin{equation*}
+      b=-\frac{1}{n}F(x)
+    \end{equation*}
+    \begin{equation*}
+      \left\{
+        \begin{aligned}
+          A &= J(\mathbf{x}^{(k-1)}) \\
+          \mathbf{x}^{(k)} &= \mathbf{x}^{(k-1)}+ A^{-1}b \\
+        \end{aligned}
+      \right.
+    \end{equation*}
 
   \item[Shooting Method Convergence Theorem]
     Assume:
@@ -164,19 +177,6 @@
       Runge-Kutta-4.
     \end{itemize}
 
-  \item[Secant/Forward Euler's Method] Is a first-order version of Runge-Kutta. For a mesh size $n$ and
-    initial guess $\mathbf{x}^{(0)}$
-    \begin{equation*}
-      b=-\frac{1}{n}F(x)
-    \end{equation*}
-    \begin{equation*}
-      \left\{
-        \begin{aligned}
-          A &= J(\mathbf{x}^{(k-1)}) \\
-          \mathbf{x}^{(k)} &= \mathbf{x}^{(k-1)}+ A^{-1}b \\
-        \end{aligned}
-      \right.
-    \end{equation*}
   \item[Runge-Kutta] For $n$ iterations and initial guess $\mathbf{x}^{(0)}$. Does not require a
     good guess of $\mathbf{x}^{(0)}$ and converges quickly, though for RK4, it requires for linear
     systems to be solved when computing the $\mathbf{k}$ values, so $n$ steps requires solving
@@ -202,12 +202,13 @@
         \end{aligned}
       \right.
     \end{equation*}
-  \item[Centered-Difference Equations] 
+  \item[Centered-Difference Equations for Non/Linear Problems] 
     \begin{gather*}
       y'(x_i)=\frac{1}{2h}[y(x_{i+1})-y(x_{i-1})]-\frac{h^2}{6}y'''(\eta_i) \\
       y''(x_i)=\frac{1}{h^2}[y(x_{i+1})-2y(x_i)+y(x_{i-1})]-\frac{h^2}{12}y^{(4)}(\xi_i) \\
       \frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} = p\frac{y(x_{i+1}) - y(x_{i-1})}{2h}+qy(x_i) + r \\
     \end{gather*}
+    % \pagebreak[2]
   \item[Linear Finite Difference Method] 
     For general BVPs, where \linebreak[4]
     $a\leq x \leq b,\quad y(a) = \alpha,\quad y(b) = \beta$
@@ -238,7 +239,7 @@
           %   & & \ddots & -1+\frac{h}{2}p(x_1) & 2+h^2q(x_1) & -1+\frac{h}{2}p(x_1) \\
           %   0 & \multicolumn{2}{c}{\cdots} & 0 & -1+\frac{h}{2}p(x_1) & 2+h^2q(x_1) \\
           % \end{pmatrix} \\
-          \scriptsize{\begin{pmatrix}
+          \footnotesize{\begin{pmatrix}
             2+h^2q(x_1) & -1+\frac{h}{2}p(x_1)& & 0\\
             -1-\frac{h}{2}p(x_2)& \ddots & \ddots & \\
             & \ddots & \ddots & -1+\frac{h}{2}p(x_{N-1})\\
@@ -258,7 +259,7 @@
         \end{aligned}
       \right.
     \end{equation*}
-  \item[Convergence Theorem for the Linear Finite-Difference Method]
+  \item[Linear Finite-Difference Convergence Theorem]
     The tridiagonal linear system has a unique solution provided that
     $h<2/L$ where $L=\stackrel{\text{max}}{_{a\leq
         x\leq b}}|p(x)|$. Establish $y^{(4)}$ is continuous for
@@ -386,6 +387,188 @@
         \end{aligned}
       \right.
     \end{equation*}
+  \item[Poisson Equation Finite-Difference Method]
+    In general form:
+    \begin{equation*}
+      \begin{aligned}
+        \nabla^2u(x,y)&\equiv\frac{\partial^2u}{\partial
+          x^2}(x,y)+\frac{\partial^2u}{\partial y^2}=f(x,y) \\
+        R &= \{(x,y) \mid a<x<b,\;c<y<d\} \\
+        u(x,y) &= g(x,y),\quad (x,y) \in S
+      \end{aligned}
+    \end{equation*}
+    $S$ is a boundary of $R$. If $f$ and $g$ are continuous then there
+    is a unique solution.  We first choose a grid of step sizes
+    $h=(b-a)/n$ and $k=(d-c)/m$; $n$ and $m$ are the number of steps
+    for the $x$ and $y$ axis. $x_i=a+ih$ and $y_i=c+ik$ are gridlines
+    whose intersections form mesh points. The Centered-Difference
+    Formulas:
+    \begin{equation*}
+      \begin{aligned}
+        \frac{\partial^2u}{\partial x^2}(x_i,y_j) &=
+        \frac{u(x_{i+1},y_{j})-2u(x_{i},y_{j}) + u(x_{i-1},y_{j})}{h^2} -
+        \frac{h^2}{12}\frac{\partial^4u}{\partial x^4}(\xi_i,y_j) \\
+        \frac{\partial^2u}{\partial y^2}(x_i,y_j) &=
+        \frac{u(x_{i},y_{j+1})-2u(x_{i},y_{j}) + u(x_{i},y_{j-1})}{k^2} -
+        \frac{k^2}{12}\frac{\partial^4u}{\partial y^4}(x_i,\eta_j) \\
+      \end{aligned}
+    \end{equation*}
+    $\xi_i \in (x_{i-1},x_{i+1})$; $\eta_j \in (y_{j-1},y_{j+1})$.
+    Difference-Equation form:
+    \begin{equation*}
+      \scriptsize{
+        \begin{array}{c}
+          2\left[\left(\frac{h}{k}\right)^2+1\right]w_{i,j}-(w_{i+1,j}+w_{i-1,j})
+          - \left(\frac{h}{k}\right)^2(w_{i,j+1}+w_{i,j-1})=-h^2f(x_i,y_j)
+        \end{array}}
+    \end{equation*}
+    $\lambda = \left(\frac{h}{k}\right)^2$. Label the grid points
+    $P_l=(x_i,y_j)$ and $w_l=w_{i,j}$, where $l=i+(m-1-j)(n-1)$ for
+    $i=1,\ldots,n-1$ and $j=1,\ldots,m-1$ to obtain equations at each
+    point $P_i$. Set the RHS of those equations to the adjacent
+    boundary conditions. Put the $P_i$ equations in a matrix and solve
+    for $w_i$. Gauss-Seidel is used to solve the matrix: it is
+    Symmetric Positive-Definite and diagonally dominant (Symmetric
+    Block Tridiagonal).
+  \item[Poisson Equation Solving Methods] Iterative methods should be
+    used for large systems, specifically SOR.
+    % , whose optimal $w$ is 
+    % $$w=\frac{2}{1+\sqrt{1-[\rho(B)]^2}}=\frac{4}{2+\sqrt{4-[\cos(\pi/m)+\cos(\pi/n)]^2}}$$
+    Otherwise direct techniques usually work better (less roundoff).
+    \pagebreak[4]
+  \item[Forward Difference Method] For Parabolic (heat/diffusion) PDEs:
+    \begin{equation*}
+      \begin{aligned}
+        &\frac{\partial u}{\partial t}(x,t) =
+        \alpha^2\frac{\partial^2u}{\partial x^2}(x,t), \qquad
+        0<x<l,\quad t>0& \\
+        &u(0,t)=u(l,t)=0,\quad t>0; \quad u(x,0)=f(x),\quad 0\leq x\leq
+        l& \\
+      \end{aligned}
+    \end{equation*}
+    The discrete equation is
+    $$w_{i,j+1}=(1-2\lambda)w_{i,j}+\lambda(w_{i+1,j}+w_{i-1,j})$$
+    Where $w_{i,0}=f(x_i)$. The system can be written in
+    matrix form:
+    \begin{equation*}
+      \begin{aligned}
+        A&=
+        \begin{pmatrix}
+            1-2\lambda & \lambda & & 0\\
+            \lambda& \ddots & \ddots & \\
+            & \ddots & \ddots & \lambda\\
+            0 & & \lambda & 1-2\lambda
+          \end{pmatrix} \\
+      \end{aligned}
+    \end{equation*}
+    where $\lambda = k\left(\frac{\alpha}{h}\right)^2,\;h=\Delta
+    x,\;k=\Delta t$. Using the matrix form, further approximations of
+    $\mathbf{w}$ can be obtained by multiplying:
+    $$ \mathbf{w}^{(j)} = A\mathbf{w}^{(j-1)} $$
+    The Forward Difference method is conditionally stable: for
+    staibilty, $\rho(A)\leq1$ because of initial error propogation in
+    the explicit nature of the difference method:
+    $$\mathbf{w}^{(1)}=A(\mathbf{w}^{(0)}+\mathbf{e}^{(0)}) =
+    A\mathbf{w}^{(0)} + A\mathbf{e}^{(0)}$$ 
+    Choose $h$, $k$ such that $\lambda\leq\frac{1}{2}$ to ensure
+    $O(k+h^2)$ convergence. 
+  \item[Backward Difference Method] Same Parabolic (heat/diffusion)
+    PDE. The discrete equation is
+    $$w_{i,j-1}=(1+2\lambda)w_{i,j}-\lambda(w_{i+1,j}+w_{i-1,j})$$
+    Where $w_{i,0}=f(x_i)$. The system can be written in matrix form:
+    \begin{equation*}
+      \begin{aligned}
+        A&=
+        \begin{pmatrix}
+            1+2\lambda & -\lambda & & 0\\
+            -\lambda& \ddots & \ddots & \\
+            & \ddots & \ddots & -\lambda\\
+            0 & & -\lambda & 1+2\lambda
+          \end{pmatrix} \\
+      \end{aligned}
+    \end{equation*}
+    where $\lambda = k\left(\frac{\alpha}{h}\right)^2\;h=\Delta
+    x,\;k=\Delta t$. Using the matrix form, further approximations of
+    $\mathbf{w}$ can be obtained by solving:
+    $$ \mathbf{w}^{(j-1)} = A\mathbf{w}^{(j)} $$
+    The Backward Difference method is unconditionally stable: The
+    implicit-difference nature of the Backward Difference
+    method. Since $\lambda>0$, $A$ is positive-definite, strictly
+    diagonally dominant, and tridiagonal. Since $\rho(A^{-1})<1$ (since
+    the eigenvalues of $A^{-1}$ are reciprocals of those from $A$),
+    $\lim_{n\rightarrow\infty}(A^{-1})^n\mathbf{e}^{0}=0$. The rate of
+    convergence and local truncation error is $O(k+h^2)$.
+  \item[Crank-Nicolson Method] The discrete equation, using an
+    averaged-difference method:
+    \begin{equation*}
+      \begin{array}{c}
+        \frac{w_{i,j+1}-w_{i,j}}{k}=\frac{\alpha^2}{2} \left[\frac{w_{i+1,j}-2w_{i,j}+w_{i-1,j}}{h^2} + \frac{w_{i+1,j}-2w_{i,j}+w_{i-1,j}}{h^2}\right]
+      \end{array}
+    \end{equation*}
+    In matrix form this is written as
+    \begin{equation*}
+      \begin{aligned}
+        A&=
+        \begin{pmatrix}
+          (1+\lambda) & -\frac{\lambda}{2} & & 0\\
+          -\frac{\lambda}{2} & \ddots & \ddots & \\
+          & \ddots & \ddots & -\frac{\lambda}{2}\\
+          0 & & -\frac{\lambda}{2} & (1+\lambda)
+        \end{pmatrix} \\
+        B&=
+        \begin{pmatrix}
+          (1-\lambda) & \frac{\lambda}{2} & & 0\\
+          \frac{\lambda}{2} & \ddots & \ddots & \\
+          & \ddots & \ddots & \frac{\lambda}{2}\\
+          0 & & \frac{\lambda}{2} & (1-\lambda)
+        \end{pmatrix} \\
+      \end{aligned}
+    \end{equation*}
+    where $\lambda = k\left(\frac{\alpha}{h}\right)^2,\;h=\Delta
+    x,\;k=\Delta t$. Using the matrix form, further approximations of
+    $\mathbf{w}$ can be obtained by solving:
+    $$ A\mathbf{w}^{(j+1)} = B\mathbf{w}^{(j)} $$
+  \item[Central-Difference Method] For Hyperbolic (wave) PDEs:
+    \begin{equation*}
+      \begin{aligned}
+        &\frac{\partial^2u}{\partial t^2}(x,t) =
+        \alpha^2\frac{\partial^2u}{\partial x^2}(x,t),
+        &0<x<l, \qquad t>0; \\
+        &u(0,t)=u(l,t)=0,\quad &t>0; \\
+        &u(x,0)=f(x),\qquad \frac{\partial u}{\partial t}(x,0)=g(x), \quad &0\leq x\leq
+        l& \\ 
+      \end{aligned}
+    \end{equation*}
+    The discrete equation is 
+    $$ w_{i,j+1} = 2(1-\lambda^2)w{i,j} + \lambda^2(w_{i+1,j}+w_{i-1,j})-w_{i,j}-1 $$
+    where $w_{0,j}=w_{m,j}=0$, $w_{i,0}=f(x_i)$, and 
+    \begin{equation*}
+      \begin{aligned}
+        \mathbf{w}_{i,0} &= f(x_i) \\
+        \mathbf{w}_{i,1} &=
+        (1-\lambda^2)f(x_i)+\frac{\lambda^2}{2}f(x_{i+1}) +
+        \frac{\lambda^2}{2}f(x_{i-1}) + kg(x_i)
+      \end{aligned}
+    \end{equation*}
+    In matrix form this is written as
+    \begin{equation*}
+      \begin{aligned}
+        A&=
+        \begin{pmatrix}
+            2(1-\lambda^2) & \lambda^2 & & 0\\
+            -\lambda& \ddots & \ddots & \\
+            & \ddots & \ddots & -\lambda\\
+            0 & & \lambda^2 & 2(1-\lambda^2)
+          \end{pmatrix} \\
+      \end{aligned}
+    \end{equation*}
+    where $\lambda=\alpha\frac{k}{h},\;h=\Delta x,\;k=\Delta
+    t$. Further approximations of $\mathbf{w}$ can be obtained by
+    computing:
+    $$ \mathbf{w}^{(j+1)} = A \mathbf{w}^{(j)} - \mathbf{w}^{(j-1)}$$
+    Since this method is explicit, it is conditionally stable: we must
+    choose $h$, $k$ such that $\lambda\leq1$ to ensure $O(h^2+k^2)$
+    convergence.
   \end{description}
 \end{multicols}
 \end{document} 

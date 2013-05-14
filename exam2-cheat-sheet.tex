@@ -266,7 +266,7 @@
     $P$ lies on $\alpha_2$ or $\alpha_3$ since 
     $P(\alpha_3)=h(\alpha_3)<h(\alpha_1)=P(\alpha_1)$. Steepest Descent has the tendency to 
     zig-zag around the solution.
-  \item[Forward Euler's Method] Is a first-order version of Runge-Kutta. For a mesh size $n$ and
+  \item[Secant/Forward Euler's Method] Is a first-order version of Runge-Kutta. For a mesh size $n$ and
     initial guess $\mathbf{x}^{(0)}$
     $$b=-\frac{1}{n}\mathbf{F}(x)$$
     \begin{equation*}
@@ -284,7 +284,7 @@
 
     The generalized $\mathbf{k}_i$ values, where $\alpha_i$ are weights and $h=\frac{1}{n}$
     $$ \mathbf{k}_i = -h[\mathbf{J}(\mathbf{x}^{(k)})+\alpha_{i-1}\mathbf{k}_{i-1})]^{-1}\mathbf{F}(\mathbf{x}^{(0)}) $$
-    For the fourth-order Runge-Kutta problem ($n=4$), the $\mathbf{k}_i$ values are as below,
+    For the fourth-order Runge-Kutta problem, the $\mathbf{k}_i$ values are as below,
     where $\alpha = (0, \frac{1}{2}, \frac{1}{2}, 1)$.
     \begin{equation*}
       \begin{aligned}
