@@ -569,6 +569,82 @@
     Since this method is explicit, it is conditionally stable: we must
     choose $h$, $k$ such that $\lambda\leq1$ to ensure $O(h^2+k^2)$
     convergence.
+  \item[Finite Element Method] For the general PDE
+    $$ \frac{\partial}{\partial x}\left(p(x,y)\frac{\partial u}{\partial x}\right) + 
+    \frac{\partial}{\partial y}\left(q(x,y)\frac{\partial u}{\partial y}\right) +
+    r(x,y)u(x,y)=f(x,y)$$
+    with $(x,y) \in D$, where $D$ is a plane region with boundary $S$
+    and boundary conditions $u(x,y)=g(x,y)$ on a portion of the
+    boundary $S_1$. On $S_2$, $u(x,y)$ must satisfy 
+    $$ p(x,y)\frac{\partial u}{\partial x}(x,y)\cos\theta_1 +
+    q(x,y)\frac{\partial u}{\partial y}(x,y)\cos\theta_2 +
+    g_1(x,y)u(x,y) = g_2(x,y)$$
+    The first step is to divide the region into triangles
+    $T_1,\ldots,T_M$ such that:
+    \begin{itemize}
+    \item $T_1,\ldots,T_k$ are triangles with no edges on $S_1$ or $S_2$
+    \item $T_{k+1},\ldots,T_N$ are triangles with at leasst one edge
+      on $S_2$.
+    \item $T_{N+1},\ldots,T_M$ are the remaining triangles.
+    \item Label the vertices of the triangle $T_i$ by
+      $(x_1^{(i)},y_1^{(i)}), (x_2^{(i)},y_2^{(i)}), (x_3^{(i)},y_3^{(i)})$.
+    \item Label the nodes (vertices) $E_1,\ldots,E_m$ where
+      $E_1k\ldots,E_n$ are in $D \cup S_2$ and $E_{n+1},\ldots,E_m$
+      are on $S_1$.
+    \end{itemize}
+    We must now find the elements of the matrix $A = (\alpha_{i,j})$, for
+    $i=1,\ldots,n$ and $j=1,\ldots,m$, is in the form
+    \begin{equation*}
+      \begin{aligned}
+        \alpha_{i,j} &=
+        % region D
+        \int\int_{D}\left[
+          p \,
+          \frac{\partial\phi_i}{\partial x} \,
+          \frac{\partial\phi_j}{\partial x} +
+          q \,
+          \frac{\partial\phi_i}{\partial y} \,
+          \frac{\partial\phi_j}{\partial y} -
+          r
+          \phi_i
+          \phi_i
+        \right]
+        \dd{x}\,\dd{y} +
+        \int_{\mathcal{S}_2}
+        g_1\phi_i\phi_j \,
+        \dd{\mathcal{S}_2} \\
+      \end{aligned}
+    \end{equation*}
+    and $\beta_i$, for $i=1,\ldots,n$, in the form
+    \begin{equation*}
+      \beta_i = -\int\int_{\mathcal{D}}f\phi_i\,\dd{x}\,\dd{y} +
+      \int_{\mathcal{S}_2}g_2\phi_i\,\dd{\mathcal{S}} -
+      \sum_{k=n+1}^{m}\alpha_{ik}\gamma_{k}
+    \end{equation*}
+    where $\phi(x,y) = a + bx + cy$ for triangles.  The $\phi_j^{(i)}$
+    equation for triangle $i$ corresponds to the vertex $V_j^{(i)}$
+    and produces systems
+    \begin{equation*}
+      \begin{bmatrix}
+        1 & x_1^{(i)} & y_1^{(i)} \\
+        1 & x_2^{(i)} & y_2^{(i)} \\
+        1 & x_3^{(i)} & y_3^{(i)} \\
+      \end{bmatrix}
+      \begin{bmatrix}
+        a_j^{(i)} \\ b_j^{(i)} \\ c_j^{(i)} \\
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        j\stackrel{?}{=}i \\ j\stackrel{?}{=}i \\ j\stackrel{?}{=}i \\
+      \end{bmatrix}
+    \end{equation*}
+    Solving each system produces the $a$, $b$, and $c$
+    values. Invoking the boundary conditions, we can consider the
+    $\gamma_i$ value corresponding to vertex $E_i$ on the $S_1$
+    boundary to be the value at boundary. Now evaluate the big
+    integral over each triangle. Parametrization and projection over
+    each triangle might be required to evaluate the line integral in
+    $\beta$.
   \end{description}
 \end{multicols}
 \end{document} 
