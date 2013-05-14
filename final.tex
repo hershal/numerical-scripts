@@ -622,7 +622,7 @@
       \sum_{k=n+1}^{m}\alpha_{ik}\gamma_{k}
     \end{equation*}
     where $\phi(x,y) = a + bx + cy$ for triangles.  The $\phi_j^{(i)}$
-    equation for triangle $i$ corresponds to the vertex $V_j^{(i)}$
+    equation for triangle $i$ corresponds to the vertex $E_j$
     and produces systems
     \begin{equation*}
       \begin{bmatrix}
@@ -638,13 +638,15 @@
         j\stackrel{?}{=}i \\ j\stackrel{?}{=}i \\ j\stackrel{?}{=}i \\
       \end{bmatrix}
     \end{equation*}
-    Solving each system produces the $a$, $b$, and $c$
-    values. Invoking the boundary conditions, we can consider the
-    $\gamma_i$ value corresponding to vertex $E_i$ on the $S_1$
-    boundary to be the value at boundary. Now evaluate the big
-    integral over each triangle. Parametrization and projection over
-    each triangle might be required to evaluate the line integral in
-    $\beta$.
+    for whichever three $\phi_j^{(i)}$ equation are nonzero. Solving
+    each system produces the $a$, $b$, and $c$ values for the
+    $\phi_j^{(i)}$ corresponding to the vertex for that triangle made
+    from $x_j^{(i)}$ and $y_j^{(i)}$. Invoking the boundary
+    conditions, we can consider the $\gamma_i$ value corresponding to
+    vertex $E_i$ on the $S_1$ boundary to be the value at
+    boundary. Now evaluate the big integrals over each
+    triangle. Parametrization and projection over each triangle might
+    be required to evaluate the line integral in $\beta$.
   \end{description}
 \end{multicols}
 \end{document} 
