@@ -12,3 +12,5 @@ I've taken at UT, I believe that I should keep these up to date.
 Over time I will add corrections to my homeworks so that even if I
 lose the original documents, I'll still be able to reference their
 original (but corrected) versions here.
+
+All .m files are in GNU Octave, despite what GitHub says.
