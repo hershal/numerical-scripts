@@ -101,7 +101,7 @@ void AGeval(int N, int M,
       if(j==M) {
 	G(l)=G(l)-dl*gTop;
       }
-      if(j==N) {
+      if(i==N) {
 	G(l)=G(l)-cl*gRight;
       }
       if(i==1) {
