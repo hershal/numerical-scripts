@@ -101,17 +101,16 @@ is positive definite.
 \hfill
 
 If $c^\intercal Ac = \int_a^bp[v']^2+qv^2\dd{x} = 0$ then both
-$\int_a^bp[v']^2\dd{x}$ or $\int_a^bqv^2\dd{x}$ are zero. Given that
-$p(x)$ is strictly greater than zero, that must imply that
-$\int_a^bqv^2\dd{x}=0$ is a possibility, leaving
-$\int_a^bp[v']^2\dd{x}=0$. Since $p(x)$ cannot equal zero, we must
-conclude that $v'(x)\equiv0$. If
-$v'(x)=\sum_{i=1}^Nc_iv_i(x)\equiv0$, we know that $v_i(x)$ is
-nonzero on $(x_{i-1},x_{i+1})$, so that must mean that $c_i\equiv0$.
+$\int_a^bp[v']^2\dd{x}$ and $\int_a^bqv^2\dd{x}$ are zero. If we
+assume that $v'(x)=0$ in each subinterval $(x_i,x_{i+1})$, then that
+must imply that $v(x)=k$ for some $k \in \mathbb{R}$. Furthermore, if
+$v(x)=k$ and we assume that $v(a) = v(b) = 0$, then we must conclude
+that $v(x) = 0$. This implies that every weight $c_i$ in
+$v(x)=\sum_{i=1}^Nc_i\phi_i(x)$ is zero, i.e. $c=0$.
 
 Since $A=\int_a^bp[v']^2+qv^2\dd{x}$ is symmetric and $c^\intercal Ac$
-is only zero if $c_i=0$ then $c^\intercal Ac>0$ for $c_i\neq0$. Thus
-$c^\intercal Ac$ is positive definite.
+is only zero if $c=0$ then $c^\intercal Ac>0$ for at least some
+$c_i\neq0$. Thus $c^\intercal Ac$ is positive definite.
 
 \hfill $\blacksquare$
 
