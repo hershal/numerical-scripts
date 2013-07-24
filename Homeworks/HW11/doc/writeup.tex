@@ -66,7 +66,7 @@
 \subsection{12$^1$}\
 \subsubsection{12$^1$a}
 Show that the matrix given by the piecewise linear basis function is
-positive definite. Assume $p(x)>0$ and $g(x)\geq0$. Show $c^\intercal
+positive definite. Assume $p(x)>0$ and $q(x)\geq 0$. Show $c^\intercal
 Ac = \int_a^bp[v']^2+qv^2\dd{x} > 0$ where
 $v(x)=\sum_{i=1}^Nc_i\phi_i(x)$.
 
@@ -76,19 +76,19 @@ $v(x)=\sum_{i=1}^Nc_i\phi_i(x)$.
   \label{eq:12_1_1}
   \begin{aligned}
     c^\intercal Ac &= \sum_{i=1}^N \left(\sum_{j=1}^N c_i A_{i,j}c_j\right) \\
-    &=\sum_{i=1}^N \left(\sum_{j=1}^N c_i \left[\int_a^b p v'_i v'_j
-        \dd{x} + \int_b^a q v_i v_j \dd{x}\right] c_j\right) \\
-    &= \int_b^a p v'^2 + q v^2 \dd{x} \\
+    &=\sum_{i=1}^N \left(\sum_{j=1}^N c_i \left[\int_a^b p \phi'_i \phi'_j
+        \dd{x} + \int_a^b q \phi_i \phi_j \dd{x}\right] c_j\right) \\
+    &= \int_a^b p \phi'^2 + q \phi^2 \dd{x} \\
   \end{aligned}
 \end{equation}
 
-Since it was assumed that $p(x)>0$ and $g(x)\geq0$ and it was given
-that $v(x)=\sum_{i=1}^Nc_iv_i(x)$, we know that
+Since it was assumed that $p(x)>0$ and $q(x)\geq0$ and it was given
+that $v(x)=\sum_{i=1}^Nc_i\phi_i(x)$, we know that
 $v(x)^2\geq0$. Since $v(x)^2$ will always be greater than or equal to
 zero, the integral $\int_a^bp[v']^2+qv^2\dd{x}$ will also be greater
 than or equal to zero based on $v(x)^2\geq0$ and the previous
 assumptions. This implies that $c^\intercal Ac$ will alway be greater
-than or equal to zero for $v(x) \in \mathbb{R}$
+than or equal to zero for any $c \in \mathbb{R}^n$
 
 \hfill $\blacksquare$
 
@@ -331,16 +331,16 @@ would have the lowest impact on the school under the conditions we assumed.
 \subsection{Poisson Finite Difference Algorithm}
 \lstinputlisting
 [language=Octave,label=lst:poisson,caption=\texttt{poissonFinDiff.m}]
-{poissonFinDiff.m}
+{../scripts/poissonFinDiff.m}
 \pagebreak
 \subsection{Program 11}
 \lstinputlisting
 [language=C++,label=lst:prog11,caption=\texttt{program11.cpp}]
-{program11.cpp}
+{../src/program11.cpp}
 \pagebreak
 \subsection{Linear Centered-Difference 2D}
 \lstinputlisting
 [language=C++,label=lst:lincd,caption=\texttt{linearcd2D.cpp}]
-{linearcd2D.cpp}
+{../src/linearcd2D.cpp}
 
 \end{document}
