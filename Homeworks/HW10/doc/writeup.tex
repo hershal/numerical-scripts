@@ -67,7 +67,7 @@ $$ y'' = y'+2y+\cos x, \qquad 0\leq x\leq\frac{\pi}{2},\qquad y(0)=-0.3,\qquad y
 has the solution $y(x) = -\frac{1}{10}(\sin x + 3\cos x)$. Use the
 Linear Finite-Difference method to approximate the solution, and
 explicitly write out the centered-difference equations. Solve and
-compare the results to the actual solution. Assume $h=\frac{\pi}{4}$.
+compare the results to the actual solution. Assume $h=\frac{\pi}{8}$.
 
 Given a differential equation in the form
 \begin{equation}
@@ -104,7 +104,7 @@ to the solution $y(x_i)$. Using the Centered-Difference Formula in
 form of \cref{eq:gendiff} we obtain
 \begin{equation}
   \label{eq:findiff-prelim}
-    \frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} = p(x_i)y'(x_i)+q(x_i)y(x_i)+r(x_i)
+  \frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} = p(x_i)y'(x_i)+q(x_i)y(x_i)+r(x_i)
 \end{equation}
 By applying \cref{eq:centdiffyp} to \cref{eq:findiff-prelim}, we obtain
 \begin{equation}
@@ -117,8 +117,8 @@ then solve the resulting matrix. Observe that we can simplify this
 into
 \begin{equation*}
   \label{eq:findiff-maty}
-    -r(x_i) = \frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} +
-    p(x_i)\left(\frac{y(x_{i+1}-y(x_{i-1})}{2h}\right)+q(x_i)y(x_i)
+  -r(x_i) = -\frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} +
+  p(x_i)\left(\frac{y(x_{i+1})-y(x_{i-1})}{2h}\right)+q(x_i)y(x_i)
 \end{equation*}
 or alternatively
 \begin{equation}
@@ -126,45 +126,23 @@ or alternatively
   -h^2r(x_i) = \left(-1-\frac{h}{2}p(x_i)\right)y(x_{i-1}) +
   \left(2+h^2q(x_i)\right)y(x_i) - \left(-1+\frac{h}{2}p(x_i)\right)y(x_{i+1})
 \end{equation}
-Then applying \cref{eq:findiff-maty2} with $h=\frac{\pi}{4}$, we obtain
+Then applying \cref{eq:findiff-maty2} with $h=\frac{\pi}{8}$, we obtain
 \begin{equation}
   \label{eq:findiff-sim}
-  -\frac{\pi^2}{16}r(x_i) = \left(-1-\frac{\pi}{8}p(x_i)\right)y(x_{i-1}) +
-  \left(2+\frac{\pi^2}{16}q(x_i)\right)y(x_i) - \left(-1+\frac{\pi}{8}p(x_i)\right)y(x_{i+1})
+  -\frac{\pi^2}{64}r(x_i) = \left(-1-\frac{\pi}{16}p(x_i)\right)y(x_{i-1}) +
+  \left(2+\frac{\pi^2}{64}q(x_i)\right)y(x_i) - \left(-1+\frac{\pi}{16}p(x_i)\right)y(x_{i+1})
 \end{equation}
 
-By invoking our boundary value conditions and bounds we have $i=1$,
-$x_0=0$, $x_1=\frac{\pi}{4}$, $x_2=\frac{\pi}{2}$, $y(0)=-0.3$, and
-$y\left(\frac{\pi}{2}\right) = -0.1$. We can substitute the interior
-values into \cref{eq:findiff-sim} to obtain an equation which, when
-solved, describes $y(x_i)$ at the corresponding interior mesh points
-of $x_i$. In our case the interior mesh point is $x_1$.
-\begin{equation}
-  \label{eq:findiff-values}
-  \begin{aligned}
-    -\frac{\pi^2\sqrt{2}}{32} &= \left(-1-\frac{\pi}{8}\right)y(x_0) +
-    \left(2+\frac{\pi^2}{8}\right)y(x_1) -
-    \left(-1+\frac{\pi}{8}\right)y(x_2) \\
-    \left(2+\frac{\pi^2}{8}\right)y(x_1) &= -\frac{\pi^2\sqrt{2}}{32}
-    + \left(-1-\frac{\pi}{2}\right)(0.3) -
-    \left(-1+\frac{\pi}{2}\right)(0.1) \\
-    &= \left[-\frac{\pi^2\sqrt{2}}{32} +
-      \left(-1-\frac{\pi}{2}\right)(0.3) +
-      \left(-1+\frac{\pi}{2}\right)(0.1)\right]\left(2+\frac{\pi^2}{8}\right)^{-1} \\
-  \end{aligned}
-\end{equation}
-Finally we obtain our solution:
-\begin{equation*}
-  \boxed{
-    y\left(\frac{\pi}{4}\right) = -0.28287
-}
-\end{equation*}
-
-We can confirm this approximation is correct by running it through the
-code in \cref{lst:linearfe} and approximating $y(x_i)$'s values at
-more mesh points. Doing this with $n=3$ I obtained the data in
-\cref{tab:2b} on \cpageref{tab:2b}, confirming that our solution is
-close to the actual solution, even with only one step.
+By invoking our boundary value conditions and bounds we have $x_0=0$,
+$x_1=\frac{\pi}{8}$, $x_2=\frac{\pi}{4}$, $x_3=\frac{3\pi}{8}$,
+$x_4=\frac{\pi}{2}$, $y(0)=-0.3$, and $y\left(\frac{\pi}{2}\right) =
+-0.1$. We can substitute the interior values into
+\cref{eq:findiff-sim} to obtain an equation which, when solved,
+describes $y(x_i)$ at the corresponding interior mesh points of
+$x_i$. We can assume that $p(x)=1$, $q(x)=2$, and $r(x)=\cos x$.
+Doing this with $n=3$ I obtained the data in \cref{tab:2b} on
+\cpageref{tab:2b}, confirming that our solution is close to the actual
+solution.
 
 \begin{table}[htp]
   \centering
@@ -179,7 +157,7 @@ close to the actual solution, even with only one step.
     $1.57080$ & $-0.10000$ & $-0.10000$ & \\
     \hline
   \end{tabularx}
-  \caption{Approximation of 2b with $n=3$}
+  \caption{Approximation of 2b with $n=3$ and $h=\frac{\pi}{8}$}
   \label{tab:2b}
 \end{table}
 \subsection{9$^2$}
@@ -190,10 +168,10 @@ Use Theorem 9.1 to prove Theorem 11.3.
 \item[Theorem 9.1] Let A be an $n \times n$ matrix and $R_i$ denote
   the circle in the complex plane with center $a_{ii}$ and radius
   $\sum_{j=1,j\neq i}^{n}|a_{ij}|$; that is,
-$$ R_i = \left\{ z \in \mathbb{C} \;\middle|\; |z-a_{ii}| \leq \sum_{j=1,j\neq
-    i}^{n}|a_{ij}|\right\} $$
-The eigenvalues of $A$ are contained within the union of these
-circles, $R=\cup_{i=1}^{n}R_i$.
+  $$ R_i = \left\{ z \in \mathbb{C} \;\middle|\; |z-a_{ii}| \leq \sum_{j=1,j\neq
+      i}^{n}|a_{ij}|\right\} $$
+  The eigenvalues of $A$ are contained within the union of these
+  circles, $R=\cup_{i=1}^{n}R_i$.
 \item[Theorem 11.3] Suppose that $p$, $q$, and $r$ are continuous on
   $[a,b]$. If $q(x)\geq0$ on $[a,b]$, then the tridiagonal linear
   system has a unique solution provided that $h<\frac{2}{L}$, where
@@ -258,29 +236,29 @@ $y(2) = \frac{1}{3}$. Since $n=3$, $h=\frac{1}{4}$.
 % The Jacobian associated with the Newton step is 
 % 
 % \begin{equation}
-% \label{eq:jac}
-% J=
-% \begin{pmatrix}
-% 2+\frac{1}{16}f_y\left(x_1,w_1,\frac{w_{2}-\alpha}{\frac{1}{2}}\right)
-% &
-% -1+\frac{1}{8}f_{y'}\left(x_1,w_1,\frac{w_{2}-\alpha}{\frac{1}{2}}\right)
-% &
-% 0
-% \\
-% 
-% -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
-% &
-% 2+\frac{1}{16}f_y\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
-% &
-% -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
-% \\
-% 
-% 0
-% &
-% -1+\frac{1}{8}f_{y'}\left(x_3,w_3,\frac{\beta-w_{3}}{\frac{1}{2}}\right)
-% &
-% 2-\frac{1}{16}f_y\left(x_3,w_3,\frac{\beta-w_{3}}{\frac{1}{2}}\right)
-% \end{pmatrix}
+%   \label{eq:jac}
+%   J=
+%   \begin{pmatrix}
+%     2+\frac{1}{16}f_y\left(x_1,w_1,\frac{w_{2}-\alpha}{\frac{1}{2}}\right)
+%     &
+%     -1+\frac{1}{8}f_{y'}\left(x_1,w_1,\frac{w_{2}-\alpha}{\frac{1}{2}}\right)
+%     &
+%     0
+%     \\
+%     
+%     -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
+%     &
+%     2+\frac{1}{16}f_y\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
+%     &
+%     -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
+%     \\
+%     
+%     0
+%     &
+%     -1+\frac{1}{8}f_{y'}\left(x_3,w_3,\frac{\beta-w_{3}}{\frac{1}{2}}\right)
+%     &
+%     2-\frac{1}{16}f_y\left(x_3,w_3,\frac{\beta-w_{3}}{\frac{1}{2}}\right)
+%   \end{pmatrix}
 % \end{equation}
 
 Performing one Newton Iteration, I obtained the table of values listed
@@ -289,17 +267,17 @@ in \cref{tab:4a}.
 \begin{table}[H]
   \centering
   \boxed{
-  \begin{tabularx}{\textwidth}{*4{>{\centering\arraybackslash}X}}
-    \hline
-    $x_i$ & $w_i$ & $y(x_i)$ & $|w_i-y(x_i)|$ \\
-    \hline
-    1.0000 & 0.50000 & 0.50000 &  \\
-    1.2500 & 0.44419 & 0.44444 & $2.5317 \times 10^{-4}$ \\
-    1.5000 & 0.39944 & 0.40000 & $5.5656 \times 10^{-4}$ \\
-    1.7500 & 0.36275 & 0.36364 & $8.9081 \times 10^{-4}$ \\
-    2.0000 & 0.33333 & 0.33333 &  \\
-    \hline
-  \end{tabularx}
+    \begin{tabularx}{\textwidth}{*4{>{\centering\arraybackslash}X}}
+      \hline
+      $x_i$ & $w_i$ & $y(x_i)$ & $|w_i-y(x_i)|$ \\
+      \hline
+      1.0000 & 0.50000 & 0.50000 &  \\
+      1.2500 & 0.44419 & 0.44444 & $2.5317 \times 10^{-4}$ \\
+      1.5000 & 0.39944 & 0.40000 & $5.5656 \times 10^{-4}$ \\
+      1.7500 & 0.36275 & 0.36364 & $8.9081 \times 10^{-4}$ \\
+      2.0000 & 0.33333 & 0.33333 &  \\
+      \hline
+    \end{tabularx}
   }
   \caption{Approximation of 4a with n=3 using one Newton Iteration}
   \label{tab:4a}
@@ -328,13 +306,13 @@ and
 So then 
 \begin{equation}
   \begin{aligned}
-   % A(1,1) &=
-   % \int_0^1\left\{p(x)[\phi'_i(x)]^2+q(x)[\phi_i(x)]^2\right\}\dd{x} \\
-   % A(i,2) &=
-   % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
-   % A(2,1) &=
-   % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
-   % A(2,2) &= \int_0^1\left\{p(x)[\phi'_{i+1}(x)\phi'_{i+1}]+q(x)[\phi_{i+1}(x)\phi_{i+1}]\right\}\dd{x} \\
+    % A(1,1) &=
+    % \int_0^1\left\{p(x)[\phi'_i(x)]^2+q(x)[\phi_i(x)]^2\right\}\dd{x} \\
+    % A(i,2) &=
+    % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
+    % A(2,1) &=
+    % \int_0^1\left\{p(x)[\phi'_i(x)\phi'_{i+1}]+q(x)[\phi_i(x)\phi_{i+1}]\right\}\dd{x} \\
+    % A(2,2) &= \int_0^1\left\{p(x)[\phi'_{i+1}(x)\phi'_{i+1}]+q(x)[\phi_{i+1}(x)\phi_{i+1}]\right\}\dd{x} \\
     Q_{1,i}&=\left(\frac{1}{h_{i}}\right)^2\int_{x_i}^{x_{i+1}}(x_{i+1}-x)(x-x_{i})q(x)\dd{x},
     \qquad & \text{for each }i=1,\ldots,n-1 \\
     Q_{2,i}&=\left(\frac{1}{h_{i-1}}\right)^2\int_{x_{i-1}}^{x_{i}}(x-x_{i-1})^2q(x)\dd{x},
@@ -352,21 +330,21 @@ So then
 which expands the entries of the matrix to
 \begin{equation}
   \begin{aligned}
-   % A(1,1) &=
-   % \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
-   % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
-   % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
-   % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
-   % A(1,2) &=
-   % \int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)\phi'_{2}]\dd{x} + 
-   %   \int_{x_1}^{x_2}q(x)[\phi_1(x)\phi_{2}]\right\}\dd{x} \\
-   % A(2,1) &=
-   % \int_{x_1}^{x_2}\left\{p(x)[\phi'_2(x)\phi'_{1}]\dd{x} + 
-   %   \int_{x_1}^{x_2}q(x)[\phi_2(x)\phi_{1}]\right\}\dd{x} \\
-   % A(2,2) &=  \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
-   % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
-   % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
-   % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+    % A(1,1) &=
+    % \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+    % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+    % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+    % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+    % A(1,2) &=
+    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)\phi'_{2}]\dd{x} + 
+    %   \int_{x_1}^{x_2}q(x)[\phi_1(x)\phi_{2}]\right\}\dd{x} \\
+    % A(2,1) &=
+    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_2(x)\phi'_{1}]\dd{x} + 
+    %   \int_{x_1}^{x_2}q(x)[\phi_2(x)\phi_{1}]\right\}\dd{x} \\
+    % A(2,2) &=  \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+    % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
+    % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
+    % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
     a_{i,i} &= Q_{4,i}+Q_{4,i+1}+Q_{2,i}+Q_{3,i},
     \qquad & \text{for each } i=1,\ldots,n \\
     a_{i,i+1} &= -Q_{4,i+1}+Q_{1,i},
@@ -379,7 +357,7 @@ which expands the entries of the matrix to
 Evaluating each integral for $i=1,2$ gives
 \begin{equation}
   \label{eq:2a-matrix}
-A=
+  A=
   \begin{pmatrix}
     3.06667 & -1.23333 \\
     -1.23333 & 6.8 \\
@@ -388,7 +366,7 @@ A=
 and 
 \begin{equation}
   \label{eq:2a-matrix-b}
-b=
+  b=
   \begin{pmatrix}
     -0.5813 \\
     -0.7960\\
@@ -397,7 +375,7 @@ b=
 Finally, the solution is
 \begin{equation}
   \label{eq:2a-matrix-c}
-c=
+  c=
   \begin{pmatrix}
     -.25553 \\
     -.16335 \\
@@ -407,16 +385,16 @@ Comparing this to the actual solution, we obtain the table \cref{tab:2a}.
 \begin{table}[H]
   \centering
   \boxed{
-  \begin{tabularx}{\textwidth}{*4{>{\centering\arraybackslash}X}}
-    \hline
-    $x_i$ & $c_i$ & $y(x_i)$ & $|c_i-y(x_i)|$ \\
-    \hline
-    0 & 0 & 0 &  \\
-    0.4 & -.25553 & -0.2400 & 0.0155300 \\
-    0.8 & -.16335 & -0.1600 & 0.0033500 \\
-    1 & 0 & 0 &  \\
-    \hline
-  \end{tabularx}
+    \begin{tabularx}{\textwidth}{*4{>{\centering\arraybackslash}X}}
+      \hline
+      $x_i$ & $c_i$ & $y(x_i)$ & $|c_i-y(x_i)|$ \\
+      \hline
+      0 & 0 & 0 &  \\
+      0.4 & -.25553 & -0.2400 & 0.0155300 \\
+      0.8 & -.16335 & -0.1600 & 0.0033500 \\
+      1 & 0 & 0 &  \\
+      \hline
+    \end{tabularx}
   }
   \caption{Approximation of 4a with n=3 using one Newton Iteration}
   \label{tab:2a}
@@ -476,7 +454,7 @@ $37$. This yielded the data in \cref{tab:mini-c}.
 
 \pagebreak
 \section{Code}
-\lstinputlisting[language=Octave,label=lst:linearfe,caption=\texttt{linfindiff.m}]{linfindiff.m}
-\lstinputlisting[language=Octave,label=lst:nonlinearfe,caption=\texttt{nonlinfindiff.m}]{nonlinfindiff.m}
-\lstinputlisting[language=C++,label=lst:program10,caption=\texttt{program10.cpp}]{program10.cpp}
+\lstinputlisting[language=Octave,label=lst:linearfe,caption=\texttt{linfindiff.m}]{../scripts/linfindiff.m}
+\lstinputlisting[language=Octave,label=lst:nonlinearfe,caption=\texttt{nonlinfindiff.m}]{../scripts/nonlinfindiff.m}
+\lstinputlisting[language=C++,label=lst:program10,caption=\texttt{program10.cpp}]{../src/program10.cpp}
 \end{document}
