@@ -12,6 +12,6 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
 	find . -regex ".*\.[cChH]\(pp\)?" -print | etags -
 clean: 
-	rm $(EXECUTABLE)
-	rm $(OBJECTS)
-	rm TAGS
+	rm -f $(EXECUTABLE)
+	rm -f $(OBJECTS)
+	rm -f TAGS
