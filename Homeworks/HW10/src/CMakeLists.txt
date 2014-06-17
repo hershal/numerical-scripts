@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project (hw10-miniproject)
+set (hw10-miniproject-srcs gauss_elim.cpp linearfem.cpp program10.cpp)
+include_directories (../../lib)
+add_subdirectory (../../lib lib)
+add_executable (hw10-miniproject ${hw10-miniproject-srcs})
+target_link_libraries (hw10-miniproject matrix)
