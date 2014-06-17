@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project (hw10-miniproject)
-set (hw10-miniproject-srcs linearfem.cpp program10.cpp)
+set (hw10-miniproject-srcs program10.cpp)
 include_directories (../../libnumerics)
 add_subdirectory (../../libnumerics libnumerics)
 add_executable (hw10-miniproject ${hw10-miniproject-srcs})

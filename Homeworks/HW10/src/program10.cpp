@@ -47,18 +47,17 @@ Note 5: The program output is written to a file.
 #include <stdlib.h>
 #include <math.h>
 #include "matrix.hpp"
+#include "linearfem.hpp"
+
 using namespace std;
 
 /*** Define output file ***/
 const char myfile[20]="program10.out" ;
 ofstream prt(myfile) ;
 
-/*** Declare external function ***/
-int linearfem(int, vector&, vector&) ; 
-
 /*** Define p(x), q(x), f(x), g(x), g'(x) ***/
-void BVPeval(const double& x, double& p, double& q, 
-                            double& f, double& g, double& dg){
+void BVPeval_override(const double& x, double& p, double& q, 
+		      double& f, double& g, double& dg) {
 
   double pi=4.0*atan(1.0) ;
   double a=-2, b=2, alphaBC=0, betaBC=0 ;
@@ -75,6 +74,9 @@ void BVPeval(const double& x, double& p, double& q,
 
 int main() {
   /*** Define problem parameters ***/
+
+    setBVP(&BVPeval_override);
+
   int N=7, success_flag ;  
   vector x(N+2), y(N+2) ;
   double a=-2, b=2, h=(b-a)/(N+1) ;

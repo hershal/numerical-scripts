@@ -28,17 +28,15 @@ FE equations.
 #include <stdlib.h>
 #include <math.h>
 #include "matrix.hpp"
+#include "gauss_elim.hpp"
+#include "linearfem.hpp"
+
 using namespace std;
 
-
-/*** External function: gauss_elim(A,F,x) ***/
-int gauss_elim(matrix&, vector&, vector&) ;
-
-
-/*** External function: BVPeval(x,p,q,f,g,g') ***/
-void BVPeval(const double&, double&, 
-                       double&, double&, double&, double&);
-
+void setBVP(void (*fpointer)(const double&, double&, 
+			     double&, double&, double&, double&)) {
+    BVPeval = fpointer;
+}
 
 /*** Auxiliary function: evaluate phi_i(xval),phi'_i(xval) ***/
 void PHIeval(int N, vector& x, int i, 
@@ -108,7 +106,6 @@ void FEMeval(int N, vector& x, matrix& A, vector& F){
     }
   }
 }
-
 
 /*** Main function: linear FE method ***/
 int linearfem(int N, vector& x, vector& y){
