@@ -27,7 +27,7 @@ FE equations.
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
-#include "matrix.h"
+#include "matrix.hpp"
 using namespace std;
 
 

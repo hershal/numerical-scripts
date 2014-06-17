@@ -2,12 +2,12 @@
 General purpose library: implementation file
 
 General purpose library of vector and matrix data 
-types and related functions.  See file matrix.h for 
+types and related functions.  See file matrix.hpp for 
 description and usage notes.
 ********************************************************/
 
 #include <math.h>
-#include "matrix.h"
+#include "matrix.hpp"
 
 /****************** 
 define matrix class 

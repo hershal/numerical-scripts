@@ -46,7 +46,7 @@ Note 5: The program output is written to a file.
 #include <fstream>
 #include <stdlib.h>
 #include <math.h>
-#include "matrix.h"
+#include "matrix.hpp"
 using namespace std;
 
 /*** Define output file ***/
