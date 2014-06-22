@@ -11,7 +11,9 @@ Note: The matrix A and vector b are not altered by this function
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+
 #include "gauss_elim.hpp"
+
 using namespace std;
 
 /*** Define auxiliary function: pivot search ***/

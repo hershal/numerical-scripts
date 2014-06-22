@@ -7,6 +7,7 @@ description and usage notes.
 ********************************************************/
 
 #include <math.h>
+
 #include "matrix.hpp"
 
 /****************** 
