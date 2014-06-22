@@ -49,12 +49,12 @@ solve the system.
 using namespace std;
 
 void setPDEeval(void (*fpointer)(const double&, const double&, double&, double&,
-				 double&, double&, double&, double&)) {
+                                 double&, double&, double&, double&)) {
     PDEeval = fpointer;
 }
 
 void setBCeval(void (*fpointer)(const double&, const double&, double&,
-				double&, double&, double&)) {
+                                double&, double&, double&)) {
     BCeval = fpointer;
 }
 
@@ -117,7 +117,7 @@ void AGeval(int N, int M,
 /*** Main function: central-difference method ***/
 int linearcd2D(int N, int M,
                double a, double b, double c, double d,
-               vector& x, vector& y, matrix& u){
+               vector& x, vector& y, matrix& u) {
 
     int l, ll, success_flag=0 ;
     matrix A(N*M,N*M) ;
