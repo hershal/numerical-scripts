@@ -59,50 +59,49 @@ ofstream prt(myfile) ;
 void BVPeval_override(const double& x, double& p, double& q, 
 		      double& f, double& g, double& dg) {
 
-  double pi=4.0*atan(1.0) ;
-  double a=-2, b=2, alphaBC=0, betaBC=0 ;
+    double pi=4.0*atan(1.0) ;
+    double a=-2, b=2, alphaBC=0, betaBC=0 ;
 
-  g = alphaBC + (x-a)*((betaBC-alphaBC)/(b-a)) ;
-  dg = (betaBC-alphaBC)/(b-a) ;
+    g = alphaBC + (x-a)*((betaBC-alphaBC)/(b-a)) ;
+    dg = (betaBC-alphaBC)/(b-a) ;
 
-  double gamma = 486;
-  double beta = 37;
-  p = x<0 ? 0.1 : 0.2;
-  q = fabs(x)<=0.5 ? 0 : beta;
-  f = fabs(x)<=0.4 ? gamma : 0;
+    double gamma = 486;
+    double beta = 37;
+    p = x<0 ? 0.1 : 0.2;
+    q = fabs(x)<=0.5 ? 0 : beta;
+    f = fabs(x)<=0.4 ? gamma : 0;
 }
 
 int main() {
-  /*** Define problem parameters ***/
-
+    /*** Define problem parameters ***/
+    
     setBVP(&BVPeval_override);
+    
+    int N=7, success_flag ;  
+    vector x(N+2), y(N+2) ;
+    double a=-2, b=2, h=(b-a)/(N+1) ;
 
-  int N=7, success_flag ;  
-  vector x(N+2), y(N+2) ;
-  double a=-2, b=2, h=(b-a)/(N+1) ;
+    /*** Define FE grid pts  ***/
+    for(int j=0; j<=N+1; j++){
+	x(j) = a + j*h ; //default
+    } 
 
-  /*** Define FE grid pts  ***/
-  for(int j=0; j<=N+1; j++){
-    x(j) = a + j*h ; //default
-  } 
+    /*** Call linear FE method ***/
+    success_flag=linearfem(N,x,y) ;
 
-  /*** Call linear FE method ***/
-  success_flag=linearfem(N,x,y) ;
-
-  /*** Print results to output file ***/
-  prt.setf(ios::fixed) ;
-  prt << setprecision(5) ;
-  cout << "Linear-FE: output written to " << myfile << endl ;
-  prt << "Linear-FE results" << endl ;
-  prt << "Number of interior grid pts: N = " << N << endl ;
-  prt << "Approximate solution: x_j, y_j" << endl ;
-  for(int j=0; j<=N+1; j++){
-    prt << setw(8) << x(j) ;
-    prt << "   " ;
-    prt << setw(8) << y(j) ;
-    prt << "   " ;
-    prt << endl;
-  }
-  return 0 ; //terminate main program
+    /*** Print results to output file ***/
+    prt.setf(ios::fixed) ;
+    prt << setprecision(5) ;
+    cout << "Linear-FE: output written to " << myfile << endl ;
+    prt << "Linear-FE results" << endl ;
+    prt << "Number of interior grid pts: N = " << N << endl ;
+    prt << "Approximate solution: x_j, y_j" << endl ;
+    for(int j=0; j<=N+1; j++){
+	prt << setw(8) << x(j) ;
+	prt << "   " ;
+	prt << setw(8) << y(j) ;
+	prt << "   " ;
+	prt << endl;
+    }
+    return 0 ; //terminate main program
 }
-
