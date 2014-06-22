@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project (hw11-miniproject)
+set (hw11-miniproject-srcs program11.cpp)
+include_directories (../../libnumerics)
+add_subdirectory (../../libnumerics libnumerics)
+add_executable (hw11-miniproject ${hw11-miniproject-srcs})
+target_link_libraries (hw11-miniproject numerics)
