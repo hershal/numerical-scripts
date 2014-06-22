@@ -48,13 +48,13 @@ solve the system.
 
 using namespace std;
 
-void setPDE(void (*fpointer)(const double&, const double&, double&, double&,
-			     double&, double&, double&, double&)) {
+void setPDEeval(void (*fpointer)(const double&, const double&, double&, double&,
+				 double&, double&, double&, double&)) {
     PDEeval = fpointer;
 }
 
 void setBCeval(void (*fpointer)(const double&, const double&, double&,
-				 double&, double&, double&)) {
+				double&, double&, double&)) {
     BCeval = fpointer;
 }
 
