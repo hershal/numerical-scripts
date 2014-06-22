@@ -46,6 +46,7 @@ Note 5: The program output is written to a file.
 #include <fstream>
 #include <stdlib.h>
 #include <math.h>
+
 #include "matrix.hpp"
 #include "linearfem.hpp"
 
@@ -73,8 +74,8 @@ void BVPeval_override(const double& x, double& p, double& q,
 }
 
 int main() {
+
     /*** Define problem parameters ***/
-    
     setBVP(&BVPeval_override);
     
     int N=7, success_flag ;  
