@@ -3,7 +3,6 @@ project (hw10-doc)
 include (../../UseLATEX.cmake)
 
 set (doc-staging-area "./doc-staging")
-set (dependent-files ../scripts/linfindiff.m ../scripts/nonlinfindiff.m ../src/program10.cpp)
 file (MAKE_DIRECTORY ${doc-staging-area})
 
 add_custom_target (copy)

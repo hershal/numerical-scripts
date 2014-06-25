@@ -3,7 +3,6 @@ project (hw11-doc)
 include (../../UseLATEX.cmake)
 
 set (doc-staging-area "./doc-staging")
-set (dependent-files ../scripts/poissonFinDiff.m ../src/program11.cpp ../../libnumerics/linearcd2D.cpp)
 file (MAKE_DIRECTORY ${doc-staging-area})
 
 add_custom_target (copy)
