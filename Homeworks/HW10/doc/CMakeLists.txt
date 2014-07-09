@@ -3,7 +3,6 @@ project (hw10-doc)
 include (../../UseLATEX.cmake)
 
 set (doc-staging-area "./doc-staging")
-file (MAKE_DIRECTORY ${doc-staging-area})
 
 add_custom_target (copy)
 add_custom_command (
