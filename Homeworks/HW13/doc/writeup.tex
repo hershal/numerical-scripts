@@ -254,7 +254,7 @@ represented by \cref{fig:tri}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=.75\textwidth]{triangles.tikz}
+  % \includegraphics[width=.75\textwidth]{triangles.tikz}
   % \Huge{TODO: PUT THIS BACK IN WHEN DONE}
   \caption{Triangles for Number 1}
   \label{fig:tri}
@@ -540,27 +540,27 @@ be any usable data until $\Delta t$ hits $\frac{1}{20}$, evidenced by
 \begin{figure}[H]
   \centering
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{b-10.tikz}
+    % \includegraphics[width=\textwidth]{b-10.tikz}
     \caption{$\Delta t=\frac{1}{10}$}
     \label{fig:mini_10}
   \end{subfigure}~
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{b-15.tikz}
+    % \includegraphics[width=\textwidth]{b-15.tikz}
     \caption{$\Delta t=\frac{1}{15}$}
     \label{fig:mini_15}
   \end{subfigure}
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{b-20.tikz}
+    % \includegraphics[width=\textwidth]{b-20.tikz}
     \caption{$\Delta t=\frac{1}{20}$}
     \label{fig:mini_20}
   \end{subfigure}
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{b-25.tikz}
+    % \includegraphics[width=\textwidth]{b-25.tikz}
     \caption{$\Delta t=\frac{1}{25}$}
     \label{fig:mini_25}
   \end{subfigure}~
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{b-30.tikz}
+    % \includegraphics[width=\textwidth]{b-30.tikz}
     \caption{$\Delta t=\frac{1}{30}$}
     \label{fig:mini_30}
   \end{subfigure}~
@@ -592,17 +592,17 @@ up the echoes around $t=7$ (as can be seen in \cref{fig:mini_c_7}).
 \begin{figure}[H]
   \centering
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{c-3-5.tikz}
+    % \includegraphics[width=\textwidth]{c-3-5.tikz}
     \caption{T = 3.5}
     \label{fig:mini_c_3_5}
   \end{subfigure}~
   \begin{subfigure}{.5\textwidth}
-    \includegraphics[width=\textwidth]{c-5.tikz}
+    % \includegraphics[width=\textwidth]{c-5.tikz}
     \caption{T = 5}
     \label{fig:mini_c_5}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
-    \includegraphics[width=\textwidth]{c-7.tikz}
+    % \includegraphics[width=\textwidth]{c-7.tikz}
     \caption{T = 7}
     \label{fig:mini_c_7}
   \end{subfigure}
@@ -611,24 +611,14 @@ up the echoes around $t=7$ (as can be seen in \cref{fig:mini_c_7}).
 \end{figure}
 \pagebreak
 \section{Code}
-\lstinputlisting
-[language=Octave,label=lst:wavediff,caption=\texttt{wavediff.m}]
-{wavediff.m}
+\lstinputlisting[language=Octave,label=lst:wavediff,caption=\texttt{wavediff.m}]{@doc-staging-area@/wavediff.m}
 \pagebreak
-\lstinputlisting
-[language=C++,label=lst:p13,caption=\texttt{program13.cpp}]
-{program13.cpp}
+\lstinputlisting[language=C++,label=lst:p13,caption=\texttt{program13.cpp}]{@doc-staging-area@/program13.cpp}
 \pagebreak
-\lstinputlisting
-[language=C++,label=lst:ctrdiff2D,caption=\texttt{ctrdiff2D.cpp}]
-{ctrdiff2D.cpp}
+\lstinputlisting[language=C++,label=lst:ctrdiff2D,caption=\texttt{ctrdiff2D.cpp}]{@doc-staging-area@/ctrdiff2D.cpp}
 \pagebreak
-\lstinputlisting
-[language=Perl,label=lst:plotpl,caption=\texttt{minilab\_contour.pl}]
-{contour.pl}
+\lstinputlisting[language=Perl,label=lst:plotpl,caption=\texttt{minilab\_contour.pl}]{@doc-staging-area@/contour.pl}
 \pagebreak
-\lstinputlisting
-[language=GnuPlot,label=lst:plotgp,caption=\texttt{plot\_1.gp}]
-{plot.gp}
+\lstinputlisting[language=GnuPlot,label=lst:plotgp,caption=\texttt{plot\_1.gp}]{@doc-staging-area@/plot.gp}
 
 \end{document}

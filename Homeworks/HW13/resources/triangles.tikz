@@ -1,0 +1,54 @@
+\begin{tikzpicture}[gnuplot]
+%% generated with GNUPLOT 4.6p2 (Lua 5.2; terminal rev. 99, script rev. 100)
+%% Thu May  9 07:18:31 2013
+\path (0.000,0.000) rectangle (12.500,8.750);
+\gpcolor{rgb color={0.000,0.000,0.000}}
+\gpsetlinetype{gp lt plot 0}
+\gpsetlinewidth{1.00}
+\draw[gp path] (4.289,4.375)--(4.109,4.375);
+\node[gp node right] at (4.105,4.375) { 0.5};
+\draw[gp path] (4.289,7.046)--(4.109,7.046);
+\node[gp node right] at (4.105,7.046) { 1};
+\draw[gp path] (8.118,1.704)--(8.118,1.524);
+\node[gp node center] at (8.118,1.216) { 0.5};
+\draw[gp path] (0.460,1.704)--(11.947,1.704);
+\draw[gp path] (4.289,0.369)--(4.289,8.381);
+\gpcolor{color=gp lt color border}
+\node[gp node center,rotate=-270] at (0.674,4.375) {y};
+\node[gp node center] at (6.571,0.215) {x};
+\gpfill{rgb color={0.000,0.376,0.678},opacity=0.25} (4.289,4.375)--(6.204,5.710)--(8.118,4.375)--cycle;
+\gpcolor{rgb color={0.000,0.376,0.678}}
+\gpsetlinetype{gp lt border}
+\draw[gp path] (4.289,4.375)--(6.204,5.710)--(8.118,4.375)--cycle;
+\gpfill{rgb color={0.000,0.376,0.678},opacity=0.25} (4.289,4.375)--(6.204,5.710)--(4.289,7.046)--cycle;
+\draw[gp path] (4.289,4.375)--(6.204,5.710)--(4.289,7.046)--cycle;
+\gpcolor{color=gp lt color border}
+\node[gp node center] at (6.586,5.977) {$E_1$};
+\node[gp node center] at (4.672,4.108) {$E_2$};
+\node[gp node center] at (4.672,7.313) {$E_3$};
+\node[gp node center] at (8.501,4.642) {$E_4$};
+\node[gp node center] at (5.036,5.710) {$T_1$};
+\node[gp node center] at (6.204,4.976) {$T_2$};
+\gpcolor{rgb color={0.000,0.000,0.000}}
+\gpsetlinetype{gp lt plot 0}
+\draw[gp path,->](11.947,1.704)--(12.330,1.704);
+\draw[gp path,->](4.289,8.381)--(4.289,8.648);
+\gpcolor{rgb color={0.000,0.376,0.678}}
+\gpsetlinewidth{2.00}
+\draw[gp path] (4.289,4.375)--(4.289,7.046);
+\gpsetpointsize{6.00}
+\gppoint{gp mark 7}{(4.289,4.375)}
+\gppoint{gp mark 7}{(4.289,7.046)}
+\draw[gp path] (4.289,4.375)--(8.118,4.375);
+\gppoint{gp mark 7}{(4.289,4.375)}
+\gppoint{gp mark 7}{(8.118,4.375)}
+\draw[gp path] (4.289,7.046)--(8.118,4.375);
+\gppoint{gp mark 7}{(4.289,7.046)}
+\gppoint{gp mark 7}{(8.118,4.375)}
+\draw[gp path] (4.289,4.375)--(6.204,5.710);
+\gppoint{gp mark 7}{(4.289,4.375)}
+\gppoint{gp mark 7}{(6.204,5.710)}
+%% coordinates of the plot area
+\gpdefrectangularnode{gp plot 1}{\pgfpoint{0.460cm}{0.369cm}}{\pgfpoint{11.947cm}{8.381cm}}
+\end{tikzpicture}
+%% gnuplot variables

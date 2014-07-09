@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project (hw13-miniproject)
+set (hw13-miniproject-srcs program13.cpp)
+include_directories (../../libnumerics)
+add_subdirectory (../../libnumerics libnumerics)
+add_executable (hw13-miniproject ${hw13-miniproject-srcs})
+target_link_libraries (hw13-miniproject numerics)
