@@ -62,7 +62,7 @@
 \section{\S~11.3}
 \subsection{\S~2b$^1$}
 
-The Boundary-value problem 
+The Boundary-value problem
 $$ y'' = y'+2y+\cos x, \qquad 0\leq x\leq\frac{\pi}{2},\qquad y(0)=-0.3,\qquad y\left(\frac{\pi}{2}\right)=-0.1 $$
 has the solution $y(x) = -\frac{1}{10}(\sin x + 3\cos x)$. Use the
 Linear Finite-Difference method to approximate the solution, and
@@ -89,7 +89,7 @@ Combining the equations in \cref{eq:taylorpoly} and solving for $y''$, we obtain
 Centered-Difference Formula for $y''$.
 \begin{equation}
   \label{eq:centdiffypp}
-  y''(x_i)=\frac{1}{h^2}[y(x_{i+1})-2y(x_i)+y(x_{i-1})]-\frac{h^2}{12}y^{(4)}(\xi_i) 
+  y''(x_i)=\frac{1}{h^2}[y(x_{i+1})-2y(x_i)+y(x_{i-1})]-\frac{h^2}{12}y^{(4)}(\xi_i)
 \end{equation}
 
 A similar Central Difference Equation can be found for $y'$.
@@ -213,7 +213,7 @@ approximate the solution. Explicitly write out the centered-difference
 equations and perform one Newton step with a straight guess of
 $y^{(0)}$. Solve and compare the results to the actual solution.
 
-Given a differential equation in the form 
+Given a differential equation in the form
 \begin{equation}
   \label{eq:gendiffnonlin}
   y''(x_i)=f(x_i,y(x_i),y'(x_i))
@@ -233,8 +233,8 @@ $y(2) = \frac{1}{3}$. Since $n=3$, $h=\frac{1}{4}$.
   f\left(\frac{3}{2}, y\left(\frac{3}{2}\right),
     \frac{y(2)-y(1)}{\frac{1}{2}}\right) = 0
 \end{equation}
-% The Jacobian associated with the Newton step is 
-% 
+% The Jacobian associated with the Newton step is
+%
 % \begin{equation}
 %   \label{eq:jac}
 %   J=
@@ -245,14 +245,14 @@ $y(2) = \frac{1}{3}$. Since $n=3$, $h=\frac{1}{4}$.
 %     &
 %     0
 %     \\
-%     
+%
 %     -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
 %     &
 %     2+\frac{1}{16}f_y\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
 %     &
 %     -1+\frac{1}{8}f_{y'}\left(x_2,w_2,\frac{w_{3}-w_{1}}{\frac{1}{2}}\right)
 %     \\
-%     
+%
 %     0
 %     &
 %     -1+\frac{1}{8}f_{y'}\left(x_3,w_3,\frac{\beta-w_{3}}{\frac{1}{2}}\right)
@@ -286,14 +286,14 @@ in \cref{tab:4a}.
 \section{\S~11.5}
 \subsection{2$^4$}
 Use the Piece-wise Linear Algorithm to approximate the solution to the
-boundary-value problem 
+boundary-value problem
 $$ -\ddt{x}(xy')+4y=4x^2-8x+1,\qquad 0\leq x\leq1,\qquad
 y(0)=y(1)=0 $$ using $x_0=0$, $x_1=0.4$, $x_2=0.8$, $x_3=1$. Compare
 your results to the actual solution $y(x)=x^2-x$. Explicitly write the
 finite-element equations. Solve and compare at nodes. Note $\int_0^1\phi_1 f
 \dd{x} = -0.5813$ and $\int_0^1\phi_2 f \dd{x} = -0.7960$.
 
-The nonzero entries of the tridiagonal matrix $A$ are defined by 
+The nonzero entries of the tridiagonal matrix $A$ are defined by
 \begin{equation}
   \label{eq:piecewise-general-a}
   a_{ij} = \int_0^1[p(x)\phi'_i(x)\phi'_j(x)+q(x)\phi'_i(x)\phi'_j(x)]\dd{x}
@@ -303,7 +303,7 @@ and
   \label{eq:piecewise-general-b}
   b_i = \int_0^1f(x)\phi_i(x)\dd{x}
 \end{equation}
-So then 
+So then
 \begin{equation}
   \begin{aligned}
     % A(1,1) &=
@@ -336,10 +336,10 @@ which expands the entries of the matrix to
     % +&\int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
     % \int_{x_1}^{x_2}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
     % A(1,2) &=
-    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)\phi'_{2}]\dd{x} + 
+    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_1(x)\phi'_{2}]\dd{x} +
     %   \int_{x_1}^{x_2}q(x)[\phi_1(x)\phi_{2}]\right\}\dd{x} \\
     % A(2,1) &=
-    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_2(x)\phi'_{1}]\dd{x} + 
+    % \int_{x_1}^{x_2}\left\{p(x)[\phi'_2(x)\phi'_{1}]\dd{x} +
     %   \int_{x_1}^{x_2}q(x)[\phi_2(x)\phi_{1}]\right\}\dd{x} \\
     % A(2,2) &=  \int_{x_0}^{x_1}\left\{p(x)[\phi'_1(x)]^2\right\}\dd{x} +
     % \int_{x_0}^{x_1}\left\{q(x)[\phi_1(x)]^2\right\}\dd{x} \\
@@ -363,7 +363,7 @@ Evaluating each integral for $i=1,2$ gives
     -1.23333 & 6.8 \\
   \end{pmatrix}
 \end{equation}
-and 
+and
 \begin{equation}
   \label{eq:2a-matrix-b}
   b=
@@ -412,15 +412,15 @@ data is listed in \cref{tab:mini-b}.
     \hline
     $x_i$ & $y_i$ \\
     \hline
-    -2.00000 &   0.00000 \\  
-    -1.50000 &  88.54167 \\  
-    -1.00000 & 177.08333 \\  
-    -0.50000 & 265.62500 \\  
-    0.00000 & 291.66667 \\  
-    0.50000 & 242.18750 \\  
-    1.00000 & 161.45833 \\  
-    1.50000 & 80.72917 \\  
-    2.00000 & 0.00000 \\  
+    -2.00000 &   0.00000 \\
+    -1.50000 &  88.54167 \\
+    -1.00000 & 177.08333 \\
+    -0.50000 & 265.62500 \\
+    0.00000 & 291.66667 \\
+    0.50000 & 242.18750 \\
+    1.00000 & 161.45833 \\
+    1.50000 & 80.72917 \\
+    2.00000 & 0.00000 \\
     \hline
   \end{tabularx}
   \caption{Minilab data with $\gamma=50$ and $\beta=0$}
