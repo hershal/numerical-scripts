@@ -33,8 +33,8 @@
 \begin{multicols}{2}
   \begin{description}
   \item[Solvability Theorem for BVPs] Suppose $f$ in the BVP
-    $$y''=f(x,y,y'), \text{ for } a\leq x\leq b \text{ with } y(a)=\alpha \text{ and } y(b)=\beta$$ 
-    is continuous on the set 
+    $$y''=f(x,y,y'), \text{ for } a\leq x\leq b \text{ with } y(a)=\alpha \text{ and } y(b)=\beta$$
+    is continuous on the set
     $$D=\{(x,y,y') \mid a\leq x\leq b, -\infty<y<\infty, -\infty<y'<\infty\}$$
     and that the partials $f_y$ and $f_{y'}$ are also continuous on $D$. If
       \begin{itemize}
@@ -43,8 +43,8 @@
       \end{itemize}
       Then the BVP has a unique solution.
   % \item[Solvability Theorem for IVPs] Suppose $f$ in the BVP
-  %   $$y''=f(x,y,y'), \text{ for } a\leq x\leq b \text{ with } y(a)=\alpha \text{ and } y(b)=\beta$$ 
-  %   is continuous on the set 
+  %   $$y''=f(x,y,y'), \text{ for } a\leq x\leq b \text{ with } y(a)=\alpha \text{ and } y(b)=\beta$$
+  %   is continuous on the set
   %   $$D=\{(x,y,y') \mid a\leq x\leq b, -\infty<y<\infty, -\infty<y'<\infty\}$$
   %   and that the partials $f_y$ and $f_{y'}$ are also continuous on $D$. If
   %     \begin{enumerate}
@@ -61,14 +61,14 @@
     \item $q(x)>0$ on $[a,b]$
     \end{itemize}
     Then the BVP has a unique solution. We can approximate this
-    solution by first solving the two IVPs for $y_1$ and $y_2$ of 
-    \begin{equation*} 
+    solution by first solving the two IVPs for $y_1$ and $y_2$ of
+    \begin{equation*}
       \begin{aligned}
         y_1'' &= p(x)y_1' + q(x)y_1 + r(x), &\qquad y_1(a)=\alpha,&\quad y_1'(a)=0 \\
         y_2'' &= p(x)y_2' + q(x)y_2, &\qquad y_2(a)=0,&\quad y_2'(a) = 1\\
       \end{aligned}
     \end{equation*}
-    using any IVP solver and then define the solution as 
+    using any IVP solver and then define the solution as
     $$ y(x) = y_1(x)+\frac{\beta - y_1(b)}{y_2(b)}y_2(x) $$
     Check: Plug $y_1''$ and $y_2''$ in above and check the BVP
     conditions.
@@ -162,7 +162,7 @@
     \item $f(t), f'(t), f''(t)$ are continuous in the neighborhood of $t$
     \item $f'(t) \neq 0$
     \end{itemize}
-    Then 
+    Then
     \begin{itemize}
     \item $t_k \rightarrow t_{*,N}$ as $k\rightarrow\infty$ provided
       that the initial guess was close enough ($|t_0-t_*|<r,
@@ -202,14 +202,14 @@
         \end{aligned}
       \right.
     \end{equation*}
-  \item[Centered-Difference Equations for Non/Linear Problems] 
+  \item[Centered-Difference Equations for Non/Linear Problems]
     \begin{gather*}
       y'(x_i)=\frac{1}{2h}[y(x_{i+1})-y(x_{i-1})]-\frac{h^2}{6}y'''(\eta_i) \\
       y''(x_i)=\frac{1}{h^2}[y(x_{i+1})-2y(x_i)+y(x_{i-1})]-\frac{h^2}{12}y^{(4)}(\xi_i) \\
       \frac{y(x_{i+1})-2y(x_i)+y(x_{i-1})}{h^2} = p\frac{y(x_{i+1}) - y(x_{i-1})}{2h}+qy(x_i) + r \\
     \end{gather*}
     % \pagebreak[2]
-  \item[Linear Finite Difference Method] 
+  \item[Linear Finite Difference Method]
     For general BVPs, where \linebreak[4]
     $a\leq x \leq b,\quad y(a) = \alpha,\quad y(b) = \beta$
     $$f(x,y,y') = y'' = p(x)y' + q(x)y + r(x)$$
@@ -264,7 +264,7 @@
     $h<2/L$ where $L=\stackrel{\text{max}}{_{a\leq
         x\leq b}}|p(x)|$. Establish $y^{(4)}$ is continuous for
     truncation error $O(h^2)$.
-  \item[Nonlinear Finite Difference Method]     
+  \item[Nonlinear Finite Difference Method]
     For general BVPs, where \linebreak[4]
     $a\leq x \leq b,\quad y(a) = \alpha,\quad y(b) = \beta$
     $$f(x,y,y') = y'' = p(x)y' + q(x)y + r(x)$$
@@ -277,14 +277,14 @@
       \begin{equation*}
         \begin{array}{cc}
           k=\stackrel{\text{max}}{_{(x,y,y')\in D}}|f_y(x,y,y')|, &
-          L=\stackrel{\text{max}}{_{(x,y,y')\in D}}|f_{y'}(x,y,y')| 
+          L=\stackrel{\text{max}}{_{(x,y,y')\in D}}|f_{y'}(x,y,y')|
         \end{array}
       \end{equation*}
     \end{itemize}
     The Centered Difference Method uses $w_0 = \alpha$, $w_{N+1} =
     \beta$:
     $$-\frac{w_{i+1}-2w_i+w_{i-1}}{h^2} +
-    f\left(x_i,w_i,\frac{w_{i+1}-w_{i-1}}{2h}\right) = 0$$ 
+    f\left(x_i,w_i,\frac{w_{i+1}-w_{i-1}}{2h}\right) = 0$$
     for $i=1,\ldots,N$.  Multiply both sides by $h^2$ and we can use
     Newton's Method to approximate the solution, so the next
     iterations of the method will converge to the solution provided
@@ -432,7 +432,7 @@
     Block Tridiagonal).
   \item[Poisson Equation Solving Methods] Iterative methods should be
     used for large systems, specifically SOR.
-    % , whose optimal $w$ is 
+    % , whose optimal $w$ is
     % $$w=\frac{2}{1+\sqrt{1-[\rho(B)]^2}}=\frac{4}{2+\sqrt{4-[\cos(\pi/m)+\cos(\pi/n)]^2}}$$
     Otherwise direct techniques usually work better (less roundoff).
     \pagebreak[4]
@@ -469,9 +469,9 @@
     staibilty, $\rho(A)\leq1$ because of initial error propogation in
     the explicit nature of the difference method:
     $$\mathbf{w}^{(1)}=A(\mathbf{w}^{(0)}+\mathbf{e}^{(0)}) =
-    A\mathbf{w}^{(0)} + A\mathbf{e}^{(0)}$$ 
+    A\mathbf{w}^{(0)} + A\mathbf{e}^{(0)}$$
     Choose $h$, $k$ such that $\lambda\leq\frac{1}{2}$ to ensure
-    $O(k+h^2)$ convergence. 
+    $O(k+h^2)$ convergence.
   \item[Backward Difference Method] Same Parabolic (heat/diffusion)
     PDE. The discrete equation is
     $$w_{i,j-1}=(1+2\lambda)w_{i,j}-\lambda(w_{i+1,j}+w_{i-1,j})$$
@@ -536,12 +536,12 @@
         &0<x<l, \qquad t>0; \\
         &u(0,t)=u(l,t)=0,\quad &t>0; \\
         &u(x,0)=f(x),\qquad \frac{\partial u}{\partial t}(x,0)=g(x), \quad &0\leq x\leq
-        l& \\ 
+        l& \\
       \end{aligned}
     \end{equation*}
-    The discrete equation is 
+    The discrete equation is
     $$ w_{i,j+1} = 2(1-\lambda^2)w{i,j} + \lambda^2(w_{i+1,j}+w_{i-1,j})-w_{i,j}-1 $$
-    where $w_{0,j}=w_{m,j}=0$, $w_{i,0}=f(x_i)$, and 
+    where $w_{0,j}=w_{m,j}=0$, $w_{i,0}=f(x_i)$, and
     \begin{equation*}
       \begin{aligned}
         \mathbf{w}_{i,0} &= f(x_i) \\
@@ -570,12 +570,12 @@
     choose $h$, $k$ such that $\lambda\leq1$ to ensure $O(h^2+k^2)$
     convergence.
   \item[Finite Element Method] For the general PDE
-    $$ \frac{\partial}{\partial x}\left(p(x,y)\frac{\partial u}{\partial x}\right) + 
+    $$ \frac{\partial}{\partial x}\left(p(x,y)\frac{\partial u}{\partial x}\right) +
     \frac{\partial}{\partial y}\left(q(x,y)\frac{\partial u}{\partial y}\right) +
     r(x,y)u(x,y)=f(x,y)$$
     with $(x,y) \in D$, where $D$ is a plane region with boundary $S$
     and boundary conditions $u(x,y)=g(x,y)$ on a portion of the
-    boundary $S_1$. On $S_2$, $u(x,y)$ must satisfy 
+    boundary $S_1$. On $S_2$, $u(x,y)$ must satisfy
     $$ p(x,y)\frac{\partial u}{\partial x}(x,y)\cos\theta_1 +
     q(x,y)\frac{\partial u}{\partial y}(x,y)\cos\theta_2 +
     g_1(x,y)u(x,y) = g_2(x,y)$$
@@ -652,4 +652,4 @@
     coef. fs. $O(h^2)$.
   \end{description}
 \end{multicols}
-\end{document} 
+\end{document}
